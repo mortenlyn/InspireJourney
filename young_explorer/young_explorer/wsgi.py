@@ -2,6 +2,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'travel_website.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'young_explorer.settings')
 
 application = get_wsgi_application()

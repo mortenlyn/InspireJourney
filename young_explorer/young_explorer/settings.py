@@ -39,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'travel_website.urls'
+ROOT_URLCONF = 'young_explorer.urls'
 
 TEMPLATES = [
     {
@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'travel_website.wsgi.application'
+WSGI_APPLICATION = 'young_explorer.wsgi.application'
 
 
 # Database
