@@ -1,0 +1,25 @@
+.Header {
+    color: green;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.Destination {
+    color: black;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(210, 251, 97);
+    width: 400px;
+    height: 500px;
+    text-align: center;
+
+}
+#paris {
+    width: 300px;
+}
+#ekstra_info {
+    color: red;
+    width: 100%;
+
+
+}
