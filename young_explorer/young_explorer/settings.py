@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
+    'user_api.apps.ApiConfig',
     'rest_framework',
 ]
 
@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # User model
-AUTH_USER_MODEL = 'api.WebsiteUser'
+AUTH_USER_MODEL = 'user_api.WebsiteUser'
 
 # Rest framework settings
 REST_FRAMEWORK = {
