@@ -15,9 +15,9 @@ const Destination_box = () => {
       <div id="ekstra_info">
         <table>
             <tr>
-                <span>20 000 kr</span>
-                <span>3-5 dager</span>
-                <span>19-25 grader</span>
+                <td>20 000 kr</td>
+                <td>3-5 dager</td>
+                <td>19-25 grader</td>
             </tr>
         </table>
       </div>

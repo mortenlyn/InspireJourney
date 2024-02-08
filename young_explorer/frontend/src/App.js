@@ -5,7 +5,7 @@ import Destination_box from "./components/Destination_box";
 function App() {
   return (
     <div className="App">
-      <Header /> MY APP 
+      <Header />
       <Destination_box />
     </div>
   );
