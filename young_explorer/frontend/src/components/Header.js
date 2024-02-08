@@ -8,8 +8,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   return (
-    <AppBar position="static">
-            <Toolbar>
+    <AppBar id="appbar" position="static">
+            <Toolbar sx={{ paddingTop: 2 }} >
                 {/*Inside the IconButton, we 
                     can render various icons*/}
                 <IconButton
@@ -26,12 +26,12 @@ const Header = () => {
                 {/* The Typography component applies 
                      default font weights and sizes */}
  
-                <Typography 
+                <Typography id="header-title"
                     variant="h6"
                     component="div"
-                    sx={{ flexGrow: 1 }}
+                    sx={{ flexGrow: 3 }}
                 >
-                    Young Explorer 
+                    <p>Young Explorer </p>
                 </Typography>
                 <Button color="inherit">Login</Button>
             </Toolbar>
