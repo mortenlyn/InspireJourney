@@ -1,24 +1,15 @@
-.Header {
-    color: green;
-    font-family: Arial, Helvetica, sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+  }
+  
+  .home {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
 
-}
-.Destination {
-    color: black;
-    padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: rgb(210, 251, 97);
-    width: 400px;
-    height: 500px;
-    text-align: center;
-
-}
-#paris {
-    width: 300px;
-}
-#ekstra_info {
-    color: black;
-    width: 100%;
-
-}
