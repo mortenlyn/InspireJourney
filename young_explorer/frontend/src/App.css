@@ -1,0 +1,132 @@
+.App {
+    text-align: center;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  /* boostrap form style */
+
+  .form-inline {
+    width: 100%;
+  }
+
+  .form-group {
+    width: 90%;
+  }
+
+  .input-group {
+    width: 90% !important;
+  }
+
+  .form-control {
+    width: 80% !important;
+  }
+
+  span.input-group-addon {
+    width: 50px !important;
+  }
+
+  .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5%;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .form-container a {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+
+  #link-btn{
+    color: blue;
+    background-color: transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+#submit-btn {
+    background-color: rgba(255, 166, 0, 0.952);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+  }
+
+  #submit-btn:hover {
+    background-color: darkorange;
+  }
+
+  .logout-btn {
+    background-color: rgb(255, 166, 0);
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin-left: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+  }
+
+    .logout-btn:hover {
+        background-color: rgba(255, 140, 0, 0.815);
+    }
+
+  .input-field {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: rgba(255, 166, 0, 0.267);
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .input-field:focus {
+    background-color: rgba(255, 165, 0, 0.7);
+    outline: none;
+  }
+
+  .title {
+    color: orange;
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+
+  .nav-title {
+    color: orange;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
