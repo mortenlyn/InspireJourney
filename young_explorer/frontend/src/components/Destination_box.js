@@ -6,21 +6,30 @@ const Destination_box = () => {
   return (
     <div className="Destination">
       <h1>Check out these destinations!</h1>
-      <div className="Destination_container">
-        <div className="destination_wrapper">
-          <ul className="Destination_items">
+      <div className="Destination__container">
+        <div className="destination__wrapper">
+          <ul className="Destination__items">
             <CardItem 
               src="Paris.jpg" 
-              text="Explore the historic city of love"
+              text="Paris: Explore the historic city of love"
               label="City"
               ></CardItem>
             <CardItem 
               src="London.jpg" 
-              text="Explore the city of London"
+              text="London: A bustling city full of exitement"
               label="City"
               ></CardItem>
-              
-            
+            </ul><ul className="Destination_items">
+            <CardItem 
+              src="Bali.jpg" 
+              text="Bali: Visit the beutiful waters of Bali"
+              label="Beach"
+              ></CardItem>
+            <CardItem 
+              src="Ireland.jpg" 
+              text="Ireland: Nothing is like seeing the stunning cliffs on the coast"
+              label="Nature"
+              ></CardItem>
           </ul>
         </div>
       </div>
