@@ -43,7 +43,7 @@ function App() {
     }
   }
 
-  function submitRegistration(e) {
+  function register(e) {
     e.preventDefault();
     client
       .post("/user_api/register", {
@@ -63,7 +63,7 @@ function App() {
       });
   }
 
-  function submitLogin(e) {
+  function login(e) {
     e.preventDefault();
     client
       .post("/user_api/login", {
@@ -75,7 +75,7 @@ function App() {
       });
   }
 
-  function submitLogout(e) {
+  function logout(e) {
     e.preventDefault();
     client
       .post("/user_api/logout", { withCredentials: true })
@@ -91,7 +91,7 @@ function App() {
           <Container>
             <Navbar.Brand className="nav-title">Young Explorer</Navbar.Brand>
             <Navbar.Collapse className="justify-content-end">
-              <form onSubmit={(e) => submitLogout(e)}>
+              <form onSubmit={(e) => logout(e)}>
                 <Button className="logout-btn" type="submit" variant="light">
                   Log out
                 </Button>
@@ -117,8 +117,8 @@ function App() {
         <div className="center">
           <div className="form-container">
             <h1 className="title">Register</h1>
-            <Form onSubmit={(e) => submitRegistration(e)}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form onSubmit={(e) => register(e)}>
+              <Form.Group className="login-register-form" controlId="emailForm">
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
@@ -127,7 +127,10 @@ function App() {
                   className="input-field"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Group
+                className="login-register-form"
+                controlId="usernameForm"
+              >
                 <Form.Control
                   type="text"
                   placeholder="Enter username"
@@ -136,7 +139,10 @@ function App() {
                   className="input-field"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group
+                className="login-register-form"
+                controlId="passwordForm"
+              >
                 <Form.Control
                   type="password"
                   placeholder="Password"
@@ -161,8 +167,8 @@ function App() {
         <div className="center">
           <div className="form-container">
             <h1 className="title">Log in</h1>
-            <Form onSubmit={(e) => submitLogin(e)}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form onSubmit={(e) => login(e)}>
+              <Form.Group className="login-register-form" controlId="emailForm">
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
@@ -171,7 +177,10 @@ function App() {
                   className="input-field"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group
+                className="login-register-form"
+                controlId="passwordForm"
+              >
                 <Form.Control
                   type="password"
                   placeholder="Password"
