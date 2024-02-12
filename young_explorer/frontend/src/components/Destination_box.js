@@ -19,7 +19,6 @@ const Destination_box = () => {
               text="London: A bustling city full of exitement"
               label="City"
               ></CardItem>
-            </ul><ul className="Destination_items">
             <CardItem 
               src="Bali.jpg" 
               text="Bali: Visit the beutiful waters of Bali"

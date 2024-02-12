@@ -8,12 +8,10 @@
   }
   
   .Destination__container {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    max-width: 1120px;
+    max-width: 2000px;
     width: 90%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .Destination__wrapper {
@@ -23,18 +21,18 @@
   
   .Destination__items {
     margin-bottom: 24px;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 90%;
   }
   
   .cards__item {
-    display: inline;
-    flex: 1;
-    margin: 0 1rem;
+    margin: 1rem;
+    flex: 1 1 auto;
     border-radius: 10px;
-  }
-  
-  .cards__item__box {
-    display: flex;
-    flex-flow: column;
     width: 100%;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
