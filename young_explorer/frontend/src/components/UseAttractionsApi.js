@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AttractionsComponent = (props) => {
+const UseAttractionsApi = (props) => {
   const [token, setToken] = useState(null);
   const [cities, setCities] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -131,4 +131,4 @@ const AttractionsComponent = (props) => {
   );
 };
 
-export default AttractionsComponent;
+export default UseAttractionsApi;
