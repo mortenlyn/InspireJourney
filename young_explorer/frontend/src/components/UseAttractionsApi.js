@@ -39,7 +39,6 @@ const AttractionsComponent = (props) => {
 
   useEffect(() => {
     const fetchCities = async () => {
-      if (!token) return;
 
       try {
         const response = await fetch(
@@ -99,27 +98,32 @@ const AttractionsComponent = (props) => {
   return (
     <div>
       {activities.length > 0 ? (
-        <ul>
-          {activities.slice(0, 20).map((activity) => (
-            <li key={activity.id}>
-              <div>
-                <h3>{activity.name}</h3>
-                {activity.pictures && (
-                  <img
-                    src={activity.pictures[0]}
-                    alt={activity.name}
-                    style={{ maxWidth: "100px" }}
-                  />
+        <div>
+          {activities.map((activity) => (
+              <div key = {activity.id}>
+                {activity.pictures && activity.name &&(
+                  <div>
+                    <h3>{activity.name}</h3>
+                    <img
+                      src={activity.pictures[0]}
+                      alt={activity.name}
+                      style={{ maxWidth: "100px" }}
+                    />
+                    <p>Activity rating: {activity.rating}</p>
+                    <p>Short activity description: {activity.shortDescription}</p>
+                    <p>Activity description: {activity.description}</p>
+                    <p>
+                      Activity price: {activity.price.amount}{" "}
+                      {activity.price.currencyCode}
+                    </p>
+                    <p>
+                      Minimum duration: {activity.minimumDuration}
+                    </p>
+                  </div>
                 )}
-                <p>Activity description: {activity.description}</p>
-                <p>
-                  Activity price: {activity.price.amount}{" "}
-                  {activity.price.currencyCode}
-                </p>
               </div>
-            </li>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Loading activities...</p>
       )}

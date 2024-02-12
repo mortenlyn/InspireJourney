@@ -12,9 +12,6 @@ function App() {
   const query = "paris";
   const locationData = UsePictureApiCall(query);
 
-  const query2 = "TOKYO";
-  const countryCode = "JP";
-
   return (
     <div className="App">
       <Header />
@@ -27,7 +24,7 @@ function App() {
       ) : (
         <h1>"Loading..."</h1>
       )}
-      <AttractionsComponent countryCode = "FR" city = "Paris"/>
+      <AttractionsComponent countryCode = "JP" city = "Tokyo"/>
       
     </div>
   );
