@@ -7,12 +7,6 @@ function App() {
     <Router>
       <div className="App">
         <Header /> MY APP
-          <div className="innhold">
-            <Routes>
-              <Route path="/eksempel" element={<Header/>}>
-              </Route>
-            </Routes>
-          </div>
       </div>
     </Router>
   );
