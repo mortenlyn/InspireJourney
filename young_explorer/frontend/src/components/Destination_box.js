@@ -10,22 +10,22 @@ const Destination_box = () => {
         <div className="destination__wrapper">
           <ul className="Destination__items">
             <CardItem 
-              src="Paris.jpg" 
+              name="Paris" 
               text="Paris: Explore the historic city of love"
               label="City"
               ></CardItem>
             <CardItem 
-              src="London.jpg" 
+              name="London" 
               text="London: A bustling city full of exitement"
               label="City"
               ></CardItem>
             <CardItem 
-              src="Bali.jpg" 
+              name="Bali" 
               text="Bali: Visit the beutiful waters of Bali"
               label="Beach"
               ></CardItem>
             <CardItem 
-              src="Ireland.jpg" 
+              name="Ireland" 
               text="Ireland: Nothing is like seeing the stunning cliffs on the coast"
               label="Nature"
               ></CardItem>
