@@ -1,10 +1,12 @@
 import "./App.css";
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Button from "react-bootstrap/Button";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+// import LoginForm from "./components/LoginForm";
+import React, { useEffect, useState } from "react";
+// import RegisterForm from "./components/RegisterForm";
+import UsePictureApiCall from "./components/UsePictureApiCall";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -16,36 +18,36 @@ const client = axios.create({
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
-  const [registrationToggle, setRegistrationToggle] = useState(false);
+  // const [registrationToggle, setRegistrationToggle] = useState(false);
 
-  const handleLogin = (data) => {
-    client
-      .post("/user_api/login", data)
-      .then(function (res) {
-        setCurrentUser(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const handleLogin = (data) => {
+  //   client
+  //     .post("/user_api/login", data)
+  //     .then(function (res) {
+  //       setCurrentUser(true);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
-  const handleRegister = (data) => {
-    client
-      .post("/user_api/register", data)
-      .then(function (res) {
-        client
-          .post("/user_api/login", data)
-          .then(function (res) {
-            setCurrentUser(true);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const handleRegister = (data) => {
+  //   client
+  //     .post("/user_api/register", data)
+  //     .then(function (res) {
+  //       client
+  //         .post("/user_api/login", data)
+  //         .then(function (res) {
+  //           setCurrentUser(true);
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //         });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   useEffect(() => {
     client
@@ -80,19 +82,12 @@ function App() {
     );
   }
   return (
-    <div className="center">
-      {registrationToggle ? (
-        <RegisterForm
-          registrationToggle={registrationToggle}
-          onRegister={handleRegister}
-        />
-      ) : (
-        <LoginForm
-          registrationToggle={registrationToggle}
-          onLogin={handleLogin}
-        />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <UsePictureApiCall query={"tokyo street"} />
+      </div>
+    </Router>
   );
 }
 
