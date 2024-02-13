@@ -1,6 +1,9 @@
 import "./App.css";
 import Button from "react-bootstrap/Button";
 // import LoginForm from "./components/LoginForm";
+import Destination_box from "./components/Destination_box";
+import Home from "./components/pages/Home";
+//import { Route, Routes } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 // import RegisterForm from "./components/RegisterForm";
 import UsePictureApiCall from "./components/UsePictureApiCall";
@@ -82,12 +85,9 @@ function App() {
     );
   }
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <UsePictureApiCall query={"tokyo street"} />
-      </div>
-    </Router>
+    <div className="App">
+      <Home />
+    </div>
   );
 }
 

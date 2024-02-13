@@ -23,7 +23,7 @@ function PictureApiCall(props) {
       {location.results && location.results.length > 0 ? (
         <Image
           imageUrl={location.results[0].urls.regular}
-          description={location.results[0].description}
+          //description={location.results[0].description}
         />
       ) : (
         <h1>"Loading..."</h1>
