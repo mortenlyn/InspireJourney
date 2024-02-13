@@ -4,7 +4,7 @@ from django.db import models
 
 class WebsiteAttraction(models.Model):
     attraction_id = models.AutoField(primary_key=True)
-    name = models.CharField()
+    name = models.CharField(max_length=50)
     description = models.TextField()
     price = models.IntegerField()
     rating = models.IntegerField()
