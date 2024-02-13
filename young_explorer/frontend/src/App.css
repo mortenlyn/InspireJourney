@@ -13,3 +13,13 @@
     font-size: 3rem;
   }
 
+#header-title {
+    font-family: Bradley Hand, cursive;
+    color: beige;
+}
+
+#appbar {
+    background-color: aliceblue;
+    background: url('./assets/Header-bilde.jpg') no-repeat top center ;
+    height: 100px;
+}
