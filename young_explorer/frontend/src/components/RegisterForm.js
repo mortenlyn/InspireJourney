@@ -1,15 +1,33 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useNavigate, Route, Routes, Link } from "react-router-dom";
+import LoginForm from "./LoginForm";
 
-function RegisterForm({ registrationToggle, onRegister }) {
+function RegisterForm({ client, setIsAuthenticated }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    onRegister({ email, username, password });
+    client
+      .post("/user_api/register", { email, username, password })
+      .then(function (res) {
+        client
+          .post("/user_api/login", { email, password })
+          .then(function (res) {
+            setIsAuthenticated(true);
+            navigate("/home"); // navigate to home page
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -49,10 +67,19 @@ function RegisterForm({ registrationToggle, onRegister }) {
       </form>
       <span>
         Already have an account?
-        <button onClick={() => registrationToggle(false)} variant="light">
-          Log in here
-        </button>
+        <Link to="/login">Login here!</Link>
       </span>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <LoginForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }

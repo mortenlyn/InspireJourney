@@ -1,15 +1,11 @@
 import "./App.css";
-import Button from "react-bootstrap/Button";
-// import LoginForm from "./components/LoginForm";
-import Destination_box from "./components/Destination_box";
+// import { Button } from "react-bootstrap";
+import LoginForm from "./components/LoginForm";
 import Home from "./components/pages/Home";
-//import { Route, Routes } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-// import RegisterForm from "./components/RegisterForm";
-import UsePictureApiCall from "./components/UsePictureApiCall";
+import RegisterForm from "./components/RegisterForm";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -20,75 +16,72 @@ const client = axios.create({
 });
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
-  // const [registrationToggle, setRegistrationToggle] = useState(false);
-
-  // const handleLogin = (data) => {
-  //   client
-  //     .post("/user_api/login", data)
-  //     .then(function (res) {
-  //       setCurrentUser(true);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const handleRegister = (data) => {
-  //   client
-  //     .post("/user_api/register", data)
-  //     .then(function (res) {
-  //       client
-  //         .post("/user_api/login", data)
-  //         .then(function (res) {
-  //           setCurrentUser(true);
-  //         })
-  //         .catch(function (error) {
-  //           console.log(error);
-  //         });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  const [isAuthenticated, setIsAuthenticated] = useState();
 
   useEffect(() => {
     client
       .get("/user_api/user")
       .then(function (res) {
-        setCurrentUser(true);
+        setIsAuthenticated(true);
       })
       .catch(function (error) {
-        setCurrentUser(false);
+        setIsAuthenticated(false);
       });
-  }, []);
+  }, [isAuthenticated]);
 
-  function logout(e) {
-    e.preventDefault();
-    client
-      .post("/user_api/logout", { withCredentials: true })
-      .then(function (res) {
-        setCurrentUser(false);
-      });
-  }
-
-  if (currentUser) {
+  if (isAuthenticated) {
     return (
-      <div>
-        <Button onClick={logout} variant="light">
-          Logout
-        </Button>
-        <div className="center">
-          <h1>Welcome, {currentUser}</h1>
+      <Router>
+        <div className="App">
+          <Home />
         </div>
-      </div>
+      </Router>
     );
   }
+
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="*"
+          element={
+            <LoginForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route path="/home/*" element={<Home />} />
+        <Route
+          path="/login"
+          element={
+            <LoginForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/register/*"
+          element={
+            <RegisterForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
+// function logout(e) {
+//   e.preventDefault();
+//   client
+//     .post("/user_api/logout", { withCredentials: true })
+//     .then(function (res) {
+//       setIsAuthenticated(false);
+//     });
+// }

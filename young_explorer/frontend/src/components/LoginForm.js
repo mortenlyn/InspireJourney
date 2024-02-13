@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useNavigate, Route, Routes, Link } from "react-router-dom";
+import RegisterForm from "./RegisterForm";
 
-function LoginForm({ registrationToggle, onLogin }) {
+function LoginForm({ client, setIsAuthenticated }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    onLogin({ email, password });
+    return client
+      .post("/user_api/login", { email, password })
+      .then(function (res) {
+        setIsAuthenticated(true);
+        navigate("/home"); // navigate to home page
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -39,10 +50,19 @@ function LoginForm({ registrationToggle, onLogin }) {
       </form>
       <span>
         Don't have an account?
-        <button onClick={() => registrationToggle(true)} variant="light">
-          Register here
-        </button>
+        <Link to="/register">Register here!</Link>
       </span>
+      <Routes>
+        <Route
+          path="/register"
+          element={
+            <RegisterForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
