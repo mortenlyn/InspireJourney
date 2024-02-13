@@ -1,39 +1,32 @@
 from django.shortcuts import render
-from .models import WebsiteAttraction
-#from rest_framework import generics
+from .models import Attraction
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import permissions as permission
 
-#class AttractionsView(generics.CreateAPIView):
-    #queryset = WebsiteAttraction.objects.all()
 
-from django.http import JsonResponse
+#from django.http import JsonResponse
 
-def attraction_view(request):
-    attractions = WebsiteAttraction.objects.all()
-    attraction_data = []
-    # Create dummy data if no attractions exist
-    if WebsiteAttraction.objects.count() == 0:
-        WebsiteAttraction.objects.create(
-            name='Example Attraction 1',
-            description='This is a description for attraction 1.',
-            price=50,
-            rating=4,
-        )
+class attraction_view(APIView):
+    permission_classes = [permission.AllowAny]
+    
+    def get(self, request):
+        allAttractions = Attraction.objects.all().values()
+        return Response({"Message": "List of Attractions", "Attraction List":allAttractions})
+
+class addAttraction(APIView):
+    permission_classes = [permission.AllowAny]
+    def get(self, request):
+        allAttractions = Attraction.objects.all().values()
+        return Response({"Message": "List of Attractions", "Attraction List":allAttractions})
+    
+    def post(self, request):
+        newAttraction = Attraction.objects.create(
+            name=request.data["name"],
+            description=request.data["description"],
+            price=request.data["price"],
+            rating=request.data["rating"]
+            )
         
-        WebsiteAttraction.objects.create(
-            name='Example Attraction 2',
-            description='This is a description for attraction 2.',
-            price=70,
-            rating=5,
-        )
-
-    # Fetch all attractions
-    attractions = WebsiteAttraction.objects.all()
-    for attraction in attractions:
-        attraction_data.append({
-            'name': attraction.name,
-            'description': attraction.description,
-            'price': attraction.price,
-            'rating': attraction.rating,
-            'date_created': attraction.date_created.strftime('%Y-%m-%d')
-        })
-    return JsonResponse(attraction_data, safe=False)
+        newAttraction = Attraction.objects.all().filter(attraction_id=newAttraction.attraction_id).values()
+        return Response({"Message": "New Attraction", "New Attraction Added":newAttraction})
