@@ -47,7 +47,7 @@ export default function AddAttraction() {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField label="Price" fullWidth onChange={handlePriceInput} />
+            <TextField label="Price" fullWidth/>
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
             <Button variant="contained" color="primary">
