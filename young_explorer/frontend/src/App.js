@@ -27,7 +27,7 @@ function App() {
       .catch(function (error) {
         setIsAuthenticated(false);
       });
-  }, [isAuthenticated]);
+  }, []);
 
   if (isAuthenticated) {
     return (
@@ -53,7 +53,7 @@ function App() {
         />
         <Route path="/home/*" element={<Home />} />
         <Route
-          path="/login"
+          path="/login/*"
           element={
             <LoginForm
               client={client}
@@ -76,12 +76,3 @@ function App() {
 }
 
 export default App;
-
-// function logout(e) {
-//   e.preventDefault();
-//   client
-//     .post("/user_api/logout", { withCredentials: true })
-//     .then(function (res) {
-//       setIsAuthenticated(false);
-//     });
-// }
