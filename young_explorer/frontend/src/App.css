@@ -24,7 +24,8 @@
 
   #appbar {
       background-color: aliceblue;
-      background: url('./assets/Header-bilde.jpg') no-repeat top center ;
+      background: url('./assets/Header-bilde.jpg') no-repeat top center;
+      background-size: cover; /* Needed to make header-picture fill bigger screens*/
       height: 100px;
   }
 
@@ -129,6 +130,7 @@
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px;
   }
 
   .nav-title {
