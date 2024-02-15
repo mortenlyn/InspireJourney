@@ -17,11 +17,13 @@ const client = axios.create({
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     client
       .get("/user_api/user")
       .then(function (res) {
+        setCurrentUser(res.data);
         setIsAuthenticated(true);
       })
       .catch(function (error) {
@@ -30,6 +32,7 @@ function App() {
   }, []);
 
   if (isAuthenticated) {
+    console.log(currentUser);
     return (
       <Router>
         <div className="App">
