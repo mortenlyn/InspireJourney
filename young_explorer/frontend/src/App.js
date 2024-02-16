@@ -5,6 +5,7 @@ import Home from "./components/pages/Home";
 import React, { useEffect, useState } from "react";
 import RegisterForm from "./components/RegisterForm";
 import axios from "axios";
+import Profile from "./components/ProfilePage"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -70,6 +71,14 @@ function App() {
             <RegisterForm
               client={client}
               setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/profile/*"
+          element={
+            <Profile
+             
             />
           }
         />

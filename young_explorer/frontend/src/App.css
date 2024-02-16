@@ -60,7 +60,9 @@
     overflow: hidden;
     outline:none;
 }
-
+#homebutton{
+  color: aqua;
+}
 #submit-btn {
     background-color: rgba(255, 166, 0, 0.952);
     border: none;
