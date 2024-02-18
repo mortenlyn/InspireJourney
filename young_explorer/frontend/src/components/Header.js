@@ -15,10 +15,16 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
       .post("/user_api/logout")
       .then(function (res) {
         setCurrentUser(null);
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const login = () => {
+    navigate("/login");
+    window.location.reload();
   };
 
   return (
@@ -53,7 +59,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Logout
           </Button>
         ) : (
-          <Button id="login-btn" onClick={() => navigate("/login")}>
+          <Button id="login-btn" onClick={login}>
             Login
           </Button>
         )}
