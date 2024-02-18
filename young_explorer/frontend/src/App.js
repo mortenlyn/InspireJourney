@@ -1,11 +1,10 @@
 import "./App.css";
-// import { Button } from "react-bootstrap";
-import LoginForm from "./components/LoginForm";
 import Home from "./components/pages/Home";
+import Header from "./components/Header";
 import React, { useEffect, useState } from "react";
-import RegisterForm from "./components/RegisterForm";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes } from "react-router-dom";
+import AppRoutes from "./AppRoutes";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -16,7 +15,6 @@ const client = axios.create({
 });
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState();
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -24,57 +22,44 @@ function App() {
       .get("/user_api/user")
       .then(function (res) {
         setCurrentUser(res.data);
-        setIsAuthenticated(true);
       })
       .catch(function (error) {
-        setIsAuthenticated(false);
+        setCurrentUser(null);
+        console.log(currentUser);
       });
   }, []);
 
-  if (isAuthenticated) {
+  if (currentUser != null) {
     console.log(currentUser);
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Router>
+          <Header
+            client={client}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
           <Home />
-        </div>
-      </Router>
+        </Router>
+      </div>
     );
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="*"
-          element={
-            <LoginForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
+    <div className="App">
+      <Router>
+        <Header
+          client={client}
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
         />
-        <Route path="/home/*" element={<Home />} />
-        <Route
-          path="/login/*"
-          element={
-            <LoginForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        />
-        <Route
-          path="/register/*"
-          element={
-            <RegisterForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        />
-      </Routes>
-    </Router>
+      </Router>
+      <AppRoutes
+        client={client}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+      />
+    </div>
   );
 }
 
