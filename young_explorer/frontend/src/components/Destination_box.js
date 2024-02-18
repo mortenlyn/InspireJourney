@@ -1,6 +1,13 @@
-import React from "react";
+import React, {Component} from "react";
 import CardItem from "./Card_Item";
 import './Destination_box.css';
+import {Route, Routes, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import London from "./destinations/London";
+import Paris from "./destinations/Paris";
+import Bali from "./destinations/Ireland";
+import Ireland from "./destinations/Bali"
+
 
 const Destination_box = () => {
   return (
@@ -9,50 +16,63 @@ const Destination_box = () => {
       <div className="Destination__container">
         <div className="destination__wrapper">
           <ul className="Destination__items">
+          <Button color="inherit" component={Link} to="/Paris" >
             <CardItem 
               name="Paris" 
               text="Paris: Explore the historic city of love"
               label="City"
-              ></CardItem>
-            <CardItem 
-              name="London" 
-              text="London: A bustling city full of exitement"
-              label="City"
-              ></CardItem>
-            <CardItem 
-              name="Bali" 
-              text="Bali: Visit the beutiful waters of Bali"
-              label="Beach"
-              ></CardItem>
-            <CardItem 
-              name="Ireland" 
-              text="Ireland: Nothing is like seeing the stunning cliffs on the coast"
-              label="Nature"
-              ></CardItem>
+              >
+              </CardItem>
+            </Button>
+            <Button color="inherit" component={Link} to="/Paris" >
+              <CardItem 
+                name="London" 
+                text="London: A bustling city full of exitement"
+                label="City"
+                >
+                </CardItem>
+             </Button>
+            <Button color="inherit" component={Link} to="/Paris" >
+              <CardItem 
+                name="Bali" 
+                text="Bali: Visit the beutiful waters of Bali"
+                label="Beach"
+                >
+                <Button color="inherit" component={Link} to="/Bali" >Login</Button>
+                </CardItem>
+             </Button>
+            <Button color="inherit" component={Link} to="/Paris" >
+              <CardItem 
+                name="Ireland" 
+                text="Ireland: Nothing is like seeing the stunning cliffs on the coast"
+                label="Nature"
+                >
+                <Button color="inherit" component={Link} to="/Ireland" >Login</Button>
+                </CardItem>
+            </Button>
           </ul>
         </div>
       </div>
     </div>
   );
+  <Routes>
+    <Route 
+            path="/Paris"
+            element = {<Paris />}
+            />   
+    <Route 
+            path="/London"
+            element = {<London />}
+            />
+    <Route 
+            path="/Bali"
+            element = {<Bali />}
+            />a
+    <Route 
+            path="/Ireland"
+            element = {<Ireland />}
+            />
+  </Routes>
 };
 
 export default Destination_box;
-
-
-/*<h1 className="Destination_name">Paris</h1>
-<div>
-<p>
-    Paris er en europeisk verdensby som er hovedstaden i Frankrike og den mest folkerike byen i landet. Dens administrative areal er 105 km2 og den har en offisiell befolkning på 2 206 488 innbyggere.
-</p>
-</div>
-<div>
-<img src="https://lh3.googleusercontent.com/p/AF1QipM_ApMgFfAP8CP2ZHJUOb13K7P_SqSkW9sh9MFY=s1360-w1360-h1020" id="paris"></img>
-</div>
-<div id="ekstra_info">
-<table>
-    <tr>
-        <td>20 000 kr</td>
-        <td>3-5 dager</td>
-        <td>19-25 grader</td>
-    </tr>
-</table>*/

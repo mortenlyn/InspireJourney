@@ -1,10 +1,12 @@
-import React from "react";
+import React, {Component} from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import LoginForm from "./LoginForm";
+import {Route, Routes, Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -33,10 +35,16 @@ const Header = () => {
                 >
                     <p>Young Explorer </p>
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <Button color="inherit" component={Link} to="/LoginForm" >Login</Button>
             </Toolbar>
         </AppBar>
   );
+  <Routes>
+                    <Route
+                        path="/LoginForm"
+                        element = {Component={LoginForm}}
+                    />
+                </Routes>
 };
 
 export default Header;
