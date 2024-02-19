@@ -23,17 +23,20 @@ class WebsiteUserManager(BaseUserManager):
         user.save()
         return user
 
-    def create_superuser(self, email, password=None):
+    def create_superuser(self, email, username, password=None):
         """
         Create and save a superuser with the given email and password
         """
         if email is None:
             raise TypeError('Users need an email')
+        if username is None:
+            raise TypeError("users need username")
         if password is None:
             raise TypeError('Users need a password')
 
         user = self.create_user(email, password)
         user.is_superuser = True
+        user.is_staff = True
         user.save()
         return user
 
@@ -53,6 +56,10 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS -- a list of the field names that are required when creating a user.
                        Here it is the username field
     """
+
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50)
