@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate, Route, Routes, Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import Header from "./Header";
+import Home from "./pages/Home"
 
 function RegisterForm({ client, setIsAuthenticated }) {
   const [email, setEmail] = useState("");
@@ -71,6 +72,9 @@ function RegisterForm({ client, setIsAuthenticated }) {
         <span>
           Already have an account? <Link to="/login">Login here!</Link>
         </span>
+        <span>
+          Check out our destinations <Link to="/home">here.</Link>
+        </span>
         <Routes>
           <Route
             path="/login"
@@ -81,6 +85,10 @@ function RegisterForm({ client, setIsAuthenticated }) {
               />
             }
           />
+          <Route 
+            path="/home"
+            element = {Component={Home}}
+            />
         </Routes>
       </div>
     </>
