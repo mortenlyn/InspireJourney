@@ -6,10 +6,6 @@ import RegisterForm from "../components/RegisterForm";
 import Header from "../components/Header";
 import AddAttraction from "../components/pages/AddAttraction"
 import GetAllAttractions from "../components/GetAllAttractions";
-import London from "../components/destinations/London";
-import Paris from "../components/destinations/Paris";
-import Bali from "../components/destinations/Ireland";
-import Ireland from "../components/destinations/Bali"
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -56,22 +52,6 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         path="/testDestinations/*"
         element={<GetAllAttractions/>}
         />
-        <Route 
-        path="/Paris"
-        element = {<Paris />}
-        />   
-        <Route 
-        path="/London"
-        element = {<London />}
-        />
-        <Route 
-        path="/Bali"
-        element = {<Bali />}
-        />a
-        <Route 
-        path="/Ireland"
-        element = {<Ireland />}
-         />
       </Routes>
     </Router>
   );
