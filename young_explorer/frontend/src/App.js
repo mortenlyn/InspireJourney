@@ -1,19 +1,83 @@
 import "./App.css";
-import Header from "./components/Header";
-import Destination_box from "./components/Destination_box";
-import Home from './components/pages/Home';
-//import { Route, Routes } from "react-router-dom";
+// import { Button } from "react-bootstrap";
+import LoginForm from "./components/LoginForm";
+import Home from "./components/pages/Home";
 import React, { useEffect, useState } from "react";
 import UsePictureApiCall from "./components/UsePictureApiCall";
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import AddAttraction from "./components/pages/AddAttraction";
+import RegisterForm from "./components/RegisterForm";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.withCredentials = true;
+
+const client = axios.create({
+  baseURL: "http://127.0.0.1:8000",
+});
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    client
+      .get("/user_api/user")
+      .then(function (res) {
+        setCurrentUser(res.data);
+        setIsAuthenticated(true);
+      })
+      .catch(function (error) {
+        setIsAuthenticated(false);
+      });
+  }, []);
+
+  if (isAuthenticated) {
+    console.log(currentUser);
+    return (
+      <Router>
+        <div className="App">
+          <Home />
+        </div>
+      </Router>
+    );
+  }
 
   return (
-      <div className="App">
-        <AddAttraction />
-      </div>
+    <Router>
+      <Routes>
+        <Route
+          path="*"
+          element={
+            <LoginForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route path="/home/*" element={<Home />} />
+        <Route
+          path="/login/*"
+          element={
+            <LoginForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/register/*"
+          element={
+            <RegisterForm
+              client={client}
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
