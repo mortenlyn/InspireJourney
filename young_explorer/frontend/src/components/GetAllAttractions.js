@@ -19,16 +19,16 @@ export default function GetAllAttractions() {
     name:"Paris"
     price: 3000
     rating: 0
+    
     */
 
   const CardItemArray = attractions.map((attraction) => {
     console.log(attraction);
     return (
       <CardItem
-        key={attraction.attraction_id}
-        label="City"
+        /*key={attraction.attraction_id}*/
+        label="Beach"
         name={attraction.name}
-        text={attraction.description}
       />
     );
   });

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
-  const navigate = useNavigate();
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
