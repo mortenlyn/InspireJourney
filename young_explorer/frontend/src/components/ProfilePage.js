@@ -4,10 +4,9 @@ import Header from './Header';
 
 function ProfilePage() {
   const [profile, setProfile] = useState({
-    email: "",
-    name: "",
-    birthdate: "",
-    nationality: ""
+    username: "",
+    mail: ""
+    
   });
 
   useEffect(() => {
@@ -16,13 +15,11 @@ function ProfilePage() {
       try {
         const response = await fetch('http://127.0.0.1:8000/user_api/user');
         const data = await response.json();
-        console.log(data); // Add this line to debug
 
         setProfile({
-          email: data.user.email,
-          name: data.user.username,
-          birthdate: data.birthdate,
-          nationality: data.nationality,
+          username: data.username,
+          email: data.email,
+
         });
       } catch (error) {
         console.error('Error fetching user profile:', error);
