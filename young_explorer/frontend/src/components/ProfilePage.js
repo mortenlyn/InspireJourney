@@ -14,10 +14,10 @@ function ProfilePage({ currentUser }) {
     <div>
       <h2>Profile Page</h2>
       <p>
-        <strong>Email:</strong> {currentUser.user.email}
+        <strong>Email:</strong> {currentUser.email}
       </p>
       <p>
-        <strong>Name:</strong> {currentUser.user.username}
+        <strong>Name:</strong> {currentUser.username}
       </p>
 
       <Link to="/home">

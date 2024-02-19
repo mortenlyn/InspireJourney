@@ -6,26 +6,22 @@ const useCurrentUser = (client) => {
   );
 
   useEffect(() => {
-    if (!currentUser || currentUser != null) {
+    if (!currentUser) {
       client
         .get("/user_api/user")
         .then(function (res) {
-          setCurrentUser(res.data);
-          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+          localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+          setCurrentUser(res.data.user);
         })
         .catch(function (error) {
           setCurrentUser(null);
+          console.log(error);
           localStorage.removeItem("currentUser");
         });
     }
-  }, []);
+  }, [client]);
 
-  const setPersistedCurrentUser = (user) => {
-    setCurrentUser(user);
-    localStorage.setItem("currentUser", JSON.stringify(user));
-  };
-
-  return [currentUser, setPersistedCurrentUser];
+  return [currentUser, setCurrentUser];
 };
 
 export default useCurrentUser;

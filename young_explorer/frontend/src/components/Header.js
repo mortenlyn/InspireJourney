@@ -16,8 +16,8 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
       .post("/user_api/logout")
       .then(function (res) {
         setCurrentUser(null);
+        localStorage.removeItem("currentUser");
         navigate("/home");
-        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
@@ -29,7 +29,6 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
 
   const login = () => {
     navigate("/login");
-    window.location.reload();
   };
 
   return (

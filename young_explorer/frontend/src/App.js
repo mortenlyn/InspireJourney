@@ -2,7 +2,6 @@ import "./App.css";
 import React from "react";
 import AppRoutes from "./routes/AppRoutes";
 import useCurrentUser from "./hooks/useCurrentUser";
-import Profile from "./components/ProfilePage"
 import client from "./api/apiClient";
 
 function App() {
