@@ -27,6 +27,12 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     window.location.reload();
   };
 
+  const addAttraction = () => { /* denne funksjonen vil føre oss til addAttraction siden, 
+  må nok endre urlen slik den blir riktig */
+    navigate("/addAttraction");
+    window.location.reload();
+  };
+
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
@@ -54,6 +60,11 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         >
           <p>Young Explorer </p>
         </Typography>
+        {currentUser != null && currentUser.is_superuser === "True" && (
+          <Button id="add-btn" onClick={addAttraction}>
+            +
+          </Button>
+        )}
         {currentUser != null ? (
           <Button id="logout-btn" onClick={logout}>
             Logout
