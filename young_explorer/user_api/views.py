@@ -84,4 +84,6 @@ class UserView(APIView):
         This method is used to handle the GET request to the user endpoint
         """
         serializer = serializers.UserSerializer(request.user)
-        return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+        if request.user.is_superuser:
+            return Response({'user': serializer.data, 'superuser': True}, status=status.HTTP_200_OK)
+        return Response({'user': serializer.data, 'superuser': False}, status=status.HTTP_200_OK)

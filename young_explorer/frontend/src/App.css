@@ -60,7 +60,9 @@
     overflow: hidden;
     outline:none;
 }
-
+#homebutton{
+  color: aqua;
+}
 #submit-btn {
     background-color: rgba(255, 166, 0, 0.952);
     border: none;
@@ -90,6 +92,18 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
+
+  }
+  #profile-btn {
+    background-color: slategray;
+    border: none;
+    color: white;
+    padding: 7.5px 20px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  #profile-btn:hover {
+    background-color: darkslategray;
   }
 
   #logout-btn:hover {
@@ -151,21 +165,25 @@
 
   #add-btn {
     background-color: slategray;
-    color: whitesmoke; 
+    color: whitesmoke;
     border: none;
-    border-radius: 50%; 
+    border-radius: 50%;
     font-size: 30px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    cursor: pointer; 
+    cursor: pointer;
     height: 39.5px;
     width: 39.5px;
     margin-top: 12px;
     margin-right: 5px;
     min-width: auto;
   }
-  
+
   #add-btn.MuiButton-root:hover {
     background-color: darkslategrey; /* Change background color on hover */
+  }
+
+  #login-txt {
+    text-align: center;
   }

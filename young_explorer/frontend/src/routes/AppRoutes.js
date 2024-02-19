@@ -4,12 +4,13 @@ import LoginForm from "../components/LoginForm";
 import Home from "../components/pages/Home";
 import RegisterForm from "../components/RegisterForm";
 import Header from "../components/Header";
-import AddAttraction from "../components/pages/AddAttraction"
+import AddAttraction from "../components/pages/AddAttraction";
 import GetAllAttractions from "../components/GetAllAttractions";
 import London from "../components/destinations/London";
 import Paris from "../components/destinations/Paris";
 import Bali from "../components/destinations/Ireland";
-import Ireland from "../components/destinations/Bali"
+import Ireland from "../components/destinations/Bali";
+import Profile from "../components/ProfilePage";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -23,7 +24,11 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         <Route
           path="*"
           element={
-            <LoginForm client={client} setCurrentUser={setCurrentUser} />
+            <Home
+              client={client}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
           }
         />
         <Route
@@ -48,30 +53,16 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
             <RegisterForm client={client} setCurrentUser={setCurrentUser} />
           }
         />
+        <Route path="/addAttraction/*" element={<AddAttraction />} />
+        <Route path="/testDestinations/*" element={<GetAllAttractions />} />
+        <Route path="/Paris" element={<Paris />} />
+        <Route path="/London" element={<London />} />
+        <Route path="/Bali" element={<Bali />} />a
+        <Route path="/Ireland" element={<Ireland />} />
         <Route
-        path="/addAttraction/*"
-        element={<AddAttraction />}
+          path="/profile/*"
+          element={<Profile client={client} currentUser={currentUser} />}
         />
-        <Route
-        path="/testDestinations/*"
-        element={<GetAllAttractions/>}
-        />
-        <Route 
-        path="/Paris"
-        element = {<Paris />}
-        />   
-        <Route 
-        path="/London"
-        element = {<London />}
-        />
-        <Route 
-        path="/Bali"
-        element = {<Bali />}
-        />a
-        <Route 
-        path="/Ireland"
-        element = {<Ireland />}
-         />
       </Routes>
     </Router>
   );

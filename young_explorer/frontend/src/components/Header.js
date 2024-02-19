@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
@@ -15,16 +16,19 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
       .post("/user_api/logout")
       .then(function (res) {
         setCurrentUser(null);
-        window.location.reload();
+        localStorage.removeItem("currentUser");
+        navigate("/home");
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+  const profile = () => {
+    navigate("/profile");
+  };
 
   const login = () => {
     navigate("/login");
-    window.location.reload();
   };
 
   const addAttraction = () => {
@@ -58,15 +62,21 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         >
           <p>Young Explorer </p>
         </Typography>
-        {currentUser != null && (
+        {currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
             +
           </Button>
         )}
         {currentUser != null ? (
-          <Button id="logout-btn" onClick={logout}>
-            Logout
-          </Button>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button id="logout-btn" onClick={logout}>
+              Logout
+            </Button>
+            ,
+            <Button id="profile-btn" onClick={profile}>
+              Profile
+            </Button>
+          </Box>
         ) : (
           <Button id="login-btn" onClick={login}>
             Login

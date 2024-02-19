@@ -19,12 +19,22 @@ function RegisterForm({ client, setCurrentUser }) {
         client
           .post("/user_api/login", { email, password })
           .then(function (res) {
-            setCurrentUser(res.data);
-            navigate("/home"); // navigate to home page
+            client.get("/user_api/user").then(function (res) {
+              localStorage.setItem(
+                "currentUser",
+                JSON.stringify(res.data.user)
+              );
+              localStorage.setItem(
+                "superuser",
+                JSON.stringify(res.data.superuser)
+              );
+              setCurrentUser(res.data.user);
+            });
           })
           .catch(function (error) {
             console.log(error);
           });
+        navigate("/home"); // navigate to home page
       })
       .catch(function (error) {
         console.log(error);
