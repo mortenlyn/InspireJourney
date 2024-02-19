@@ -5,6 +5,7 @@ import Home from "../components/pages/Home";
 import RegisterForm from "../components/RegisterForm";
 import Header from "../components/Header";
 import AddAttraction from "../components/pages/AddAttraction"
+import GetAllAttractions from "../components/GetAllAttractions";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -46,6 +47,10 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         <Route
         path="/addAttraction/*"
         element={<AddAttraction />}
+        />
+        <Route
+        path="/testDestinations/*"
+        element={<GetAllAttractions/>}
         />
       </Routes>
     </Router>

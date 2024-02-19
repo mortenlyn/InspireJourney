@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
+  const navigate = useNavigate();
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
@@ -29,16 +31,14 @@ export default function AddAttraction() {
         name: attractionName,
         description: attractionDescription,
         price: price,
-        rating: 3,
+        rating: 0,
       }),
     };
     fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
       .then((res) => res.json())
       .then((data) => console.log(data));
-    console.log(
-      "" + attractionDescription + ", " + attractionName + ", " + price
-    );
   };
+
 
   return (
     <Grid
