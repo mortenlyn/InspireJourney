@@ -26,7 +26,7 @@ export default function GetAllAttractions() {
     console.log(attraction);
     return (
       <CardItem
-        /*key={attraction.attraction_id}*/
+        key={attraction.attraction_id}
         label="Beach"
         name={attraction.name}
       />
