@@ -1,28 +1,43 @@
 import React, { useState } from "react";
-import {
-  FormControl,
-  FormGroup,
-  InputLabel,
-  Input,
-  Grid,
-  TextField,
-  Button,
-  OutlinedInput,
-} from "@mui/material";
+import { Grid, TextField, Button } from "@mui/material";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
-  const [attractionID, setAttractionID] = useState("");
+  const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
 
-  const handlePriceInput = (event) => {
+  const handlePriceChange = (event) => {
     const value = event.target.value;
-    const checkIfInt = "/^d*$/".test(
-      value
-    ); /*This regular experession ensures that the input is a field*/
-    if (checkIfInt && parseInt(value) > 0) {
-      setPrice(value);
-    }
+    setPrice(value);
+  };
+
+  const handleAttractionNameChange = (event) => {
+    const value = event.target.value;
+    setAttractionName(value);
+  };
+
+  const handleAttractionDescriptionChange = (event) => {
+    const value = event.target.value;
+    setAttractionDescription(value);
+  };
+
+  const handleAttractionButton = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: attractionName,
+        description: attractionDescription,
+        price: price,
+        rating: 3,
+      }),
+    };
+    fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    console.log(
+      "" + attractionDescription + ", " + attractionName + ", " + price
+    );
   };
 
   return (
@@ -36,7 +51,12 @@ export default function AddAttraction() {
       <Grid item xs={12} sm={6}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <TextField label="Attraction Name" fullWidth />
+            <TextField
+              label="Attraction Name"
+              fullWidth
+              onChange={handleAttractionNameChange}
+              required
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -44,13 +64,18 @@ export default function AddAttraction() {
               multiline // Set multiline to true
               fullWidth
               rows={4} // Specify the number of rows (optional)
+              onChange={handleAttractionDescriptionChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField label="Price" fullWidth/>
+          <Grid item xs={12} onChange={handlePriceChange}>
+            <TextField label="Price" fullWidth required />
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAttractionButton}
+            >
               Create Attraction
             </Button>
           </Grid>
