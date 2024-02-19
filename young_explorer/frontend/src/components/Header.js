@@ -31,6 +31,10 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     navigate("/login");
   };
 
+  const addAttraction = () => {
+    navigate("/addAttraction");
+  };
+
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
@@ -58,6 +62,11 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         >
           <p>Young Explorer </p>
         </Typography>
+        {currentUser != null && (
+          <Button id="add-btn" onClick={addAttraction}>
+            +
+          </Button>
+        )}
         {currentUser != null ? (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Button id="logout-btn" onClick={logout}>
