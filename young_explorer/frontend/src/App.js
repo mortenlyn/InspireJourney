@@ -19,65 +19,16 @@ const client = axios.create({
 });
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState();
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    client
-      .get("/user_api/user")
-      .then(function (res) {
-        setCurrentUser(res.data);
-        setIsAuthenticated(true);
-      })
-      .catch(function (error) {
-        setIsAuthenticated(false);
-      });
-  }, []);
-
-  if (isAuthenticated) {
-    console.log(currentUser);
-    return (
-      <Router>
-        <div className="App">
-          <Home />
-        </div>
-      </Router>
-    );
-  }
+  const [currentUser, setCurrentUser] = useCurrentUser(client);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="*"
-          element={
-            <LoginForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        />
-        <Route path="/home/*" element={<Home />} />
-        <Route
-          path="/login/*"
-          element={
-            <LoginForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        />
-        <Route
-          path="/register/*"
-          element={
-            <RegisterForm
-              client={client}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          }
-        />
-      </Routes>
-    </Router>
+    <div className="App">
+      <AppRoutes
+        client={client}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+      />
+    </div>
   );
 }
 
