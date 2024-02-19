@@ -23,7 +23,6 @@ export default function GetAllAttractions() {
     */
 
   const CardItemArray = attractions.map((attraction) => {
-    console.log(attraction);
     return (
       <CardItem
         key={attraction.attraction_id}
