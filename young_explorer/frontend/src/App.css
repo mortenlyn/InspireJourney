@@ -148,3 +148,24 @@
     margin-bottom: 20px;
     margin-top: 20px;
   }
+
+  #add-btn {
+    background-color: slategray;
+    color: whitesmoke; 
+    border: none;
+    border-radius: 50%; 
+    font-size: 30px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+    height: 39.5px;
+    width: 39.5px;
+    margin-top: 12px;
+    margin-right: 5px;
+    min-width: auto;
+  }
+  
+  #add-btn.MuiButton-root:hover {
+    background-color: darkslategrey; /* Change background color on hover */
+  }
