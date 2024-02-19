@@ -4,12 +4,7 @@ import "../../App.css";
 import Header from "../Header";
 
 function Home() {
-  return (
-    <>
-      <Header />
-      <Destination_box />
-    </>
-  );
+  return <Destination_box />;
 }
 
 export default Home;

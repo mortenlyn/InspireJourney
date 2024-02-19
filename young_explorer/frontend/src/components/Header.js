@@ -1,50 +1,71 @@
-import React, {Component} from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoginForm from "./LoginForm";
-import {Route, Routes, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ client, currentUser, setCurrentUser }) => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    client
+      .post("/user_api/logout")
+      .then(function (res) {
+        setCurrentUser(null);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const login = () => {
+    navigate("/login");
+    window.location.reload();
+  };
+
   return (
     <AppBar id="appbar" position="static">
-            <Toolbar sx={{ paddingTop: 2 }} >
-                {/*Inside the IconButton, we 
+      <Toolbar sx={{ paddingTop: 2 }}>
+        {/*Inside the IconButton, we
                     can render various icons*/}
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    {/*This is a simple Menu 
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          {/*This is a simple Menu
                       Icon wrapped in Icon */}
-                    <MenuIcon />
-                </IconButton>
-                {/* The Typography component applies 
+          <MenuIcon />
+        </IconButton>
+        {/* The Typography component applies
                      default font weights and sizes */}
- 
-                <Typography id="header-title"
-                    variant="h6"
-                    component="div"
-                    sx={{ flexGrow: 3 }}
-                >
-                    <p>Young Explorer </p>
-                </Typography>
-                <Button color="inherit" component={Link} to="/LoginForm" >Login</Button>
-            </Toolbar>
-        </AppBar>
+
+        <Typography
+          id="header-title"
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 3 }}
+        >
+          <p>Young Explorer </p>
+        </Typography>
+        {currentUser != null ? (
+          <Button id="logout-btn" onClick={logout}>
+            Logout
+          </Button>
+        ) : (
+          <Button id="login-btn" onClick={login}>
+            Login
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
-  <Routes>
-                    <Route
-                        path="/LoginForm"
-                        element = {Component={LoginForm}}
-                    />
-                </Routes>
 };
 
 export default Header;
