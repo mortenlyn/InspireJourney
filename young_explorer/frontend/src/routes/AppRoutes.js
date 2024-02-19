@@ -4,6 +4,7 @@ import LoginForm from "../components/LoginForm";
 import Home from "../components/pages/Home";
 import RegisterForm from "../components/RegisterForm";
 import Header from "../components/Header";
+import Profile from "../components/ProfilePage"
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -41,6 +42,12 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
           element={
             <RegisterForm client={client} setCurrentUser={setCurrentUser} />
           }
+        />
+        <Route
+            path="/profile/*"
+            element ={
+              <Profile client = {client} currentUser = {currentUser}/>
+            }
         />
       </Routes>
     </Router>

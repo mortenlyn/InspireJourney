@@ -92,6 +92,18 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
+  
+  }
+  #profile-btn {
+    background-color: slategray;
+    border: none;
+    color: white;
+    padding: 7.5px 20px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  #profile-btn:hover {
+    background-color: darkslategray;
   }
 
   #logout-btn:hover {
