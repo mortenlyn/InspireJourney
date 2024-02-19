@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import AddAttraction from "./components/pages/AddAttraction";
 import RegisterForm from "./components/RegisterForm";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+/*import { BrowserRouter as Router, Route, Routes } from "react-router-dom";*/
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
