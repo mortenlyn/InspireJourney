@@ -27,10 +27,8 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     window.location.reload();
   };
 
-  const addAttraction = () => { /* denne funksjonen vil føre oss til addAttraction siden, 
-  må nok endre urlen slik den blir riktig */
+  const addAttraction = () => {
     navigate("/addAttraction");
-    window.location.reload();
   };
 
   return (
@@ -60,7 +58,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         >
           <p>Young Explorer </p>
         </Typography>
-        {currentUser != null && currentUser.is_superuser === "True" && (
+        {currentUser != null && (
           <Button id="add-btn" onClick={addAttraction}>
             +
           </Button>

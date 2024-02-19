@@ -20,7 +20,7 @@ class attraction_view(APIView):
     
     def get(self, request):
         allAttractions = Attraction.objects.all().values()
-        return Response({"Message": "List of Attractions", "Attraction List":allAttractions})
+        return Response({"Message": "List of Attractions", "AttractionList":allAttractions})
 
 class addAttraction(APIView):
 

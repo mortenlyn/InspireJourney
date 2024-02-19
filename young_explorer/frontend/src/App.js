@@ -1,8 +1,10 @@
 import "./App.css";
-import React from "react";
-import AppRoutes from "./routes/AppRoutes";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import useCurrentUser from "./hooks/useCurrentUser";
-import client from "./api/apiClient";
+import AppRoutes from "./routes/AppRoutes";
+import client from "./api/apiClient"
+
 
 function App() {
   const [currentUser, setCurrentUser] = useCurrentUser(client);
