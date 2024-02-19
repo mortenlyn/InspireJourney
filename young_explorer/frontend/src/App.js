@@ -1,13 +1,9 @@
 import "./App.css";
 // import { Button } from "react-bootstrap";
-import LoginForm from "./components/LoginForm";
-import Home from "./components/pages/Home";
 import React, { useEffect, useState } from "react";
-import UsePictureApiCall from "./components/UsePictureApiCall";
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import AddAttraction from "./components/pages/AddAttraction";
-import RegisterForm from "./components/RegisterForm";
 import axios from "axios";
+import useCurrentUser from "./hooks/useCurrentUser";
+import AppRoutes from "./routes/AppRoutes";
 /*import { BrowserRouter as Router, Route, Routes } from "react-router-dom";*/
 
 axios.defaults.xsrfCookieName = "csrftoken";
