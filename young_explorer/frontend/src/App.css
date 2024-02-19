@@ -92,7 +92,7 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
-  
+
   }
   #profile-btn {
     background-color: slategray;
@@ -161,4 +161,8 @@
     font-size: 30px;
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+
+  #login-txt {
+    text-align: center;
   }

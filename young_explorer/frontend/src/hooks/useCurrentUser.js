@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react";
 
 const useCurrentUser = (client) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser")) || null
+  );
 
   useEffect(() => {
-    client
-      .get("/user_api/user")
-      .then(function (res) {
-        setCurrentUser(res.data);
-      })
-      .catch(function (error) {
-        setCurrentUser(null);
-      });
+    if (!currentUser || currentUser != null) {
+      client
+        .get("/user_api/user")
+        .then(function (res) {
+          setCurrentUser(res.data);
+          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        })
+        .catch(function (error) {
+          setCurrentUser(null);
+          localStorage.removeItem("currentUser");
+        });
+    }
   }, []);
 
-  return [currentUser, setCurrentUser];
+  const setPersistedCurrentUser = (user) => {
+    setCurrentUser(user);
+    localStorage.setItem("currentUser", JSON.stringify(user));
+  };
+
+  return [currentUser, setPersistedCurrentUser];
 };
 
 export default useCurrentUser;
