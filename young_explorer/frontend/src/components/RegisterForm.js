@@ -24,6 +24,10 @@ function RegisterForm({ client, setCurrentUser }) {
                 "currentUser",
                 JSON.stringify(res.data.user)
               );
+              localStorage.setItem(
+                "superuser",
+                JSON.stringify(res.data.superuser)
+              );
               setCurrentUser(res.data.user);
             });
           })

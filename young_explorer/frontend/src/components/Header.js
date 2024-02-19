@@ -62,7 +62,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         >
           <p>Young Explorer </p>
         </Typography>
-        {currentUser != null && (
+        {currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
             +
           </Button>

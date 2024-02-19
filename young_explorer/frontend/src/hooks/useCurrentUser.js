@@ -11,6 +11,7 @@ const useCurrentUser = (client) => {
         .get("/user_api/user")
         .then(function (res) {
           localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+          localStorage.setItem("superuser", JSON.stringify(res.data.superuser));
           setCurrentUser(res.data.user);
         })
         .catch(function (error) {
