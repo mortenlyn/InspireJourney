@@ -34,8 +34,7 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         <Route
           path="/home/*"
           element={
-            //Anette - change to <home/> when done validation on attraction form
-            <AddAttraction
+            <Home
               client={client}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
