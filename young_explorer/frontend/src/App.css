@@ -20,7 +20,16 @@
   #header-title {
     font-family: Bradley Hand, cursive;
     color: beige;
+    align-items: center;
 }
+
+  #title-link {
+    font-family: Bradley Hand, cursive;
+    color: beige;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+  }
 
   #appbar {
       background-color: aliceblue;
@@ -92,8 +101,13 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
-
+    margin-bottom: 10px;
   }
+
+  #logout-btn:hover {
+    background-color: darkslategray;
+  }
+
   #profile-btn {
     background-color: slategray;
     border: none;
@@ -101,12 +115,10 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
-  }
-  #profile-btn:hover {
-    background-color: darkslategray;
+    margin-bottom: 10px;
   }
 
-  #logout-btn:hover {
+  #profile-btn:hover {
     background-color: darkslategray;
   }
 
