@@ -6,35 +6,44 @@ export default function AddAttraction() {
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
 
+  const [attractionNameError, setAttractionNameError] = useState(false);
+  const [attractionDescriptionError, setAttractionDescriptionError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
+
   const handlePriceChange = (event) => {
     const value = event.target.value;
     setPrice(value);
+    setPriceError(false);
   };
 
   const handleAttractionNameChange = (event) => {
     const value = event.target.value;
     setAttractionName(value);
+    setAttractionNameError(false);
   };
 
   const handleAttractionDescriptionChange = (event) => {
     const value = event.target.value;
     setAttractionDescription(value);
+    setAttractionDescriptionError(false);
   };
 
-  const test = {};
-
   const handleAttractionButton = () => {
+    let hasError = false;
     if (!attractionName.trim()) {
-      test.attractionName = "Required"
-      alert("Please enter attraction name");
-      return;
+      setAttractionNameError(true);
+      hasError = true;
     }
     if (!attractionDescription.trim()) {
-      alert("Please enter attraction description");
-      return;
+      setAttractionDescriptionError(true);
+      hasError = true;
     }
     if (!price) {
-      alert("Please enter price");
+      setPriceError(true);
+      hasError = true;
+    }
+
+    if (hasError) {
       return;
     }
 
@@ -70,6 +79,8 @@ export default function AddAttraction() {
               fullWidth
               onChange={handleAttractionNameChange}
               required
+              error = {attractionNameError}
+              helperText = {attractionNameError && "Enter attraction name"}
             />
           </Grid>
           <Grid item xs={12}>
@@ -79,10 +90,18 @@ export default function AddAttraction() {
               fullWidth
               rows={4} // Specify the number of rows (optional)
               onChange={handleAttractionDescriptionChange}
+              error = {attractionDescriptionError}
+              helperText = {attractionDescriptionError && "Enter attraction description"}
             />
           </Grid>
           <Grid item xs={12} onChange={handlePriceChange}>
-            <TextField label="Price" fullWidth required />
+            <TextField 
+              label="Price" 
+              fullWidth 
+              required
+              error = {priceError}
+              helperText = {priceError && "Enter price"}
+            />
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
             <Button
