@@ -35,32 +35,22 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     navigate("/addAttraction");
   };
 
+  const goToHomePage = () => {
+    navigate("/home");
+  }
+
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
-        {/*Inside the IconButton, we
-                    can render various icons*/}
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          {/*This is a simple Menu
-                      Icon wrapped in Icon */}
-          <MenuIcon />
-        </IconButton>
-        {/* The Typography component applies
-                     default font weights and sizes */}
 
+       
         <Typography
           id="header-title"
           variant="h6"
           component="div"
           sx={{ flexGrow: 3 }}
         >
-          <p>Young Explorer </p>
+          <p onClick={goToHomePage}>Young Explorer </p>
         </Typography>
         {currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
@@ -88,3 +78,21 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
 };
 
 export default Header;
+
+
+
+/*DON'T REMOVE THIS - IN CASE WE're going to use it later
+ <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          /*This is a simple Menu
+                      Icon wrapped in Icon /*
+                      <MenuIcon />
+                      </IconButton>
+                      {/* The Typography component applies
+                                   default font weights and sizes }
+*/
