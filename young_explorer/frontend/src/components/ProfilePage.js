@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./ProfilePage.css";
 
 function ProfilePage({ currentUser }) {
   if (!currentUser) {
@@ -11,18 +12,21 @@ function ProfilePage({ currentUser }) {
     );
   }
   return (
-    <div>
-      <h2>Profile Page</h2>
-      <p>
-        <strong>Email:</strong> {currentUser.email}
-      </p>
-      <p>
-        <strong>Name:</strong> {currentUser.username}
-      </p>
-
-      <Link to="/home">
-        <button id="homebutton">Return to homepage</button>
-      </Link>
+    <div className="ProfilePage">
+      <div className="profile-card">
+        <h2>User Profile</h2>
+        <div className="profile-info">
+          <p>
+            <strong>Email:</strong> {currentUser.email}
+          </p>
+          <p>
+            <strong>Name:</strong> {currentUser.username}
+          </p>
+        </div>
+        <Link to="/home">
+          <button id="homebutton">Return to homepage</button>
+        </Link>
+      </div>
     </div>
   );
 }
