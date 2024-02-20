@@ -25,7 +25,7 @@ export default function GetAllAttractions() {
     return (
       <CardItem
         key={attraction.attraction_id}
-        label="Beach"
+        label="Destination"
         name={attraction.name}
       />
     );

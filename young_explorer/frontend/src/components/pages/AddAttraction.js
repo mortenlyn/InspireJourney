@@ -50,7 +50,7 @@ export default function AddAttraction() {
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
-              label="Attraction Name"
+              label="Destination Name"
               fullWidth
               onChange={handleAttractionNameChange}
               required
@@ -58,7 +58,7 @@ export default function AddAttraction() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Attraction Description"
+              label="Destination Description"
               multiline // Set multiline to true
               fullWidth
               rows={4} // Specify the number of rows (optional)
@@ -74,7 +74,7 @@ export default function AddAttraction() {
               color="primary"
               onClick={handleAttractionButton}
             >
-              Create Attraction
+              Create Destination
             </Button>
           </Grid>
         </Grid>
