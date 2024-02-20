@@ -11,6 +11,7 @@ import Paris from "../components/destinations/Paris";
 import Bali from "../components/destinations/Ireland";
 import Ireland from "../components/destinations/Bali";
 import Profile from "../components/ProfilePage";
+import GeneralDestination from "../components/destinations/GeneralDestination"
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -55,10 +56,7 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         />
         <Route path="/addAttraction/*" element={<AddAttraction />} />
         <Route path="/testDestinations/*" element={<GetAllAttractions />} />
-        <Route path="/Paris" element={<Paris />} />
-        <Route path="/London" element={<London />} />
-        <Route path="/Bali" element={<Bali />} />a
-        <Route path="/Ireland" element={<Ireland />} />
+        <Route path="/Destination/:name" element={<GeneralDestination/>}></Route>
         <Route
           path="/profile/*"
           element={<Profile client={client} currentUser={currentUser} />}
