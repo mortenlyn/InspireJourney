@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 import Home from "../components/pages/Home";
 import RegisterForm from "../components/RegisterForm";
@@ -11,7 +16,7 @@ import Paris from "../components/destinations/Paris";
 import Bali from "../components/destinations/Ireland";
 import Ireland from "../components/destinations/Bali";
 import Profile from "../components/ProfilePage";
-import GeneralDestination from "../components/destinations/GeneralDestination"
+import GeneralDestination from "../components/destinations/GeneralDestination";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -54,9 +59,22 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
             <RegisterForm client={client} setCurrentUser={setCurrentUser} />
           }
         />
-        <Route path="/addAttraction/*" element={<AddAttraction />} />
+        <Route
+          path="/addAttraction/*"
+          element={
+            localStorage.getItem("superuser") === "true" ? (
+              <AddAttraction />
+            ) : (
+              <Navigate to="/home" replace />
+            )
+          }
+        />
+
         <Route path="/testDestinations/*" element={<GetAllAttractions />} />
-        <Route path="/Destination/:name" element={<GeneralDestination/>}></Route>
+        <Route
+          path="/Destination/:name"
+          element={<GeneralDestination />}
+        ></Route>
         <Route
           path="/profile/*"
           element={<Profile client={client} currentUser={currentUser} />}
