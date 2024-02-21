@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
@@ -35,22 +35,18 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     navigate("/addAttraction");
   };
 
-  const goToHomePage = () => {
-    navigate("/home");
-  }
-
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
-
-       
         <Typography
           id="header-title"
           variant="h6"
           component="div"
           sx={{ flexGrow: 3 }}
         >
-          <p onClick={goToHomePage}>Young Explorer </p>
+          <Link id="title-link" to="/home">
+            Young Explorer{" "}
+          </Link>
         </Typography>
         {currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
@@ -58,7 +54,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
           </Button>
         )}
         {currentUser != null ? (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box>
             <Button id="logout-btn" onClick={logout}>
               Logout
             </Button>
@@ -78,8 +74,6 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
 };
 
 export default Header;
-
-
 
 /*DON'T REMOVE THIS - IN CASE WE're going to use it later
  <IconButton
