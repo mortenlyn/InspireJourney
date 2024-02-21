@@ -30,6 +30,7 @@ export default function AddAttraction() {
 
   const handleAttractionButton = () => {
     let hasError = false;
+
     if (!attractionName.trim()) {
       setAttractionNameError(true);
       hasError = true;
@@ -38,6 +39,7 @@ export default function AddAttraction() {
       setAttractionDescriptionError(true);
       hasError = true;
     }
+
     if (!isNaN(price) && parseFloat(price) > 0) {
       // price is a number
       if (price > 0) {
@@ -46,13 +48,13 @@ export default function AddAttraction() {
       } else {
           // price is not positive
           setPriceError(true);
-          hasError(true);
+          hasError = true;
       }
     } else {
       // price is not a number
       setPriceError(true);
-      hasError (true);
-  }
+      hasError = true;
+    }
 
     if (hasError) {
       return;
