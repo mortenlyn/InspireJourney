@@ -5,14 +5,14 @@ import GetAllAttractions from "./GetAllAttractions";
 
 
 
-const Destination_box = () => {
+const Destination_box = (props) => {
   return (
     <div className="Destination">
       <h1>Check out these destinations!</h1>
       <div className="Destination__container">
         <div className="destination__wrapper">
           <ul className="Destination__items">
-            <GetAllAttractions />
+            <GetAllAttractions currentUser={props.currentUser}/>
           </ul>
         </div>
       </div>
