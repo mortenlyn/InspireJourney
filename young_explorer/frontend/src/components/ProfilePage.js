@@ -19,9 +19,20 @@ function ProfilePage({ currentUser }) {
           <p>
             <strong>Email:</strong> {currentUser.email}
           </p>
-          <p>
-            <strong>Name:</strong> {currentUser.username}
-          </p>
+          {localStorage.getItem("superuser") == "true" ? (
+            <>
+              <p>You're logged in as an admin.</p>
+              <p>
+                You can add destinations to the website by clicking the "+"
+                button in the header.
+              </p>
+            </>
+          ) : (
+            <p>
+              <strong>Name:</strong> {currentUser.username}
+            </p>
+          )}
+          {}
         </div>
         <Link to="/home">
           <button id="homebutton">Return to homepage</button>
