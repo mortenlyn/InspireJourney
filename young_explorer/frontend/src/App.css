@@ -190,6 +190,7 @@
     margin-top: 12px;
     margin-right: 5px;
     min-width: auto;
+    margin-bottom: 10px;
   }
 
   #add-btn.MuiButton-root:hover {
