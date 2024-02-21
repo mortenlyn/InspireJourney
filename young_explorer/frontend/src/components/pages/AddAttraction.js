@@ -38,10 +38,21 @@ export default function AddAttraction() {
       setAttractionDescriptionError(true);
       hasError = true;
     }
-    if (!price) {
+    if (!isNaN(price) && parseFloat(price) > 0) {
+      // price is a number
+      if (price > 0) {
+          // price is positive
+          setPriceError(false); 
+      } else {
+          // price is not positive
+          setPriceError(true);
+          hasError(true);
+      }
+    } else {
+      // price is not a number
       setPriceError(true);
-      hasError = true;
-    }
+      hasError (true);
+  }
 
     if (hasError) {
       return;
@@ -100,7 +111,7 @@ export default function AddAttraction() {
               fullWidth 
               required
               error = {priceError}
-              helperText = {priceError && "Enter price"}
+              helperText = {priceError && "Enter price (must be a positive number)"}
             />
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
