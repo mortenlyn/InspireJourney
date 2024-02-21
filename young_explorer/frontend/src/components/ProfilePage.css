@@ -44,7 +44,7 @@ h2 {
     align-items: center;
 }
 
-p {
+.user-info-paragraph {
     display: flex;
     margin-top: 10px;
     width: 50%;

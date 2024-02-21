@@ -16,19 +16,21 @@ function ProfilePage({ currentUser }) {
       <div className="profile-card">
         <h2>User Profile</h2>
         <div className="profile-info">
-          <p>
+          <p className="user-info-paragraph">
             <strong>Email:</strong> {currentUser.email}
           </p>
           {localStorage.getItem("superuser") == "true" ? (
             <>
-              <p>You're logged in as an admin.</p>
-              <p>
+              <p className="user-info-paragraph">
+                You're logged in as an admin.
+              </p>
+              <p className="user-info-paragraph">
                 You can add destinations to the website by clicking the "+"
                 button in the header.
               </p>
             </>
           ) : (
-            <p>
+            <p className="user-info-paragraph">
               <strong>Name:</strong> {currentUser.username}
             </p>
           )}
