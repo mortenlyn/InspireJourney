@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./Card_Item";
 
-export default function GetAllAttractions() {
+export default function GetAllAttractions(props) {
   const [attractions, setAttractions] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export default function GetAllAttractions() {
         key={attraction.attraction_id}
         label="Destination"
         name={attraction.name}
+        currentUser={props.currentUser}
       />
     );
   });
