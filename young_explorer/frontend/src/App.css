@@ -64,6 +64,10 @@
     color: blue;
     background-color: transparent;
     background-repeat:no-repeat;
+    padding: 7.5px 20px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 10px;
     border: none;
     cursor:pointer;
     overflow: hidden;
@@ -129,6 +133,8 @@
     padding: 7.5px 20px;
     text-align: center;
     margin-top: 12px;
+    margin-bottom: 10px;
+
   }
 
   #login-btn:hover {
