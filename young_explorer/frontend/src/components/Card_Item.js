@@ -5,9 +5,11 @@ import {Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function CardItem(props) {
+
+    const currentUser = props.currentUser
     return (
       <>
-      <Button color="inherit" component={Link} to={"/Destination/" + props.name} >
+      <Button color="inherit" component={Link} to={"/Destination/" + props.name} disabled={!currentUser}>
         <li className='cards__item'>
           <div className='cards_item_box'>
             <figure data-category={props.label} className='cards__item__pic-wrap'>
