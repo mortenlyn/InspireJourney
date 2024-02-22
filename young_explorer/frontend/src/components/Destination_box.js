@@ -1,18 +1,29 @@
 import React, {Component} from "react";
 import CardItem from "./Card_Item";
 import './Destination_box.css';
-import {Route, Routes, Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import GetAllAttractions from "./GetAllAttractions";
 
 
-const Destination_box = () => {
+
+const Destination_box = (props) => {
   return (
     <div className="Destination">
       <h1>Check out these destinations!</h1>
       <div className="Destination__container">
         <div className="destination__wrapper">
           <ul className="Destination__items">
-          <Button color="inherit" component={Link} to="/Paris" >
+            <GetAllAttractions currentUser={props.currentUser}/>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Destination_box;
+
+/*
+<Button color="inherit" component={Link} to="/Paris" >
             <CardItem 
               name="Paris" 
               text="Paris: Explore the historic city of love"
@@ -44,11 +55,4 @@ const Destination_box = () => {
                 >
                 </CardItem>
             </Button>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Destination_box;
+*/

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./Card_Item";
 
-export default function GetAllAttractions() {
+export default function GetAllAttractions(props) {
   const [attractions, setAttractions] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function GetAllAttractions() {
   }, []);
 
   /*
-    Fields 
+    Fields from GET-Request (fetch)
     --------- 
     attraction_id: 23
     date_created: "2024-02-19"
@@ -19,18 +19,20 @@ export default function GetAllAttractions() {
     name:"Paris"
     price: 3000
     rating: 0
-    
-    */
+  */
 
   const CardItemArray = attractions.map((attraction) => {
     return (
       <CardItem
         key={attraction.attraction_id}
-        label="Beach"
+        label="Destination"
         name={attraction.name}
+        currentUser={props.currentUser}
       />
     );
   });
 
-  return <div>{attractions.length > 0 ? CardItemArray : "Loading..."}</div>;
+  return (
+    <div>{attractions.length > 0 ? CardItemArray : "Loading..."}</div>
+  );
 }

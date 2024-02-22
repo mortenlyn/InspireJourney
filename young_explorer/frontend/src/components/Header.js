@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
@@ -38,29 +38,15 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
-        {/*Inside the IconButton, we
-                    can render various icons*/}
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          {/*This is a simple Menu
-                      Icon wrapped in Icon */}
-          <MenuIcon />
-        </IconButton>
-        {/* The Typography component applies
-                     default font weights and sizes */}
-
         <Typography
           id="header-title"
           variant="h6"
           component="div"
           sx={{ flexGrow: 3 }}
         >
-          <p>Young Explorer </p>
+          <Link id="title-link" to="/home">
+            Young Explorer{" "}
+          </Link>
         </Typography>
         {currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
@@ -68,7 +54,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
           </Button>
         )}
         {currentUser != null ? (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box>
             <Button id="logout-btn" onClick={logout}>
               Logout
             </Button>
@@ -88,3 +74,19 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
 };
 
 export default Header;
+
+/*DON'T REMOVE THIS - IN CASE WE're going to use it later
+ <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          /*This is a simple Menu
+                      Icon wrapped in Icon /*
+                      <MenuIcon />
+                      </IconButton>
+                      {/* The Typography component applies
+                                   default font weights and sizes }
+*/

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
@@ -71,10 +72,16 @@ export default function AddAttraction() {
       }),
     };
     fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    .then((res) => {
+      if (res.status >= 400 && res.status < 600) {
+        alert("The form name must be unique, and the price and name must be filled. Therefore the destination was not added");
+      }
+      else{
+        alert("The destination was succesfully added")
+      }
+      return res.json();
+    }).then((data) => console.log(data));
   };
-
 
   return (
     <Grid
@@ -88,7 +95,7 @@ export default function AddAttraction() {
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
-              label="Attraction Name"
+              label="Destination Name"
               fullWidth
               onChange={handleAttractionNameChange}
               required
@@ -98,7 +105,7 @@ export default function AddAttraction() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Attraction Description"
+              label="Destination Description"
               multiline // Set multiline to true
               fullWidth
               rows={4} // Specify the number of rows (optional)
@@ -120,9 +127,18 @@ export default function AddAttraction() {
             <Button
               variant="contained"
               color="primary"
+              component={Link}
+              to = "/home"
+              style={{marginRight:"10%"}}
+            >
+              Go to homepage
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
               onClick={handleAttractionButton}
             >
-              Create Attraction
+              Create Destination
             </Button>
           </Grid>
         </Grid>
