@@ -34,8 +34,7 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         <Route
           path="/home/*"
           element={
-            // endre når ferdig
-            <AddAttraction
+            <Home
               client={client}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
