@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Attraction
+from .models import Attraction, Label
 
 
 """
@@ -17,6 +17,7 @@ class AttractionSerializer(serializers.Serializer):
     description = serializers.CharField(label="Enter a attraction description: ")
     price = serializers.IntegerField(label="Enter a price: ")
     rating = serializers.IntegerField(label="Enter a rating between 1 and 5: ")
+    labels = serializers.CharField(label = "Enter some labels")
 
 
     def validate_rating(self, value):
@@ -34,6 +35,22 @@ class AttractionSerializer(serializers.Serializer):
             raise serializers.ValidationError("There already exists a destination with that name")
         return value
     
+    def create(self, validated_data):
+        labels_data = validated_data.pop('labels', [])
+        attraction = Attraction.objects.create(**validated_data)
+        for label_name in labels_data:
+            label, _ = Label.objects.get_or_create(name=label_name)
+            attraction.labels.add(label)
+        return attraction
+
+class LabelSerializer(serializers.Serializer):
+    name = serializers.CharField(label="Enter the label name")
+
+    def validate_name(self, value):
+        if Label.objects.filter(name=value).exists():
+            raise serializers.ValidationError("There already exists a destination with that name")
+        return value
+
     
     
     
