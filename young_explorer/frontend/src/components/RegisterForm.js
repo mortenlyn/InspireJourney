@@ -9,12 +9,17 @@ function RegisterForm({ client, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords don't match");
+    }
+    else{
+      client.post("/user_api/register", { email, username, password })
     client
-      .post("/user_api/register", { email, username, password })
       .then(function (res) {
         client
           .post("/user_api/login", { email, password })
@@ -39,6 +44,7 @@ function RegisterForm({ client, setCurrentUser }) {
       .catch(function (error) {
         console.log(error);
       });
+    }
   }
 
   return (
@@ -69,6 +75,15 @@ function RegisterForm({ client, setCurrentUser }) {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
+        </Form.Group>
+        <Form.Group className="login-register-form" controlId="reEnterPasswordForm">
+          <Form.Control
+            type="password"
+            placeholder="Re-enter password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             className="input-field"
           />
         </Form.Group>
