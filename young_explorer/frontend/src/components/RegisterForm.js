@@ -18,8 +18,8 @@ function RegisterForm({ client, setCurrentUser }) {
       alert("Passwords don't match");
     }
     else{
-      client.post("/user_api/register", { email, username, password })
-    client
+      client
+      .post("/user_api/register", { email, username, password })
       .then(function (res) {
         client
           .post("/user_api/login", { email, password })
