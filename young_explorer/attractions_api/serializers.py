@@ -12,14 +12,16 @@ Validation rules
 3) There can't be any attractions with the same name (ensures no name duplicates)
 """
 
-class AttractionSerializer(serializers.Serializer):
-    name = serializers.CharField(label="Enter a name")
-    description = serializers.CharField(label="Enter a attraction description: ")
-    price = serializers.IntegerField(label="Enter a price: ")
-    rating = serializers.IntegerField(label="Enter a rating between 1 and 5: ")
-    #labels = serializers.CharField(label = "Enter some labels")
-    labels = serializers.SerializerMethodField()
+class AttractionSerializer(serializers.ModelSerializer):
 
+    """
+    This serializer validates the different fields for an attraction, but also creates a new attraction
+    and then updates it with the selected labels.
+    """
+    labels = serializers.PrimaryKeyRelatedField(queryset=Label.objects.all(), many=True, required=False)
+    class Meta:
+        model = Attraction
+        fields = ['name', 'description', 'price', 'rating', 'labels']
 
     def validate_rating(self, value):
         if((value < 0) or (value > 5)):
@@ -35,16 +37,19 @@ class AttractionSerializer(serializers.Serializer):
         if Attraction.objects.filter(name=value).exists():
             raise serializers.ValidationError("There already exists a destination with that name")
         return value
-    
-    def get_labels(self, obj):
-        if obj.labels.exists():  # Check if labels exist
-            return [label.name for label in obj.labels.all()]  # Serialize label names
-        else:
-            return []  # Return an empty list if no labels exist
+
+    def create(self, validated_data):
+        labels_data = validated_data.pop('labels')
+        attraction = Attraction.objects.create(**validated_data)
+        attraction.labels.set(labels_data)  # Set the labels for the attraction
+        return attraction
 
 class LabelSerializer(serializers.Serializer):
+    """
+    This labelserializer makes sure you can't add any labels with the same name
+    """
     name = serializers.CharField(label="Enter the label name")
-
+    
     def validate_name(self, value):
         if Label.objects.filter(name=value).exists():
             raise serializers.ValidationError("There already exists a destination with that name")

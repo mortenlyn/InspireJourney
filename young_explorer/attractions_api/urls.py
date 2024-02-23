@@ -9,5 +9,6 @@ urlpatterns = [
     path('attractions', views.attraction_view.as_view()),
     path('addAttraction', views.addAttraction.as_view()),
     path('labels', views.label_view.as_view()),
-    path('addLabel', views.create_label.as_view())
+    path('addLabel', views.create_label.as_view()),
+    path('Europe', views.SortLabelsByEurope.as_view())
 ]
