@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Select, MenuItem, Input, Chip, InputLabel} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
+  const [selected, setSelected] = useState([]);
 
   const [attractionNameError, setAttractionNameError] = useState(false);
   const [attractionDescriptionError, setAttractionDescriptionError] = useState(false);
@@ -28,6 +29,11 @@ export default function AddAttraction() {
     setAttractionDescription(value);
     setAttractionDescriptionError(false);
   };
+
+  const handleSelectedValues = (event) => {
+    setSelected(event.target.value);
+    console.log(event.target.value)
+  }
 
   const handleAttractionButton = () => {
     let hasError = false;
@@ -122,6 +128,28 @@ export default function AddAttraction() {
               error = {priceError}
               helperText = {priceError && "Enter price (must be a positive number)"}
             />
+          </Grid>
+          <Grid item xs={12} >
+            <InputLabel id="demo-mutiple-chip-label">Select Labels: </InputLabel>
+            <Select
+            multiple
+            value={selected}
+            onChange={handleSelectedValues}
+            input={<Input id="select-multiple-chip" />}
+            renderValue={(selected) => (
+              <div>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </div>
+            )}
+            >
+              <MenuItem value="Europe">Europe</MenuItem>
+              <MenuItem value="Nature">Nature</MenuItem>
+              <MenuItem value="City">City</MenuItem>
+            </Select>
+
+            
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
             <Button
