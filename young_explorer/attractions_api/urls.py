@@ -10,5 +10,5 @@ urlpatterns = [
     path('addAttraction', views.addAttraction.as_view()),
     path('labels', views.label_view.as_view()),
     path('addLabel', views.create_label.as_view()),
-    path('Europe', views.SortLabelsByEurope.as_view())
+    path('<str:label_name>/', views.SortLabelsByEurope.as_view())
 ]
