@@ -17,7 +17,8 @@ class AttractionSerializer(serializers.Serializer):
     description = serializers.CharField(label="Enter a attraction description: ")
     price = serializers.IntegerField(label="Enter a price: ")
     rating = serializers.IntegerField(label="Enter a rating between 1 and 5: ")
-    labels = serializers.CharField(label = "Enter some labels")
+    #labels = serializers.CharField(label = "Enter some labels")
+    labels = serializers.SerializerMethodField()
 
 
     def validate_rating(self, value):
@@ -35,13 +36,11 @@ class AttractionSerializer(serializers.Serializer):
             raise serializers.ValidationError("There already exists a destination with that name")
         return value
     
-    def create(self, validated_data):
-        labels_data = validated_data.pop('labels', [])
-        attraction = Attraction.objects.create(**validated_data)
-        for label_name in labels_data:
-            label, _ = Label.objects.get_or_create(name=label_name)
-            attraction.labels.add(label)
-        return attraction
+    def get_labels(self, obj):
+        if obj.labels.exists():  # Check if labels exist
+            return [label.name for label in obj.labels.all()]  # Serialize label names
+        else:
+            return []  # Return an empty list if no labels exist
 
 class LabelSerializer(serializers.Serializer):
     name = serializers.CharField(label="Enter the label name")

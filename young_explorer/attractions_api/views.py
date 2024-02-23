@@ -64,8 +64,7 @@ class addAttraction(APIView):
     
     def post(self, request):
         serializer_obj=AttractionSerializer(data=request.data)
-        label_names = request.data.get('labels', [])
-        labels = Label.objects.filter(name__in=label_names)
+        label_names = serializer_obj.data.get('labels', [])
         if(serializer_obj.is_valid()):
             newAttraction = Attraction.objects.create(
             name=serializer_obj.data.get("name"),
@@ -73,8 +72,9 @@ class addAttraction(APIView):
             price=serializer_obj.data.get("price"),
             rating=serializer_obj.data.get("rating"),
             )
-            newAttraction.labels.add(*labels)
-            newAttraction = Attraction.objects.all().filter(attraction_id=newAttraction.attraction_id).values()
+            for label_name in label_names:
+                label, created = Label.objects.get_or_create(name=label_name)
+                newAttraction.labels.add(label)
             return Response({"Message": "New Attraction", "New Attraction Added":newAttraction})
         else:
             errors = serializer_obj.errors
