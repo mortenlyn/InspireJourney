@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions as permission, status
 from .serializers import AttractionSerializer, LabelSerializer
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 class label_view(APIView):
     """This view allows you see all of the labels"""
@@ -98,20 +99,22 @@ class addAttraction(APIView):
 
 class SortByLabels(APIView):
     """
-    This apiView allows you to get all attractions described with the label europe. In the start
-    it's meant for testing. We won't have a filtering function that only sorts by Europe. 
+    This apiView allows you to get all attractions described with the endpoint /attractions_api/{labelname_1, labelname_2, ...,
+    labelname_n}. Here you can write /attractions_api/Europe, Asia. Then you will get all of the destinations with either the
+    Asia or Europe label.
     """
 
     permission_classes = [permission.AllowAny]
 
-    def get(self, request, label_name):
-        try:
-            print(label_name)
-            label = get_object_or_404(Label, name=label_name)
-        except Label.DoesNotExist:
-            return Response({"error": f"Label '{label_name}' not found"}, status=status.HTTP_404_NOT_FOUND)
+    def get(self, request, label_names):
+        filter_query = Q()
+        label_name_list = label_names.split(',')
+        for label_name in label_name_list:
+                filter_query |= Q(labels__name=label_name)
+                if not Label.objects.filter(name=label_name).exists():
+                    return Response({"error": f"Label '{label_name}' not found"}, status=status.HTTP_404_NOT_FOUND)
         
         # Filter attractions by the specified label
-        attractions = Attraction.objects.filter(labels=label)
+        attractions = Attraction.objects.filter(filter_query).distinct()
         serializer = AttractionSerializer(attractions, many=True)
         return Response(serializer.data)
