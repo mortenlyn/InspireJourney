@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Select, MenuItem, Input, Chip, InputLabel} from "@mui/material";
 import { Link } from "react-router-dom";
+import useGetLabels from "../../hooks/useGetLabels";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
+  const [selected, setSelected] = useState([]);
 
   const [attractionNameError, setAttractionNameError] = useState(false);
   const [attractionDescriptionError, setAttractionDescriptionError] = useState(false);
   const [priceError, setPriceError] = useState(false);
+  const { labels, loading, error } = useGetLabels();
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
@@ -28,6 +31,10 @@ export default function AddAttraction() {
     setAttractionDescription(value);
     setAttractionDescriptionError(false);
   };
+
+  const handleSelectedValues = (event) => {
+    setSelected(event.target.value);
+  }
 
   const handleAttractionButton = () => {
     let hasError = false;
@@ -69,7 +76,7 @@ export default function AddAttraction() {
         description: attractionDescription,
         price: price,
         rating: 0,
-        labels: [], /*Have made this empty since the react-form doesn't include labels yet in this branch*/
+        labels: selected, /*Have made this empty since the react-form doesn't include labels yet in this branch*/
         /*labels: ["Europe", "City", "Expensive"], Examle of passing labels with names*/
       }),
     };
@@ -84,6 +91,10 @@ export default function AddAttraction() {
       return res.json();
     }).then((data) => console.log(data));
   };
+
+  const LabelsMenuArray = labels.map((label) => (
+    <MenuItem key={label.id} value={label.name}>{label.name}</MenuItem> // Adjust based on your actual label object structure
+  ))
 
   return (
     <Grid
@@ -124,6 +135,26 @@ export default function AddAttraction() {
               error = {priceError}
               helperText = {priceError && "Enter price (must be a positive number)"}
             />
+          </Grid>
+          <Grid item xs={12} >
+            <InputLabel id="demo-mutiple-chip-label">Select Labels: </InputLabel>
+            <Select
+            multiple
+            value={selected}
+            onChange={handleSelectedValues}
+            input={<Input id="select-multiple-chip" />}
+            renderValue={(selected) => (
+              <div>
+                {selected.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </div>
+            )}
+            >
+              {LabelsMenuArray /*Displays all the menu-items which are the labels fetched from the database*/}
+            </Select>
+
+            
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }} size="large">
             <Button
