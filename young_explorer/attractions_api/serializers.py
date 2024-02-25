@@ -18,7 +18,10 @@ class AttractionSerializer(serializers.ModelSerializer):
     This serializer validates the different fields for an attraction, but also creates a new attraction
     and then updates it with the selected labels.
     """
-    labels = serializers.PrimaryKeyRelatedField(queryset=Label.objects.all(), many=True, required=False)
+    #labels = serializers.PrimaryKeyRelatedField(queryset=Label.objects.all(), many=True, required=False)
+    labels = serializers.ListSerializer(child=serializers.CharField(), required=False)
+    #write_only=True
+
     class Meta:
         model = Attraction
         fields = ['name', 'description', 'price', 'rating', 'labels']
@@ -37,12 +40,20 @@ class AttractionSerializer(serializers.ModelSerializer):
         if Attraction.objects.filter(name=value).exists():
             raise serializers.ValidationError("There already exists a destination with that name")
         return value
-
-    def create(self, validated_data):
-        labels_data = validated_data.pop('labels')
+    
+    def create(self, validated_data): #This allows for creation of attractions
+        label_names = validated_data.pop('labels', [])
         attraction = Attraction.objects.create(**validated_data)
-        attraction.labels.set(labels_data)  # Set the labels for the attraction
+        for name in label_names:
+            label, created = Label.objects.get_or_create(name=name)
+            attraction.labels.add(label)
         return attraction
+    
+    def to_representation(self, instance): #This makes it possible to view the labels in the addAttractions-view
+
+        representation = super().to_representation(instance) #This creates a base instance of the attraction
+        representation['labels'] = [label.name for label in instance.labels.all()] #This iterates through labels add adds them to the view
+        return representation
 
 class LabelSerializer(serializers.Serializer):
     """
