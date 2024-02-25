@@ -75,6 +75,8 @@ export default function AddAttraction() {
         description: attractionDescription,
         price: price,
         rating: 0,
+        labels: [], /*Have made this empty since the react-form doesn't include labels yet in this branch*/
+        /*labels: ["Europe", "City", "Expensive"], Examle of passing labels with names*/
       }),
     };
     fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
