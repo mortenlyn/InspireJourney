@@ -1,0 +1,4 @@
+.header-container {
+    background-color: aliceblue;
+    background-image: url('../assets/Header-bilde.jpg') no-repeat top center; /*doesnt work*/
+}
