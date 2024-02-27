@@ -12,7 +12,7 @@ const Destination_box = (props) => {
       <div className="Destination__container">
         <div className="destination__wrapper">
           <ul className="Destination__items">
-            <GetAllAttractions currentUser={props.currentUser}/>
+            <GetAllAttractions currentUser={props.currentUser} />
           </ul>
         </div>
       </div>

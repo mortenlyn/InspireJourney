@@ -12,7 +12,8 @@ function CardItem(props) {
       <Button color="inherit" component={Link} to={"/Destination/" + props.name} disabled={!currentUser}>
         <li className='cards__item'>
           <div className='cards_item_box'>
-            <figure data-category={props.label} className='cards__item__pic-wrap'>
+            <figure style={{height: '500px', objectFit: 'contain'}}
+            data-category={props.label} className='cards__item__pic-wrap'>
               <UsePictureApiCall query = {props.name} className='cards__item__img'/>
             </figure>
             <div className='cards__item__info'>
