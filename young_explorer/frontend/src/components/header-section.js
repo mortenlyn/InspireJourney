@@ -20,7 +20,7 @@ function headersection() {
             id='beach-picture'
             alt='beach and water'
           />
-          <h1 id="header-text" style={{ position: 'absolute', top: '25%', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
+          <h1 id="header-text" style={{ position: 'absolute', top: '35%', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
         </div>
       )
 

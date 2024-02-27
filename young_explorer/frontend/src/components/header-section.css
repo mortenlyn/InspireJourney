@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Saira+Stencil+One);
+
+
 /*.header-container {
 
     background: url('../assets/Header-bilde.jpg') no-repeat top center;
@@ -7,11 +10,28 @@
 }*/
 
 
-#header-text {
+/*#header-text {
     color: aquamarine;
-    size: large;
-}
+    font-size: 100px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}*/
 
+#header-text {
+    /*position: absolute;
+    top: 0;
+    left: 0;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 30%;
+    /*margin: 0;*/
+    font-weight: 600;
+    font-size: 100px;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    mix-blend-mode: screen;
+}
 
 
 
