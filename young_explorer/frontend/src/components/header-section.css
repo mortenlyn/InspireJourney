@@ -1,4 +1,17 @@
-.header-container {
-    background-color: aliceblue;
-    background-image: url('../assets/Header-bilde.jpg') no-repeat top center; /*doesnt work*/
+/*.header-container {
+
+    background: url('../assets/Header-bilde.jpg') no-repeat top center;
+    background: url('../assets/Header-bilde.jpg') no-repeat top center;
+    background-size: cover; /* Needed to make header-picture fill bigger screens
+    background-position: center top;
+}*/
+
+
+#header-text {
+    color: aquamarine;
+    size: large;
 }
+
+
+
+
