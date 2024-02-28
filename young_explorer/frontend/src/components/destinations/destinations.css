@@ -4,9 +4,14 @@
     /* text-align: center; */
   }
 
-.topContainer {
-  text-align: center;
-}
+  .topContainer {
+    text-align: center;
+  }
+
+  .ratingContainer {
+    text-align: center;
+    margin: 10px;
+  }
 
   h1 {
     text-align: center;
@@ -113,4 +118,13 @@
 
   #reviewButton:hover {
     background-color: #f4a460;
+  }
+
+  input[type=radio]{
+    display: none;
+  }
+
+  .star{
+    cursor: pointer;
+
   }

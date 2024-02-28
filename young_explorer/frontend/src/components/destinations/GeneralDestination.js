@@ -3,17 +3,50 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
 import Button from "@mui/material/Button";
+import { FaStar } from "react-icons/fa";
+import { useState } from "react";
 import "./destinations.css";
 
 function GeneralDestination() {
   const { name } = useParams();
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+  const [show, setShow] = useState(false);
 
   return (
     <div className="Destination">
       <div className="topContainer">
         <h1>Some information on {name}!</h1>
-        <Button id="reviewButton">Write a review!</Button>
+        <Button id="reviewButton" onClick={() => setShow(!show)}>
+          {show ? "Hide" : "Leave a review"}
+        </Button>
+        {show && (
+          <div className="ratingContainer">
+            {[...Array(5)].map((index) => {
+              const currentRating = index + 1;
+              return (
+                <label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={currentRating}
+                    onClick={() => setRating(currentRating)}
+                  />
+                  <FaStar
+                    className="star"
+                    size={30}
+                    color={currentRating <= (hover || rating) ? "gold" : "gray"}
+                    onMouseEnter={() => setHover(currentRating)}
+                    onMouseLeave={() => setHover(null)}
+                  />
+                </label>
+              );
+            })}
+            <p>Your rating is {rating}</p>
+          </div>
+        )}
       </div>
+
       <h3>
         Check out our other destinations <Link to="/home">here.</Link>
       </h3>
