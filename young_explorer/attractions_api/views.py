@@ -85,24 +85,45 @@ class addAttraction(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SortByLabels(APIView):
+class FilterDestinations(APIView):
     """
-    This apiView allows you to get all attractions described with the endpoint /attractions_api/{labelname_1, labelname_2, ...,
-    labelname_n}. Here you can write /attractions_api/Europe, Asia. Then you will get all of the destinations with either the
-    Asia or Europe label.
+    This apiView allows you to filter destinations on price and labels. Here you can write 
+    /attractions_api/filter?label_names=Europe,Asia&min_price=min&max_price=max. 
+    Then you will get all of the destinations with either the Asia or Europe label. 
+    You can also choose to sort on max and min price. This is done by specifying the max_price and min_price in
+    the url like in the example above. However both labels and min/max_price are optional in the filtering. You can
+    choose to not filter on anything and then get all destinations by using: /attractions_api/filter
     """
 
     permission_classes = [permission.AllowAny]
 
-    def get(self, request, label_names):
+    def get(self, request):
         filter_query = Q()
-        label_name_list = label_names.split(',')
-        for label_name in label_name_list:
-                filter_query |= Q(labels__name=label_name) #This queries the labels and adds all the destination that match |= (meaning all that has either specified label)
-                if not Label.objects.filter(name=label_name).exists():
-                    return Response({"error": f"Label '{label_name}' not found"}, status=status.HTTP_404_NOT_FOUND)
+        label_names = request.query_params.get('label_names')
+        if(label_names):
+            label_name_list = label_names.split(',')
+            for label_name in label_name_list:
+                    filter_query |= Q(labels__name=label_name) #This queries the labels and adds all the destination that match |= (meaning all that has either specified label)
+                    if not Label.objects.filter(name=label_name).exists():
+                        return Response({"error": f"Label '{label_name}' not found"}, status=status.HTTP_404_NOT_FOUND)
         
         # Filter attractions by the specified label
-        attractions = Attraction.objects.filter(filter_query).distinct()
+                    
+        attractions = Attraction.objects.all()
+        if(filter_query):
+            attractions = attractions.filter(filter_query).distinct()
+
+
+        #Filter on price if min_price and max_price is provided
+        min_price = request.query_params.get('min_price')
+        max_price = request.query_params.get('max_price')
+        if(min_price or max_price):
+            price_filter = Q()
+            if min_price:
+                price_filter &= Q(price__gte=min_price)
+            if max_price:
+                price_filter &= Q(price__lte=max_price)
+            attractions = attractions.filter(price_filter)
+
         serializer = AttractionSerializer(attractions, many=True)
         return Response(serializer.data)
