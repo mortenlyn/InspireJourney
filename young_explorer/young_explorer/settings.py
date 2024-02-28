@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'young_explorer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sample',
+        'NAME': 'db',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'root1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }
