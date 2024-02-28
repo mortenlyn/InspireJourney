@@ -2,13 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
+import Button from "@mui/material/Button";
+import "./destinations.css";
 
 function GeneralDestination() {
   const { name } = useParams();
 
   return (
     <div className="Destination">
-      <h1>Some information on {name}!</h1>
+      <div className="topContainer">
+        <h1>Some information on {name}!</h1>
+        <Button id="reviewButton">Write a review!</Button>
+      </div>
       <h3>
         Check out our other destinations <Link to="/home">here.</Link>
       </h3>

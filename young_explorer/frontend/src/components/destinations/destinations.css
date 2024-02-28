@@ -1,7 +1,12 @@
 .Destination {
     padding: 4rem;
     background: #fff;
+    /* text-align: center; */
   }
+
+.topContainer {
+  text-align: center;
+}
 
   h1 {
     text-align: center;
@@ -23,7 +28,7 @@
     margin: 50px 0 45px;
   }
 
-  
+
   .Destination__items {
     margin-bottom: 24px;
     display: flex;
@@ -98,6 +103,14 @@
     color: #252e48;
     font-size: 18px;
     line-height: 24px;
+  }
 
+  #reviewButton {
+    background-color:burlywood;
+    color: white;
+    margin: 7px;
+  }
 
+  #reviewButton:hover {
+    background-color: #f4a460;
   }
