@@ -13,6 +13,10 @@
     margin: 10px;
   }
 
+  .textContainer {
+    margin: 10px
+  }
+
   h1 {
     text-align: center;
   }
@@ -126,5 +130,9 @@
 
   .star{
     cursor: pointer;
+  }
 
+  .reviewText {
+    width: 500px;
+    text-size-adjust: 20px;
   }
