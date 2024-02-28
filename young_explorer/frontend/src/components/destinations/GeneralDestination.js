@@ -5,7 +5,6 @@ import DestinationCard from "../DestinationCard";
 import Button from "@mui/material/Button";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
-import TextArea from "@mui/material/TextField";
 import "./destinations.css";
 
 function GeneralDestination() {
@@ -24,9 +23,10 @@ function GeneralDestination() {
         {show && (
           <div className="ratingContainer">
             <div className="textContainer">
-              <TextArea className="reviewText">
-                Write your review here!
-              </TextArea>
+              <textarea
+                className="reviewText"
+                placeholder="Write your review here!"
+              ></textarea>
             </div>
             {[...Array(5)].map((star, index) => {
               const currentRating = index + 1;

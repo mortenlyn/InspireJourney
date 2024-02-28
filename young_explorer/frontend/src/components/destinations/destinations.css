@@ -133,6 +133,9 @@
   }
 
   .reviewText {
+    resize: none;
+    height: 100px;
     width: 500px;
-    text-size-adjust: 20px;
+    font-size: 20px;
+    padding: 10px;
   }
