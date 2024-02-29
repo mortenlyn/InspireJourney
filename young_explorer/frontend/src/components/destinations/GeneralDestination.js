@@ -86,7 +86,7 @@ function GeneralDestination() {
             {[...Array(5)].map((star, index) => {
               const currentRating = index + 1;
               return (
-                <label>
+                <label key={currentRating}>
                   <input
                     type="radio"
                     name="rating"
