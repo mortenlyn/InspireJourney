@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Attraction",
             fields=[
-                ("attraction_id", models.AutoField(primary_key=True, serialize=False)),
+                ("attraction_id", models.AutoField(
+                    primary_key=True, serialize=False)),
                 ("name", models.CharField(max_length=50)),
                 ("description", models.TextField()),
                 ("price", models.IntegerField()),

@@ -8,6 +8,10 @@
     text-align: center;
   }
 
+  .bottomContainer {
+    text-align: center;
+  }
+
   .ratingContainer {
     text-align: center;
     margin: 10px;
@@ -117,7 +121,8 @@
   #reviewButton {
     background-color:burlywood;
     color: white;
-    margin: 7px;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
 
   #reviewButton:hover {
@@ -138,4 +143,15 @@
     width: 500px;
     font-size: 20px;
     padding: 10px;
+  }
+
+  #submitReview {
+    background-color:burlywood;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+  }
+
+  #submitReview:hover {
+    background-color: #f4a460;
   }
