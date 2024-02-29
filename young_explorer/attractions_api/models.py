@@ -25,5 +25,8 @@ class Attraction(models.Model):
     rating = models.IntegerField()
     date_created = models.DateField(auto_now_add=True)
     labels = models.ManyToManyField(Label)
+    food_description = models.TextField(default = "")
+    housing_description = models.TextField(default ="")
+    activity_description = models.TextField(default="")
 
     REQUIRED_FIELDS = [name, description]

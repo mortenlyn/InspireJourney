@@ -18,13 +18,12 @@ class AttractionSerializer(serializers.ModelSerializer):
     This serializer validates the different fields for an attraction, but also creates a new attraction
     and then updates it with the selected labels.
     """
-    #labels = serializers.PrimaryKeyRelatedField(queryset=Label.objects.all(), many=True, required=False)
+    
     labels = serializers.ListSerializer(child=serializers.CharField(), required=False)
-    #write_only=True
 
     class Meta:
         model = Attraction
-        fields = ['name', 'description', 'price', 'rating', 'labels']
+        fields = ['name', 'description', 'price', 'rating', 'labels', 'food_description', 'housing_description', 'activity_description']
 
     def validate_rating(self, value):
         if((value < 0) or (value > 5)):
