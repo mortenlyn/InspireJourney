@@ -29,6 +29,9 @@ function GeneralDestination() {
     <div className="Destination">
       <div className="topContainer">
         <h1>Some information on {name}!</h1>
+        <h3>
+          Check out our other destinations <Link to="/home">here.</Link>
+        </h3>
         <div>
           {" "}
           {}
@@ -43,9 +46,6 @@ function GeneralDestination() {
           </Button>
         </div>
       </div>
-      <h3>
-        Check out our other destinations <Link to="/home">here.</Link>
-      </h3>
 
       <div className="Destination__container">
         <div className="destination__wrapper">
