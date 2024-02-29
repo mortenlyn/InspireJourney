@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
+import Button from "@mui/material/Button";
+import "./BeenHereButton.css";
 
 function GeneralDestination() {
   const { name } = useParams();
+
+  
+  const [BeenHere, setBeenHere] = useState(false); // Been here button is set to false by default
+
+  const handleToggleBeenhere = () => {
+    setBeenHere(!BeenHere); // The state of the button can toggle between true or false
+  }; /* False->True adds the destination to the users database. 
+  True->False removes the destination from the users database
+  */
+
+  //const beenhereText = BeenHere ? "I've been here" : "Have you been here?";
+
+  const uncheckedSymbol = "☐";
+  const checkedSymbol = "☑️";
 
   return (
     <div className="Destination">
@@ -12,6 +28,15 @@ function GeneralDestination() {
       <h3>
         Check out our other destinations <Link to="/home">here.</Link>
       </h3>
+      <div style={{textAlign: "right"}}> {}
+        <Button
+          id="beenhere-btn"
+          variant="contained"
+          onClick={handleToggleBeenhere}
+        >
+          {BeenHere ? `I've been here ${checkedSymbol}` : `Have you been here? ${uncheckedSymbol}`}
+        </Button>
+      </div>
       <div className="Destination__container">
         <div className="destination__wrapper">
           <ul className="Destination__items">
