@@ -10,6 +10,7 @@ function RegisterForm({ client, setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
@@ -18,7 +19,7 @@ function RegisterForm({ client, setCurrentUser }) {
       alert("Passwords don't match");
     } 
     else if (password.length < 8) {
-      alert("Password must be at least 8 characters");
+      setPasswordError("Password must be at least 8 characters");
     }
     else{
       client
@@ -73,6 +74,9 @@ function RegisterForm({ client, setCurrentUser }) {
           />
         </Form.Group>
         <Form.Group className="login-register-form" controlId="passwordForm">
+        {passwordError && (
+            <span className="error-message">{passwordError}</span>
+          )}
           <Form.Control
             type="password"
             placeholder="Password"
