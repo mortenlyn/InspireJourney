@@ -5,7 +5,6 @@ import CardItem from "../Card_Item";
 export default function SearchForm(props) {
   const [searchName, setSearchName] = useState("");
   const [destinations, setDestinations] = useState([])
-  const [loading, setLoading] = useState(true); // Added to track loading state
   const firstUrlPart = "http://127.0.0.1:8000/attractions_api/filter/?search_name="
 
     useEffect(() => {
@@ -19,12 +18,9 @@ export default function SearchForm(props) {
             })
             .then(data => {
                 setDestinations(data);
-                setLoading(false);
             })
             .catch(error => {
                 console.error("Failed to fetch destinations:", error);
-                setLoading(false);
-                console.log(firstUrlPart + searchName)
             });
         };
 
