@@ -166,15 +166,19 @@ class review_view(APIView):
 
 
 class getUserReviews(APIView):
+    """
+    This view allows you to get all the reviews of a specified user. Intended to be used to get all the reviews
+    of a user on their profile page
+    """
+
     permission_classes = [permission.AllowAny]
 
     def get(self, request):
-        # Assuming 'user_id' is passed as a query parameter and it represents the user's primary key (ID).
         username = request.query_params.get('username')
 
         if username is not None:
-            # Filter reviews where the 'user' field matches the provided user_id
+            # Filter reviews where the 'username field matches the provided username in the url'
             userReviews = Review.objects.filter(user__username=username).values()
             return Response({"Message": "List of Reviews", "ReviewList": userReviews})
         else:
-            return Response({"Message": "User ID not provided."}, status=400)
+            return Response({"Message": "username not provided."}, status=400)
