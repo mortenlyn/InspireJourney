@@ -1,24 +1,63 @@
-import React, { useState } from "react"
-import { TextField,Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { TextField, Grid, Button } from "@mui/material";
+import CardItem from "../Card_Item";
 
+export default function SearchForm(props) {
+  const [searchName, setSearchName] = useState("");
+  const [destinations, setDestinations] = useState([])
+  const [loading, setLoading] = useState(true); // Added to track loading state
+  const firstUrlPart = "http://127.0.0.1:8000/attractions_api/filter/?search_name="
 
-function SearchForm(){
-    const [searchName, setSearchName] = useState("");
+    useEffect(() => {
+        const fetchDestinations = () => {
+            fetch("" + firstUrlPart + searchName)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setDestinations(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Failed to fetch destinations:", error);
+                setLoading(false);
+                console.log(firstUrlPart + searchName)
+            });
+        };
 
+        fetchDestinations();
+    }, [searchName]);
+  
 
-    const handleChange = (event) => {
-        setSearchName(event.target.value);
-    };
+  const handleChange = (event) => {
+    setSearchName(event.target.value);
+  };
 
+  const CardItemArray = destinations.map((attraction, index) => {
     return (
+      <CardItem
+        key={index}
+        label="Destination"
+        name={attraction.name}
+        currentUser={props.currentUser}
+      />
+    );
+  });
+
+
+  return (
+    <div>
         <Grid
         container
         direction="column"
         justifyContent="center"
         alignItems="center"
-        style={{ minHeight: '50vh' }}
+        style={{ minHeight: "50vh" }}
         >
-        <Grid item xs={12} style={{ width: '50%' }}>
+        <Grid item xs={12} style={{ width: "50%" }}>
             <TextField
             fullWidth
             label="Search destination"
@@ -27,8 +66,17 @@ function SearchForm(){
             variant="outlined"
             />
         </Grid>
+        <Grid item xs={12} style={{ width: "50%" }}>
+                <Button
+                variant="contained"
+                color="primary"
+                >
+                Search for destinations
+                </Button>
         </Grid>
+        </Grid>
+        <div>
+            {destinations.length > 0 ? CardItemArray : "Loading..."}</div>
+        </div>
   );
 }
-
-export default SearchForm;

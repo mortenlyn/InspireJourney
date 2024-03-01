@@ -79,7 +79,11 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
 
         <Route 
         path="filter/*"
-        element={<SearchForm/>}
+        element={<SearchForm  
+        client={client}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        />}
         />
         
       </Routes>
