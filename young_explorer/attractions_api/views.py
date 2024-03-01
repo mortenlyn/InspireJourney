@@ -134,7 +134,7 @@ class FilterDestinations(APIView):
 
 class addReview(APIView):
     """
-    This view allows you to add a review to a destination. It also checks if the user has already reviewed the destination.
+    This api view allows you to add a review to a destination. 
     """
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()

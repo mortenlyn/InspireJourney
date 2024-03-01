@@ -34,6 +34,9 @@ class Attraction(models.Model):
 
 
 class Review(models.Model):
+    """
+    This is the model for a review. The validation of the model is done in the serializers.py - ReviewSerializer
+    """
     review_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         WebsiteUser, on_delete=models.CASCADE, related_name='user_reviews')
@@ -44,4 +47,4 @@ class Review(models.Model):
     date_created = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.review
+        return f'{self.user}: {self.rating} - {self.review}'
