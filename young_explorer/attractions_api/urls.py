@@ -8,5 +8,7 @@ urlpatterns = [
     path('addAttraction', views.addAttraction.as_view()),
     path('labels', views.label_view.as_view()),
     path('addLabel', views.create_label.as_view()),
-    path('filter/', views.FilterDestinations.as_view())
+    path('filter/', views.FilterDestinations.as_view()),
+    path('addReview', views.addReview.as_view()),
+    path('reviews', views.review_view.as_view()),
 ]
