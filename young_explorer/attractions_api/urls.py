@@ -11,4 +11,5 @@ urlpatterns = [
     path('filter/', views.FilterDestinations.as_view()),
     path('addReview', views.addReview.as_view()),
     path('reviews', views.review_view.as_view()),
+    path('userreviews/', views.getUserReviews.as_view()),
 ]

@@ -163,3 +163,18 @@ class review_view(APIView):
     def get(self, request):
         allReviews = Review.objects.all().values()
         return Response({"Message": "List of Reviews", "ReviewList": allReviews})
+
+
+class getUserReviews(APIView):
+    permission_classes = [permission.AllowAny]
+
+    def get(self, request):
+        # Assuming 'user_id' is passed as a query parameter and it represents the user's primary key (ID).
+        username = request.query_params.get('username')
+
+        if username is not None:
+            # Filter reviews where the 'user' field matches the provided user_id
+            userReviews = Review.objects.filter(user__username=username).values()
+            return Response({"Message": "List of Reviews", "ReviewList": userReviews})
+        else:
+            return Response({"Message": "User ID not provided."}, status=400)
