@@ -44,7 +44,7 @@ function ProfilePage({ currentUser }) {
             <p className="user-info-paragraph">
               <strong>Email:</strong> {currentUser.email}
             </p>
-            {localStorage.getItem("superuser") == "true" ? (
+            {localStorage.getItem("superuser") === "true" ? (
               <>
                 <p className="user-info-paragraph">
                   You're logged in as an admin.
@@ -65,7 +65,7 @@ function ProfilePage({ currentUser }) {
           </Link>
         </div>
       </div>
-      {localStorage.getItem("superuser") == "false" && (
+      {localStorage.getItem("superuser") === "false" && (
         <div>
           <h1>These are all the reviews the user have made</h1>
           {userReviews.length > 0 && userReviews ? (
