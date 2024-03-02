@@ -1,59 +1,97 @@
-import { Button, Grid } from "@mui/material"
-import React, { useState } from "react";
-import { Grid, TextField, Button, Select, MenuItem, Input, Chip, InputLabel} from "@mui/material";
-import { Link } from "react-router-dom";
-import useGetLabels from "../../hooks/useGetLabels";
+import React, { useState, useEffect } from "react";
+import { Grid, TextField, Button, Select, MenuItem, Input, Chip, InputLabel } from "@mui/material";
+import useGetLabels from "../hooks/useGetLabels";
 
-const Filter_box = () => {
+export default function FilterBox() {
+    const [price, setPrice] = useState({ min: "", max: "" });
+    const [selectedLabels, setSelectedLabels] = useState([]);
+    const { labels, loading, error } = useGetLabels();
+
+    const handleSelectedLabelsChange = (event) => {
+        setSelectedLabels(event.target.value);
+    };
+
+    const handlePriceChange = (event) => {
+        const { name, value } = event.target;
+        setPrice(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleFilterButton = () => {
+        // Add logic for filtering
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+    const LabelsMenuArray = labels.map((label) => (
+        <MenuItem key={label.id} value={label.name}>{label.name}</MenuItem>
+    ));
+
     return (
-        <div className="Filter_box">
-            <h1> Filters</h1>
-            <div className="filter_components">
-                <Grid
-                container
-                spacing={2}
-                justifyContent="center"
-                alignItems="center"
-                style={{ minHeight: "100vh" }}
-                >
-                    <Grid item xs={12} sm={6}>
-                        <Grid container spacing={4}>
-                            <Grid item xs={12}>
-                                <InputLabel id="demo-mutiple-chip-label">Select Labels: </InputLabel>
-                                <Select
-                                multiple
-                                value={selected}
-                                onChange={handleSelectedValues}
-                                input={<Input id="select-multiple-chip" />}
-                                renderValue={(selected) => (
-                                    <div>
-                                        {selected.map((value) => (
-                                        <Chip key={value} label={value} />
-                                        ))}
-                                    </div>
-                                )}
-                                >
-                                {LabelsMenuArray /*Displays all the menu-items which are the labels fetched from the database*/}
-                                </Select> 
-                            </Grid>
-                            <Grid item xs={12} style={{ textAlign: "center" }} size="large">
-                            <TextField 
-                                label="MinPrice" 
-                                fullWidth 
-                                required
-                                helperText = {priceError && "Enter price (must be a positive number)"}
-                                />
-                            <TextField 
-                                label="MaxPrice" 
-                                fullWidth 
-                                required
-                                helperText = {priceError && "Enter price (must be a positive number)"}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
+        <div style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
+            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Filters</h2>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <InputLabel>Select Labels:</InputLabel>
+                    <Select
+                        multiple
+                        value={selectedLabels}
+                        onChange={handleSelectedLabelsChange}
+                        input={<Input id="select-multiple-chip" />}
+                        renderValue={(selected) => (
+                            <div>
+                                {selected.map((value) => (
+                                    <Chip key={value} label={value} style={{ margin: "2px" }} />
+                                ))}
+                            </div>
+                        )}
+                        fullWidth
+                    >
+                        {LabelsMenuArray}
+                    </Select>
                 </Grid>
-            </div>
+                <Grid item xs={6}>
+                    <TextField 
+                        label="Min Price" 
+                        fullWidth 
+                        name="min"
+                        value={price.min}
+                        onChange={handlePriceChange}
+                        type="number"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField 
+                        label="Max Price" 
+                        fullWidth 
+                        name="max"
+                        value={price.max}
+                        onChange={handlePriceChange}
+                        type="number"
+                        InputProps={{ inputProps: { min: 0 } }}
+                        variant="outlined"
+                    />
+                </Grid>
+                <Grid item xs={12} style={{ textAlign: "center" }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleFilterButton}
+                    >
+                        Filter
+                    </Button>
+                </Grid>
+            </Grid>
         </div>
-    )
+    );
 }
