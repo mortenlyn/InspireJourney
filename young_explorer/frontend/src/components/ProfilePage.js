@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProfilePage.css";
+import ReviewContainer from "./ReviewContainer";
 
 function ProfilePage({ currentUser }) {
+
+  const [userReviews, setUserReviews] = useState([])
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/attractions_api/getUserReviews/?username=" + currentUser.username)
+      .then((res) => res.json())
+      .then((data) => setUserReviews(data.ReviewList));
+  }, [userReviews]);
+
+  const userReviewsMap = userReviews.map((review) => {
+    return(
+      <ReviewContainer
+      key={review.review_id}
+      attraction_name = {review.attraction_name}
+      rating = {review.rating}
+      date_created = {review.date_created}
+      review = {review.review}
+      />
+    )
+  })
+
   if (!currentUser) {
     return (
       <div>
@@ -41,7 +63,11 @@ function ProfilePage({ currentUser }) {
           </Link>
         </div>
       </div>
-      {localStorage.getItem("superuser") == true ? <h>A admin doesn't have any reviews</h>: <h>Hey</h>}
+      {localStorage.getItem("superuser") == "false" &&<div>
+        <h1>These are all the reviews the user have made</h1>
+        {userReviews.length > 0 && userReviews ? userReviewsMap : <p>The user hasn't made any reviews</p>}
+      </div>}
+      
     </div>
   );
 }

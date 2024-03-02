@@ -6,6 +6,7 @@ from rest_framework import permissions as permission, status
 from .serializers import AttractionSerializer, LabelSerializer, ReviewSerializer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.db.models import F
 
 
 class label_view(APIView):
@@ -168,7 +169,8 @@ class review_view(APIView):
 class getUserReviews(APIView):
     """
     This view allows you to get all the reviews of a specified user. Intended to be used to get all the reviews
-    of a user on their profile page
+    of a user on their profile page. It returns a standard review response, but also the name of a attraction and not 
+    just the attraction_id (which isn't used in frontend)
     """
 
     permission_classes = [permission.AllowAny]
@@ -177,8 +179,10 @@ class getUserReviews(APIView):
         username = request.query_params.get('username')
 
         if username is not None:
-            # Filter reviews where the 'username field matches the provided username in the url'
-            userReviews = Review.objects.filter(user__username=username).values()
-            return Response({"Message": "List of Reviews", "ReviewList": userReviews})
+            #UserReviews manually looks up the attraction_name by querying (F) on the destination name and creates a new list containing all the fields in a review and the destination name
+            userReviews = user_reviews = Review.objects.filter(user__username=username).annotate(
+                attraction_name=F('attraction__name')
+            ).values('review_id', 'user_id', 'attraction_id', 'attraction_name', 'review', 'rating', 'date_created')
+            return Response({"Message": "List of Reviews", "ReviewList": list(userReviews)})
         else:
             return Response({"Message": "username not provided."}, status=400)
