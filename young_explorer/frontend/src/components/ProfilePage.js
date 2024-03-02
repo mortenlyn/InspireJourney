@@ -4,26 +4,28 @@ import "./ProfilePage.css";
 import ReviewContainer from "./ReviewContainer";
 
 function ProfilePage({ currentUser }) {
-
-  const [userReviews, setUserReviews] = useState([])
+  const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/attractions_api/getUserReviews/?username=" + currentUser.username)
+    fetch(
+      "http://127.0.0.1:8000/attractions_api/getUserReviews/?username=" +
+        currentUser.username
+    )
       .then((res) => res.json())
       .then((data) => setUserReviews(data.ReviewList));
-  }, [userReviews]);
+  }, []);
 
   const userReviewsMap = userReviews.map((review) => {
-    return(
+    return (
       <ReviewContainer
-      key={review.review_id}
-      attraction_name = {review.attraction_name}
-      rating = {review.rating}
-      date_created = {review.date_created}
-      review = {review.review}
+        key={review.review_id}
+        attraction_name={review.attraction_name}
+        rating={review.rating}
+        date_created={review.date_created}
+        review={review.review}
       />
-    )
-  })
+    );
+  });
 
   if (!currentUser) {
     return (
@@ -42,7 +44,7 @@ function ProfilePage({ currentUser }) {
             <p className="user-info-paragraph">
               <strong>Email:</strong> {currentUser.email}
             </p>
-            {localStorage.getItem("superuser") == "true" ? (
+            {localStorage.getItem("superuser") === "true" ? (
               <>
                 <p className="user-info-paragraph">
                   You're logged in as an admin.
@@ -63,11 +65,16 @@ function ProfilePage({ currentUser }) {
           </Link>
         </div>
       </div>
-      {localStorage.getItem("superuser") == "false" &&<div>
-        <h1>These are all the reviews the user have made</h1>
-        {userReviews.length > 0 && userReviews ? userReviewsMap : <p>The user hasn't made any reviews</p>}
-      </div>}
-      
+      {localStorage.getItem("superuser") === "false" && (
+        <div>
+          <h1>These are all the reviews the user have made</h1>
+          {userReviews.length > 0 && userReviews ? (
+            userReviewsMap
+          ) : (
+            <p>The user hasn't made any reviews</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
