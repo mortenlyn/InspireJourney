@@ -12,4 +12,5 @@ urlpatterns = [
     path('addReview', views.addReview.as_view()),
     path('reviews', views.review_view.as_view()),
     path('getUserReviews/', views.getUserReviews.as_view()),
+    path('addVisitor/', views.add_visitor.as_view(), name='add_visitor'),
 ]

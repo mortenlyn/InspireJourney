@@ -165,6 +165,15 @@ class review_view(APIView):
         allReviews = Review.objects.all().values()
         return Response({"Message": "List of Reviews", "ReviewList": allReviews})
 
+class add_visitor(APIView):
+    permission_classes = [permission.AllowAny]
+
+    def post(self, request):
+        attraction_name = request.query_params.get('attraction_name')
+        if(attraction_name):
+            attraction = get_object_or_404(Attraction, name=attraction_name)
+            attraction.visited_by.add(request.user)
+            return Response({"message": "You have successfully visited this attraction"})
 
 class getUserReviews(APIView):
     """

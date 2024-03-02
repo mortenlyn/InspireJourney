@@ -1,8 +1,8 @@
 from django.db import models
 from user_api.models import WebsiteUser
-
+from django.contrib.auth import get_user_model
 # Create your models here.
-
+User = get_user_model()
 
 class Label(models.Model):
     """
@@ -29,6 +29,7 @@ class Attraction(models.Model):
     food_description = models.TextField(default="")
     housing_description = models.TextField(default="")
     activity_description = models.TextField(default="")
+    visited_by = models.ManyToManyField(User, related_name='visited_attractions', blank=True)
 
     REQUIRED_FIELDS = [name, description]
 
