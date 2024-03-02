@@ -1,4 +1,38 @@
-import React, {Component} from "react";
+import React from "react";
+import CardItem from "./Card_Item";
+import './Destination_box.css';
+import GetAllAttractions from "./GetAllAttractions";
+
+const Destination_box = (props) => {
+  const { filteredAttractions, currentUser } = props;
+
+  return (
+    <div className="Destination">
+      <h1>Check out these destinations!</h1>
+      <div className="Destination__container">
+        <div className="destination__wrapper">
+          {filteredAttractions.length > 0 ? (
+            <ul className="Destination__items">
+              {filteredAttractions.map((attraction, index) => (
+                <CardItem key={index} attraction={attraction} />
+              ))}
+            </ul>
+          ) : (
+            <ul className="Destination__items">
+              <GetAllAttractions currentUser={currentUser} />
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Destination_box;
+
+
+
+/*import React, {Component} from "react";
 import CardItem from "./Card_Item";
 import './Destination_box.css';
 import GetAllAttractions from "./GetAllAttractions";

@@ -6,6 +6,7 @@ export default function FilterBox() {
     const [price, setPrice] = useState({ min: "", max: "" });
     const [selectedLabels, setSelectedLabels] = useState([]);
     const { labels, loading, error } = useGetLabels();
+    const [filteredAttractions, setFilteredAttractions] = useState([]);
 
     const handleSelectedLabelsChange = (event) => {
         setSelectedLabels(event.target.value);
@@ -20,7 +21,18 @@ export default function FilterBox() {
     };
 
     const handleFilterButton = () => {
-        // Add logic for filtering
+        // Make API call to fetch filtered attractions
+        const url = `http://127.0.0.1:8000/attractions_api/${selectedLabels.join(',')}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setFilteredAttractions(data);
+                console.log(filteredAttractions);
+
+            })
+            .catch(error => {
+                console.error('Error fetching attractions:', error);
+            });
     };
 
     if (loading) {
@@ -34,12 +46,19 @@ export default function FilterBox() {
     const LabelsMenuArray = labels.map((label) => (
         <MenuItem key={label.id} value={label.name}>{label.name}</MenuItem>
     ));
+    const handleSearchButton = () => {
 
+    }
     return (
-        <div style={{ padding: "20px", backgroundColor: "#f5f5f5" }}>
-            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Filters</h2>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+        <div style={{ padding: "10px", backgroundColor: "#f5f5f5" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "10px" , marginTop: "10px"}}>Filter content</h3>
+            <Grid 
+            container spacing={2} 
+            justifyContent={"center"}
+            alignItems={"center"}
+
+            >
+                <Grid item xs={3}>
                     <InputLabel>Select Labels:</InputLabel>
                     <Select
                         multiple
@@ -58,7 +77,7 @@ export default function FilterBox() {
                         {LabelsMenuArray}
                     </Select>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={3}>
                     <TextField 
                         label="Min Price" 
                         fullWidth 
@@ -70,7 +89,7 @@ export default function FilterBox() {
                         variant="outlined"
                     />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={3}>
                     <TextField 
                         label="Max Price" 
                         fullWidth 
@@ -82,13 +101,29 @@ export default function FilterBox() {
                         variant="outlined"
                     />
                 </Grid>
-                <Grid item xs={12} style={{ textAlign: "center" }}>
+                <Grid item xs={3} style={{ textAlign: "center" }}>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleFilterButton}
-                    >
+                        fullWidth
+                        onClick={handleFilterButton}>
                         Filter
+                    </Button>
+                </Grid>
+                <Grid item xs={9}>
+                    <TextField
+                    label="Search for destination"
+                    fullWidth
+                    helperText = {"Enter search information"}
+                    />
+                </Grid>
+                <Grid item xs={3} style={{ textAlign: "center" }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={handleSearchButton}>
+                        Search
                     </Button>
                 </Grid>
             </Grid>
