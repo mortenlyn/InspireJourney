@@ -9,18 +9,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { FaRegUserCircle } from "react-icons/fa";
 import './header.css';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-
-/*import { registerLicense } from '@syncfusion/ej2-base';
-import { enableRipple } from '@syncfusion/ej2-base';
-import { DropDownButtonComponent } from '@syncfusion/ej2-react-splitbuttons';
-
-
-// Registering Syncfusion license key
-registerLicense('Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhNYVFpR2Nbe05zflBHallTVAciSV9jS3pTdUVgWXxbcXFWRmFcUg==');
-
-enableRipple(true);*/
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
