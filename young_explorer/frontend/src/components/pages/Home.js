@@ -17,7 +17,7 @@ function Home(props) {
     <div>
       {/* Render Filter_box component and pass updateFilteredAttractions as a prop */}
       <Filter_box setFilteredAttractions={updateFilteredAttractions} />
-
+      
       {/* Render Destination_box component and pass filteredAttractions as a prop */}
       <Destination_box
         currentUser={props.currentUser}
