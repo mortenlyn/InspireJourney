@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {
   Grid,
   TextField,
@@ -11,9 +11,7 @@ import {
 } from "@mui/material";
 import useGetLabels from "../hooks/useGetLabels";
 import CardItem from "./Card_Item";
-import Destination_box from "./Destination_box";
 import GetAllAttractions from "./GetAllAttractions";
-
 
 export default function FilterBox(props) {
   const [price, setPrice] = useState({ min: "", max: "" });
@@ -65,7 +63,7 @@ export default function FilterBox(props) {
       {label.name}
     </MenuItem>
   ));
-  
+
   const handleSearchButton = () => {};
 
   const CardItemArray = filteredAttractions.map((attraction) => {
@@ -81,100 +79,109 @@ export default function FilterBox(props) {
 
   return (
     <div>
-        <div>
-            <div style={{ padding: "10px", backgroundColor: "#f5f5f5" }}>
-                <h3
-                style={{
-                    textAlign: "center",
-                    marginBottom: "10px",
-                    marginTop: "10px",
-                }}
-                >
-                Filter content
-                </h3>
-                <Grid
-                container
-                spacing={2}
-                justifyContent={"center"}
-                alignItems={"center"}
-                >
-                <Grid item xs={3}>
-                    <InputLabel>Select Labels:</InputLabel>
-                    <Select
-                    multiple
-                    value={selectedLabels}
-                    onChange={handleSelectedLabelsChange}
-                    input={<Input id="select-multiple-chip" />}
-                    renderValue={(selected) => (
-                        <div>
-                        {selected.map((value) => (
-                            <Chip key={value} label={value} style={{ margin: "2px" }} />
-                        ))}
-                        </div>
-                    )}
-                    fullWidth
-                    >
-                    {LabelsMenuArray}
-                    </Select>
-                </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                    label="Min Price"
-                    fullWidth
-                    name="min"
-                    value={price.min}
-                    onChange={handlePriceChange}
-                    type="number"
-                    InputProps={{ inputProps: { min: 0 } }}
-                    variant="outlined"
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <TextField
-                    label="Max Price"
-                    fullWidth
-                    name="max"
-                    value={price.max}
-                    onChange={handlePriceChange}
-                    type="number"
-                    InputProps={{ inputProps: { min: 0 } }}
-                    variant="outlined"
-                    />
-                </Grid>
-                <Grid item xs={3} style={{ textAlign: "center" }}>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    onClick={handleFilterButton}
-                    >
-                    Filter
-                    </Button>
-                </Grid>
-                <Grid item xs={9}>
-                    <TextField
-                    label="Search for destination"
-                    fullWidth
-                    helperText={"Enter search information"}
-                    />
-                </Grid>
-                <Grid item xs={3} style={{ textAlign: "center" }}>
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    onClick={handleSearchButton}
-                    >
-                    Search
-                    </Button>
-                </Grid>
-                </Grid>
-            </div>
+      <div>
+        <div style={{ padding: "10px", backgroundColor: "#f5f5f5" }}>
+          <h3
+            style={{
+              textAlign: "center",
+              marginBottom: "10px",
+              marginTop: "10px",
+            }}
+          >
+            Filter content
+          </h3>
+          <Grid
+            container
+            spacing={2}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <Grid item xs={3}>
+              <InputLabel>Select Labels:</InputLabel>
+              <Select
+                multiple
+                value={selectedLabels}
+                onChange={handleSelectedLabelsChange}
+                input={<Input id="select-multiple-chip" />}
+                renderValue={(selected) => (
+                  <div>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={value}
+                        style={{ margin: "2px" }}
+                      />
+                    ))}
+                  </div>
+                )}
+                fullWidth
+              >
+                {LabelsMenuArray}
+              </Select>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                label="Min Price"
+                fullWidth
+                name="min"
+                value={price.min}
+                onChange={handlePriceChange}
+                type="number"
+                InputProps={{ inputProps: { min: 0 } }}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                label="Max Price"
+                fullWidth
+                name="max"
+                value={price.max}
+                onChange={handlePriceChange}
+                type="number"
+                InputProps={{ inputProps: { min: 0 } }}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={3} style={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleFilterButton}
+              >
+                Filter
+              </Button>
+            </Grid>
+            <Grid item xs={9}>
+              <TextField
+                label="Search for destination"
+                fullWidth
+                helperText={"Enter search information"}
+              />
+            </Grid>
+            <Grid item xs={3} style={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleSearchButton}
+              >
+                Search
+              </Button>
+            </Grid>
+          </Grid>
         </div>
-        <div><br></br>
-          <h1>Check out these destinations!</h1>
-          {CardItemArray.length > 0 && filteredAttractions ? CardItemArray : <GetAllAttractions currentUser={props.currentUser}/>}
-        </div>
+      </div>
+      <div>
+        <br></br>
+        <h1>Check out these destinations!</h1>
+        {CardItemArray.length > 0 && filteredAttractions ? (
+          CardItemArray
+        ) : (
+          <GetAllAttractions currentUser={props.currentUser} />
+        )}
+      </div>
     </div>
   );
 }
