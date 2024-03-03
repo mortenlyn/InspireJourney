@@ -1,0 +1,15 @@
+#user-btn {
+    color: beige;
+
+}
+
+#user-btn:hover {
+    color: rgba(245, 245, 220, 0.718);
+}
+
+#dropdown-basic {
+    border: none;
+    
+    
+}
+

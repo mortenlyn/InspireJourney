@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -7,6 +7,20 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { FaRegUserCircle } from "react-icons/fa";
+import './header.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
+/*import { registerLicense } from '@syncfusion/ej2-base';
+import { enableRipple } from '@syncfusion/ej2-base';
+import { DropDownButtonComponent } from '@syncfusion/ej2-react-splitbuttons';
+
+
+// Registering Syncfusion license key
+registerLicense('Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhNYVFpR2Nbe05zflBHallTVAciSV9jS3pTdUVgWXxbcXFWRmFcUg==');
+
+enableRipple(true);*/
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
@@ -35,6 +49,12 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
     navigate("/addAttraction");
   };
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <AppBar id="appbar" position="static">
       <Toolbar sx={{ paddingTop: 2 }}>
@@ -48,7 +68,26 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Young Explorer{" "}
           </Link>
         </Typography>
-        {currentUser != null && localStorage.getItem("superuser") == "true" && (
+
+        <div class="dropdown">
+          <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
+          {isMenuOpen && (
+            <div class="dropdown-menu">
+              <Button class="dropdown-item" onClick={login}>Login</Button>
+
+            </div>
+          )}
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Header;
+
+// <FaRegUserCircle id="user-btn" size={42}/>
+
+    /*{currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>
             +
           </Button>
@@ -67,13 +106,9 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
           <Button id="login-btn" onClick={login}>
             Login
           </Button>
-        )}
-      </Toolbar>
-    </AppBar>
-  );
-};
-
-export default Header;
+          
+          
+        )}*/
 
 /*DON'T REMOVE THIS - IN CASE WE're going to use it later
  <IconButton
