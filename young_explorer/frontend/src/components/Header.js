@@ -85,7 +85,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
               {currentUser != null ? (
                 <Box>
                   <Button class="dropdown-item" onClick={logout}>
-                    Logout
+                    Log Out
                   </Button>
                   <Button class="dropdown-item" onClick={profile}>
                     Profile
@@ -93,7 +93,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
                 </Box>
               ) : (
                 <Button class="dropdown-item" onClick={login}>
-                  Login
+                  Log In
                 </Button>
         )}
 
