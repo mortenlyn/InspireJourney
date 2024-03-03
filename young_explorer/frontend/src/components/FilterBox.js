@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import {
   Grid,
   TextField,
@@ -18,8 +18,10 @@ export default function FilterBox(props) {
   const [selectedLabels, setSelectedLabels] = useState([]);
   const { labels, loading, error } = useGetLabels();
   const [filteredAttractions, setFilteredAttractions] = useState([]);
+  const [filterApplied, setFilterApplied] = useState(false);
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
+  
   const handleSelectedLabelsChange = (event) => {
     setSelectedLabels(event.target.value);
   };
@@ -48,6 +50,7 @@ export default function FilterBox(props) {
       .catch((error) => {
         console.error("Error fetching attractions:", error);
       });
+    setFilterApplied(true);
   };
 
   if (loading) {
@@ -66,16 +69,18 @@ export default function FilterBox(props) {
 
   const handleSearchButton = () => {};
 
-  const CardItemArray = filteredAttractions.map((attraction) => {
+  const CardItemArray = filteredAttractions.map((attraction, iteration) => {
     return (
       <CardItem
-        key={attraction.attraction_id}
+        key={iteration}
         label="Destination"
         name={attraction.name}
         currentUser={props.currentUser}
       />
     );
   });
+
+  
 
   return (
     <div>
@@ -173,14 +178,15 @@ export default function FilterBox(props) {
           </Grid>
         </div>
       </div>
+
       <div>
         <br></br>
         <h1>Check out these destinations!</h1>
         {CardItemArray.length > 0 && filteredAttractions ? (
           CardItemArray
         ) : (
-          <GetAllAttractions currentUser={props.currentUser} />
-        )}
+          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
+        }
       </div>
     </div>
   );
