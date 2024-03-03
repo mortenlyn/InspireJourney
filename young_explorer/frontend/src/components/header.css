@@ -7,9 +7,29 @@
     color: rgba(245, 245, 220, 0.718);
 }
 
-#dropdown-basic {
-    border: none;
-    
-    
+
+.dropdown-menu {
+    position: absolute;
+    right: 7px;
+    /*z-index: 1;*/
 }
 
+.dropdown-item {
+    display: block;
+    /*background: black;
+    color: beige;*/
+    background-color: rgb(76, 77, 76);
+    color: beige;
+    border: none;
+    border-radius: 8px;
+    margin-top: 7px;
+    width: 120px;
+    height: 45px;
+    font-family: Marker Felt, fantasy; 
+    font-size: 17px;
+    /*font-weight: bolder;*/
+}
+
+.dropdown-item:hover {
+    background-color: darkslategray;
+  }

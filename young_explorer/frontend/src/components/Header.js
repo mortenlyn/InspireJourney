@@ -55,10 +55,14 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
       setIsMenuOpen(!isMenuOpen);
   };
 
+  const NoToggleMenu = () => {
+      setIsMenuOpen();
+  };
+
   return (
     <AppBar id="appbar" position="static">
-      <Toolbar sx={{ paddingTop: 2 }}>
-        <Typography
+      <Toolbar sx={{paddingTop: 3}}>
+        <Typography 
           id="header-title"
           variant="h6"
           component="div"
@@ -72,8 +76,26 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         <div class="dropdown">
           <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
           {isMenuOpen && (
-            <div class="dropdown-menu">
-              <Button class="dropdown-item" onClick={login}>Login</Button>
+            <div class="dropdown-menu" onMouseLeave={NoToggleMenu}>
+              {currentUser != null && localStorage.getItem("superuser") == "true" && (
+                <Button class="dropdown-item" onClick={addAttraction}>
+                  +
+                </Button>
+              )}
+              {currentUser != null ? (
+                <Box>
+                  <Button class="dropdown-item" onClick={logout}>
+                    Logout
+                  </Button>
+                  <Button class="dropdown-item" onClick={profile}>
+                    Profile
+                  </Button>
+                </Box>
+              ) : (
+                <Button class="dropdown-item" onClick={login}>
+                  Login
+                </Button>
+        )}
 
             </div>
           )}
@@ -85,7 +107,6 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
 
 export default Header;
 
-// <FaRegUserCircle id="user-btn" size={42}/>
 
     /*{currentUser != null && localStorage.getItem("superuser") == "true" && (
           <Button id="add-btn" onClick={addAttraction}>

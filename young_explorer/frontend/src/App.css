@@ -98,6 +98,7 @@
     background-color: darkorange;
   }
 
+  /*NOT IN USE ANYMORE
   #logout-btn {
     background-color: slategray;
     border: none;
@@ -139,7 +140,7 @@
 
   #login-btn:hover {
     background-color: darkslategray;
-  }
+  }*/
 
   .login-register-form {
     width: 750px;
@@ -181,6 +182,7 @@
     margin-top: 20px;
   }
 
+  /* NOT IN USE ANYMORE
   #add-btn {
     background-color: slategray;
     color: whitesmoke;
@@ -200,8 +202,8 @@
   }
 
   #add-btn.MuiButton-root:hover {
-    background-color: darkslategrey; /* Change background color on hover */
-  }
+    background-color: darkslategrey; 
+  } */
 
   #login-txt {
     text-align: center;
