@@ -203,7 +203,7 @@ export default function AddAttraction() {
               rows={4} // Specify the number of rows (optional)
               onChange={handleAttractionHousingChange}
               error = {attractionHousingError}
-              helperText = {attractionHousingError && "Enter attraction description"}
+              helperText = {attractionHousingError && "Enter attraction housing"}
             />
           </Grid>
           <Grid item xs={12} onChange={handlePriceChange}>
