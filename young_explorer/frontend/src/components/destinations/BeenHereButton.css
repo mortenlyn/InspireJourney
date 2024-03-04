@@ -1,0 +1,14 @@
+#beenhere-btn {
+    background-color: slategray;
+    border: none;
+    color: white;
+    padding: 2.5px 5px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+#beenhere-btn:hover {
+    background-color: darkslategray;
+  }
