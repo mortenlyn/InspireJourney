@@ -147,6 +147,7 @@ export default function AddAttraction() {
       justifyContent="center"
       alignItems="center"
       style={{ minHeight: "100vh" }}
+      m={2}
     >
       <Grid item xs={12} sm={6}>
         <Grid container spacing={4}>
