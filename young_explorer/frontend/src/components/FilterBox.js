@@ -19,6 +19,7 @@ export default function FilterBox(props) {
   const { labels, loading, error } = useGetLabels();
   const [filteredAttractions, setFilteredAttractions] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
+  const [searchName, setSearchName] = useState("")
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
   
@@ -34,6 +35,10 @@ export default function FilterBox(props) {
     }));
   };
 
+  const handleSearchName = (event) => {
+    setSearchName(event.target.value);
+  };
+
   const handleFilterButton = () => {
     if (price) {
       url += "min_price=" + price.min + "&max_price=" + price.max;
@@ -41,11 +46,14 @@ export default function FilterBox(props) {
     if (selectedLabels) {
       url += `&label_names=${selectedLabels.join(",")}`;
     }
+
+    if(searchName) {
+      url += "&search_name=" + searchName;
+    }
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setFilteredAttractions(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching attractions:", error);
@@ -66,8 +74,6 @@ export default function FilterBox(props) {
       {label.name}
     </MenuItem>
   ));
-
-  const handleSearchButton = () => {};
 
   const CardItemArray = filteredAttractions.map((attraction, iteration) => {
     return (
@@ -163,17 +169,8 @@ export default function FilterBox(props) {
                 label="Search for destination"
                 fullWidth
                 helperText={"Enter search information"}
+                onChange={handleSearchName}
               />
-            </Grid>
-            <Grid item xs={3} style={{ textAlign: "center" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={handleSearchButton}
-              >
-                Search
-              </Button>
             </Grid>
           </Grid>
         </div>
