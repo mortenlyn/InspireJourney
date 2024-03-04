@@ -7,6 +7,9 @@ from .serializers import AttractionSerializer, LabelSerializer, ReviewSerializer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.db.models import F
+from rest_framework import generics
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class label_view(APIView):
@@ -180,6 +183,24 @@ class add_visitor(APIView):
             attraction = get_object_or_404(Attraction, name=attraction_name)
             attraction.visited_by.add(request.user)
             return Response({"message": "You have successfully visited this attraction"})
+
+class VisitedAttractionsView(generics.ListAPIView):
+    serializer_class = AttractionSerializer
+    permission_classes = [permission.AllowAny]
+
+    def get_queryset(self):
+        username = self.request.query_params.get('username')
+        if username:
+            # Retrieve the visited attractions for the specified user
+            user = get_object_or_404(User, username=username)
+            return user.visited_attractions.all()
+        else:
+            return Attraction.objects.none()  # Return empty queryset if username is not provided
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class getUserReviews(APIView):
     """

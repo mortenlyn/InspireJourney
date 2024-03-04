@@ -5,6 +5,7 @@ import ReviewContainer from "./ReviewContainer";
 
 function ProfilePage({ currentUser }) {
   const [userReviews, setUserReviews] = useState([]);
+  const [visitedAttractions, setVisitedAttractions] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -13,8 +14,14 @@ function ProfilePage({ currentUser }) {
     )
       .then((res) => res.json())
       .then((data) => setUserReviews(data.ReviewList));
+      
+    fetch("http://127.0.0.1:8000/attractions_api/visited-attractions/?username=" + 
+        currentUser.username,
+      )
+      .then((res) => res.json())
+      .then((data) => setVisitedAttractions(data));
   }, []);
-
+  
   const userReviewsMap = userReviews.map((review) => {
     return (
       <ReviewContainer
@@ -26,6 +33,14 @@ function ProfilePage({ currentUser }) {
       />
     );
   });
+
+  const visitedAttractionsList = visitedAttractions.map((attraction) => (
+    <div key={attraction.id}>
+      <p>{attraction.name}</p>
+    </div>
+  ));
+  
+
 
   if (!currentUser) {
     return (
@@ -75,6 +90,15 @@ function ProfilePage({ currentUser }) {
           )}
         </div>
       )}
+      {/* Visited attractions */}
+      <div>
+        <h1>Visited Destinations</h1>
+        {visitedAttractionsList.length > 0 ? (
+          visitedAttractionsList
+        ) : (
+          <p>No visited destinations</p>
+        )}
+      </div>
     </div>
   );
 }
