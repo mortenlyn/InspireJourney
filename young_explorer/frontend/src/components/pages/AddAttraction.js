@@ -174,7 +174,7 @@ export default function AddAttraction() {
           <Grid item xs={12}>
             <TextField
               label="Destination Activities"
-              assis
+              
               multiline // Set multiline to true
               fullWidth
               rows={4} // Specify the number of rows (optional)
