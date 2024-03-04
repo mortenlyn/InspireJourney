@@ -86,6 +86,7 @@ class ReviewSerializer(serializers.Serializer):
         model = Review
         fields = ['attraction', 'user',
                   'review', 'rating', 'date_created']
+
     review = serializers.CharField()
     rating = serializers.IntegerField()
 
@@ -96,6 +97,5 @@ class ReviewSerializer(serializers.Serializer):
 
     def validate_user(self, current_user, current_attraction):
         if Review.objects.filter(user=current_user, attraction=current_attraction).exists():
-            raise serializers.ValidationError(
-                "You have already reviewed this destination")
+            return False
         return current_user

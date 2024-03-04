@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from user_api.models import WebsiteUser
 from .models import Attraction, Label, Review
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -91,9 +92,9 @@ class addAttraction(APIView):
 
 class FilterDestinations(APIView):
     """
-    This apiView allows you to filter destinations on price and labels. Here you can write 
-    /attractions_api/filter?search_name=Chennai&label_names=Europe,Asia&min_price=min&max_price=max. 
-    Then you will get all of the destinations with either the Asia or Europe label. 
+    This apiView allows you to filter destinations on price and labels. Here you can write
+    /attractions_api/filter?search_name=Chennai&label_names=Europe,Asia&min_price=min&max_price=max.
+    Then you will get all of the destinations with either the Asia or Europe label.
     You can also choose to sort on max and min price. This is done by specifying the max_price and min_price in
     the url like in the example above. However both labels and min/max_price are optional in the filtering. You can
     choose to not filter on anything and then get all destinations by using: /attractions_api/filter
@@ -130,10 +131,10 @@ class FilterDestinations(APIView):
                 price_filter &= Q(price__lte=max_price)
             attractions = attractions.filter(price_filter)
 
-        #Searching filter on attraction names
+        # Searching filter on attraction names
         if search_name:
-            attractions = attractions.filter(name__icontains=search_name).distinct()
-
+            attractions = attractions.filter(
+                name__icontains=search_name).distinct()
 
         serializer = AttractionSerializer(attractions, many=True)
         return Response(serializer.data)
@@ -141,24 +142,32 @@ class FilterDestinations(APIView):
 
 class addReview(APIView):
     """
-    This api view allows you to add a review to a destination. 
+    This api view allows you to add a review to a destination.
     """
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     permission_classes = [permission.AllowAny]
 
-    def post(self, request, attraction_id):
+    def post(self, request):
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
+            user = WebsiteUser.objects.get(
+                email=request.data.get("user")["email"])
+            attraction = Attraction.objects.get(
+                name=request.data.get("attraction"))
+
+            if (not serializer.validate_user(user, attraction)):
+                return Response({"Message": "You have already reviewed this attraction"}, status=status.HTTP_409_CONFLICT)
+
             new_review = Review.objects.create(
-                user=request.user,
-                attraction_id=attraction_id,
+                user=user,
+                attraction=attraction,
                 review=serializer.data.get("review"),
                 rating=serializer.data.get("rating")
             )
             return Response({"Message": "Review added successfully", "Review": new_review.review}, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class review_view(APIView):
@@ -175,7 +184,7 @@ class review_view(APIView):
 class getUserReviews(APIView):
     """
     This view allows you to get all the reviews of a specified user. Intended to be used to get all the reviews
-    of a user on their profile page. It returns a standard review response, but also the name of a attraction and not 
+    of a user on their profile page. It returns a standard review response, but also the name of a attraction and not
     just the attraction_id (which isn't used in frontend)
     """
 
@@ -185,7 +194,7 @@ class getUserReviews(APIView):
         username = request.query_params.get('username')
 
         if username is not None:
-            #UserReviews manually looks up the attraction_name by querying (F) on the destination name and creates a new list containing all the fields in a review and the destination name
+            # UserReviews manually looks up the attraction_name by querying (F) on the destination name and creates a new list containing all the fields in a review and the destination name
             userReviews = user_reviews = Review.objects.filter(user__username=username).annotate(
                 attraction_name=F('attraction__name')
             ).values('review_id', 'user_id', 'attraction_id', 'attraction_name', 'review', 'rating', 'date_created')

@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { FaStar } from "react-icons/fa";
 import "./destinations.css";
 import "./BeenHereButton.css";
+import client from "../../api/apiClient";
 
 function GeneralDestination() {
   const { name } = useParams();
@@ -24,6 +25,31 @@ function GeneralDestination() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [show, setShow] = useState(false);
+  const [reviewText, setReviewText] = useState("");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await client.post("/attractions_api/addReview", {
+        user: JSON.parse(localStorage.getItem("currentUser")),
+        attraction: name,
+        review: reviewText,
+        rating: rating,
+      });
+      console.log(res);
+      alert("Review successfully submitted");
+      window.document.getElementById("reviewText").value = "";
+      setReviewText("");
+      setRating(null);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 409) {
+        alert("You've already reviewed this destination!");
+      } else {
+        alert("Review not submitted!");
+      }
+    }
+  }
 
   return (
     <div className="Destination">
@@ -79,8 +105,10 @@ function GeneralDestination() {
           <div className="ratingContainer">
             <div className="textContainer">
               <textarea
+                id="reviewText"
                 className="reviewText"
                 placeholder="Write your review here!"
+                onChange={(e) => setReviewText(e.target.value)}
               ></textarea>
             </div>
             {[...Array(5)].map((star, index) => {
@@ -104,7 +132,9 @@ function GeneralDestination() {
               );
             })}
             <p>Your rating is {rating}</p>
-            <Button id="submitReview">Submit</Button>
+            <Button id="submitReview" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
         )}
       </div>
