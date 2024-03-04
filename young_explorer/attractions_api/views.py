@@ -91,9 +91,9 @@ class addAttraction(APIView):
 
 class FilterDestinations(APIView):
     """
-    This apiView allows you to filter destinations on price and labels. Here you can write
-    /attractions_api/filter?label_names=Europe,Asia&min_price=min&max_price=max.
-    Then you will get all of the destinations with either the Asia or Europe label.
+    This apiView allows you to filter destinations on price and labels. Here you can write 
+    /attractions_api/filter?search_name=Chennai&label_names=Europe,Asia&min_price=min&max_price=max. 
+    Then you will get all of the destinations with either the Asia or Europe label. 
     You can also choose to sort on max and min price. This is done by specifying the max_price and min_price in
     the url like in the example above. However both labels and min/max_price are optional in the filtering. You can
     choose to not filter on anything and then get all destinations by using: /attractions_api/filter
@@ -104,6 +104,7 @@ class FilterDestinations(APIView):
     def get(self, request):
         filter_query = Q()
         label_names = request.query_params.get('label_names')
+        search_name = request.query_params.get('search_name')
         if (label_names):
             label_name_list = label_names.split(',')
             for label_name in label_name_list:
@@ -128,6 +129,11 @@ class FilterDestinations(APIView):
             if max_price:
                 price_filter &= Q(price__lte=max_price)
             attractions = attractions.filter(price_filter)
+
+        #Searching filter on attraction names
+        if search_name:
+            attractions = attractions.filter(name__icontains=search_name).distinct()
+
 
         serializer = AttractionSerializer(attractions, many=True)
         return Response(serializer.data)

@@ -13,6 +13,7 @@ import AddAttraction from "../components/pages/AddAttraction";
 import GetAllAttractions from "../components/GetAllAttractions";
 import Profile from "../components/ProfilePage";
 import GeneralDestination from "../components/destinations/GeneralDestination";
+import SearchForm from "../components/destinations/SearchForm";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -75,6 +76,16 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
           path="/profile/*"
           element={<Profile client={client} currentUser={currentUser} />}
         />
+
+        <Route 
+        path="filter/*"
+        element={<SearchForm  
+        client={client}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        />}
+        />
+        
       </Routes>
     </Router>
   );
