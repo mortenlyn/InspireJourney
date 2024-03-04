@@ -1,10 +1,14 @@
 import React from "react";
-import Destination_box from "../Destination_box";
+import DestinationBox from "../DestinationBox";
 import "../../App.css";
-import Header from "../Header";
 
 function Home(props) {
-  return <Destination_box currentUser={props.currentUser}/>;
+  return (
+    <div>
+      <DestinationBox currentUser={props.currentUser} />
+    </div>
+  );
 }
 
 export default Home;
+

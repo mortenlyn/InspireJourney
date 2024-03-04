@@ -5,9 +5,17 @@ import useGetLabels from "../../hooks/useGetLabels";
 
 export default function AddAttraction() {
   const [attractionDescription, setAttractionDescription] = useState("");
+  const [attractionFood, setAttractionFood] = useState("");
+  const [attractionActivity, setAttractionActivity] = useState("");
+  const [attractionHousing, setAttractionHousing] = useState("");
   const [attractionName, setAttractionName] = useState("");
   const [price, setPrice] = useState(null);
   const [selected, setSelected] = useState([]);
+
+
+  const [attractionFoodError, setAttractionFoodError] = useState(false);
+  const [attractionActivityError, setAttractionActivityError] = useState(false);
+  const [attractionHousingError, setAttractionHousingError] = useState(false);
 
   const [attractionNameError, setAttractionNameError] = useState(false);
   const [attractionDescriptionError, setAttractionDescriptionError] = useState(false);
@@ -32,6 +40,27 @@ export default function AddAttraction() {
     setAttractionDescriptionError(false);
   };
 
+  const handleAttractionFoodChange = (event) => {
+    const value = event.target.value;
+    setAttractionFood(value);
+    setAttractionFoodError(false);
+  };
+
+  const handleAttractionActivityChange = (event) => {
+    const value = event.target.value;
+    setAttractionActivity(value);
+    setAttractionActivityError(false);
+  };
+
+
+  const handleAttractionHousingChange = (event) => {
+    const value = event.target.value;
+    setAttractionHousing(value);
+    setAttractionHousingError(false);
+  };
+
+
+
   const handleSelectedValues = (event) => {
     setSelected(event.target.value);
   }
@@ -45,6 +74,18 @@ export default function AddAttraction() {
     }
     if (!attractionDescription.trim()) {
       setAttractionDescriptionError(true);
+      hasError = true;
+    }
+    if (!attractionActivity.trim()) {
+      setAttractionActivityError(true);
+      hasError = true;
+    }
+    if (!attractionFood.trim()) {
+      setAttractionFoodError(true);
+      hasError = true;
+    }
+    if (!attractionHousing.trim()) {
+      setAttractionHousingError(true);
       hasError = true;
     }
 
@@ -76,8 +117,10 @@ export default function AddAttraction() {
         description: attractionDescription,
         price: price,
         rating: 0,
-        labels: selected, /*Have made this empty since the react-form doesn't include labels yet in this branch*/
-        /*labels: ["Europe", "City", "Expensive"], Examle of passing labels with names*/
+        labels: selected,
+        food_description: attractionFood,
+        housing_description: attractionHousing,
+        activity_description: attractionActivity
       }),
     };
     fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
@@ -103,6 +146,7 @@ export default function AddAttraction() {
       justifyContent="center"
       alignItems="center"
       style={{ minHeight: "100vh" }}
+      m={2}
     >
       <Grid item xs={12} sm={6}>
         <Grid container spacing={4}>
@@ -125,6 +169,40 @@ export default function AddAttraction() {
               onChange={handleAttractionDescriptionChange}
               error = {attractionDescriptionError}
               helperText = {attractionDescriptionError && "Enter attraction description"}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Destination Activities"
+              
+              multiline // Set multiline to true
+              fullWidth
+              rows={4} // Specify the number of rows (optional)
+              onChange={handleAttractionActivityChange}
+              error = {attractionActivityError}
+              helperText = {attractionActivityError && "Enter attraction activites"}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Destination Food"
+              multiline // Set multiline to true
+              fullWidth
+              rows={4} // Specify the number of rows (optional)
+              onChange={handleAttractionFoodChange}
+              error = {attractionFoodError}
+              helperText = {attractionFoodError && "Enter attraction food"}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Destination Housing"
+              multiline // Set multiline to true
+              fullWidth
+              rows={4} // Specify the number of rows (optional)
+              onChange={handleAttractionHousingChange}
+              error = {attractionHousingError}
+              helperText = {attractionHousingError && "Enter attraction housing"}
             />
           </Grid>
           <Grid item xs={12} onChange={handlePriceChange}>

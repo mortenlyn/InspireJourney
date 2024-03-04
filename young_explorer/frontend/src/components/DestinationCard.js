@@ -1,8 +1,6 @@
 import React from 'react';
 import UsePictureApiCall from "./UsePictureApiCall";
-import './Destination_box.css';
-import {Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import './DestinationBox.css';
 
 
 function DestinationCard(props) {
