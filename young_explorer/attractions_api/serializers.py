@@ -24,11 +24,12 @@ class AttractionSerializer(serializers.ModelSerializer):
         child=serializers.CharField(), required=False)
     attraction_reviews = serializers.StringRelatedField(
         many=True, read_only=True)
+    visited_by = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Attraction
         fields = ['name', 'description', 'price', 'rating', 'labels',
-                  'food_description', 'housing_description', 'activity_description', 'attraction_reviews']
+                  'food_description', 'housing_description', 'activity_description', 'attraction_reviews', 'visited_by']
 
     def validate_rating(self, value):
         if ((value < 0) or (value > 5)):
