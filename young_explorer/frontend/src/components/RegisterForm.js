@@ -10,13 +10,20 @@ function RegisterForm({ client, setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
+    setEmailError("");
+    setPasswordError("");
+    if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters");
     }
+    else if (password !== confirmPassword) {
+      setPasswordError("Passwords don't match");
+    } 
     else{
       client
       .post("/user_api/register", { email, username, password })
@@ -43,6 +50,9 @@ function RegisterForm({ client, setCurrentUser }) {
       })
       .catch(function (error) {
         console.log(error);
+        if (error.response) {
+          setEmailError("Email already exists. Please use a different email.");
+        }
       });
     }
   }
@@ -52,6 +62,9 @@ function RegisterForm({ client, setCurrentUser }) {
       <h1 className="title">Register</h1>
       <form onSubmit={handleSubmit}>
         <Form.Group className="login-register-form" controlId="emailForm">
+          {emailError && (
+            <span className="error-message">{emailError}</span>
+          )}
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -70,6 +83,9 @@ function RegisterForm({ client, setCurrentUser }) {
           />
         </Form.Group>
         <Form.Group className="login-register-form" controlId="passwordForm">
+        {passwordError && (
+            <span className="error-message">{passwordError}</span>
+          )}
           <Form.Control
             type="password"
             placeholder="Password"
