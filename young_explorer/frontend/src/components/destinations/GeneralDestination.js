@@ -10,13 +10,10 @@ import client from "../../api/apiClient";
 
 function GeneralDestination() {
   const { name } = useParams();
-  const [BeenHere, setBeenHere] = useState(false); // Been here button is set to false by default
 
   const handleToggleBeenhere = () => {
-    setBeenHere(!BeenHere); // The state of the button can toggle between true or false
-  }; /* False->True adds the destination to the users database.
-  True->False removes the destination from the users database
-  */
+    setBeenHere(!BeenHere);
+  }; 
 
   //const beenhereText = BeenHere ? "I've been here" : "Have you been here?";
 
@@ -27,6 +24,8 @@ function GeneralDestination() {
   const [show, setShow] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [destinationReviews, setDestinationReviews] = useState([]);
+  const [destination, setDestination] = useState([]);
+  const [BeenHere, setBeenHere] = useState(false); // Been here button is set to false by default
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -95,7 +94,7 @@ function GeneralDestination() {
       />
     );
   });
-  const [destination, setDestination] = useState([]);
+  
 
   useEffect(() => {
     if (!name) {
@@ -108,6 +107,21 @@ function GeneralDestination() {
         setDestination(data.Attraction);
       });
   }, [name]);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const username = currentUser.username
+    if(!username){
+      return;
+    }
+    let beenHereUrl = `http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=${username}`
+    fetch(beenHereUrl).then(res => res.json())
+    .then((data) => {
+      const visited = data.some(destination => destination.visited_by.includes(username));
+      console.log(visited)
+      setBeenHere(visited);
+    });
+  }, [])
 
   return (
     <div className="Destination">
