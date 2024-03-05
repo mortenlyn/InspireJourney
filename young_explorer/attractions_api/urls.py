@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('attractions', views.attraction_view.as_view()),
     path('addAttraction', views.addAttraction.as_view()),
+    path('attraction/', views.getSpecificAttraction.as_view()),
     path('labels', views.label_view.as_view()),
     path('addLabel', views.create_label.as_view()),
     path('filter/', views.FilterDestinations.as_view()),

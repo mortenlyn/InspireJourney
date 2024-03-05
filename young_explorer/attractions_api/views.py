@@ -89,6 +89,14 @@ class addAttraction(APIView):
             return Response({"Message": "Attraction added successfully", "Attraction": attraction_data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class getSpecificAttraction(APIView):
+    permission_classes = [permission.AllowAny]
+
+    def get(self, request):
+        attraction_name = request.query_params.get('attraction_name')
+        specificAttraction = Attraction.objects.get(name__iexact=attraction_name)
+        attraction_data = AttractionSerializer(specificAttraction, many=False).data
+        return Response({"Message": "Attraction found", "Attraction": attraction_data})
 
 class FilterDestinations(APIView):
     """
