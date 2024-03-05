@@ -51,7 +51,7 @@ function ProfilePage({ currentUser }) {
                 </p>
                 <p className="user-info-paragraph">
                   You can add destinations to the website by clicking the "+"
-                  button in the header.
+                  button in the header .
                 </p>
               </>
             ) : (

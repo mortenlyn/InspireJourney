@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { FaStar } from "react-icons/fa";
 import "./destinations.css";
 import "./BeenHereButton.css";
+import client from "../../api/apiClient";
 
 function GeneralDestination() {
   const { name } = useParams();
@@ -24,20 +25,89 @@ function GeneralDestination() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [show, setShow] = useState(false);
-  const [destination, setDestination] = useState([])
+  const [reviewText, setReviewText] = useState("");
+  const [destinationReviews, setDestinationReviews] = useState([]);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await client.post("/attractions_api/addReview", {
+        user: JSON.parse(localStorage.getItem("currentUser")),
+        attraction: name,
+        review: reviewText,
+        rating: rating,
+      });
+      console.log(res);
+      alert("Review successfully submitted");
+      window.document.getElementById("reviewText").value = "";
+      setReviewText("");
+      setRating(null);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 409) {
+        alert("You've already reviewed this destination!");
+      } else {
+        alert("Review not submitted!");
+      }
+    }
+  }
 
   useEffect(() => {
-    if(!name){
+    fetch(
+      "http://127.0.0.1:8000/attractions_api/getDestinationReviews/?destination=" +
+        name
+    )
+      .then((res) => res.json())
+      .then((data) => setDestinationReviews(data.ReviewList));
+  }, [rating]);
+
+  const ReviewContainer = (props) => {
+    return (
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "10px",
+          margin: "10px",
+          borderRadius: "5px",
+          overflowWrap: "break-word",
+        }}
+      >
+        <small>Submitted by: {props.reviewer}</small>
+        <p style={{ color: "#f5a623" }}>
+          Rating: {"★".repeat(props.rating)}
+          {"☆".repeat(5 - props.rating)}
+        </p>
+        <p>{props.review}</p>
+        <small>Date created: {props.date_created}</small>
+      </div>
+    );
+  };
+
+  const destinationReviewsMap = destinationReviews.map((review) => {
+    return (
+      <ReviewContainer
+        key={review.review_id}
+        attraction_name={review.attraction_name}
+        reviewer={review.user_name}
+        rating={review.rating}
+        date_created={review.date_created}
+        review={review.review}
+      />
+    );
+  });
+  const [destination, setDestination] = useState([]);
+
+  useEffect(() => {
+    if (!name) {
       return;
     }
     const url = `http://127.0.0.1:8000/attractions_api/attraction/?attraction_name=${name}`;
     fetch(url)
-    .then((res) => (res.json()))
-    .then((data) => {
-      setDestination(data.Attraction);
-    })
-  }
-  ,[name])
+      .then((res) => res.json())
+      .then((data) => {
+        setDestination(data.Attraction);
+      });
+  }, [name]);
 
   return (
     <div className="Destination">
@@ -86,15 +156,19 @@ function GeneralDestination() {
         </div>
       </div>
       <div className="bottomContainer">
-        <Button id="reviewButton" onClick={() => setShow(!show)}>
-          {show ? "Hide" : "Leave a review"}
-        </Button>
+        {localStorage.getItem("superuser") !== "true" && (
+          <Button id="reviewButton" onClick={() => setShow(!show)}>
+            {show ? "Hide" : "Leave a review"}
+          </Button>
+        )}
         {show && (
           <div className="ratingContainer">
             <div className="textContainer">
               <textarea
+                id="reviewText"
                 className="reviewText"
                 placeholder="Write your review here!"
+                onChange={(e) => setReviewText(e.target.value)}
               ></textarea>
             </div>
             {[...Array(5)].map((star, index) => {
@@ -118,8 +192,18 @@ function GeneralDestination() {
               );
             })}
             <p>Your rating is {rating}</p>
-            <Button id="submitReview">Submit</Button>
+            <Button id="submitReview" onClick={handleSubmit}>
+              Submit
+            </Button>
           </div>
+        )}
+      </div>
+      <div className="reviewDiv">
+        <h2>Reviews</h2>
+        {destinationReviews.length > 0 ? (
+          destinationReviewsMap
+        ) : (
+          <p>There are no reviews for this destination</p>
         )}
       </div>
     </div>
