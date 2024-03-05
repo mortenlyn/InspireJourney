@@ -15,4 +15,5 @@ urlpatterns = [
     path('getUserReviews/', views.getUserReviews.as_view()),
     path('getDestinationReviews/', views.getDestinationReviews.as_view()),
     path('modifyVisitor/', views.modifyVisitor.as_view()),
+    path('getAttractionsVisitedByUser/', views.getAttractionsVisitedByUser.as_view()),
 ]

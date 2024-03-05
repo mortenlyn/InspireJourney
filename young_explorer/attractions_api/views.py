@@ -257,4 +257,23 @@ class modifyVisitor(APIView):
             attraction.visited_by.add(user)
             serializer = AttractionSerializer(attraction)
             return Response(serializer.data, status=status.HTTP_200_OK)
+        
+class getAttractionsVisitedByUser(APIView):
+
+    """
+    This view gets all the attractions a user has visited.
+    An example of a call is: http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=test12345
+    """
+    permission_classes = [permission.AllowAny]
+
+    def get(self, request):
+        username = request.query_params.get('username')
+        if not username:
+            return Response({"error": "Username are required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = WebsiteUser.objects.get(username=username)
+        visited_attractions = Attraction.objects.filter(visited_by=user)
+        serializer = AttractionSerializer(visited_attractions, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
