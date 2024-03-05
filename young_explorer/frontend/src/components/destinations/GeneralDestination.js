@@ -95,20 +95,19 @@ function GeneralDestination() {
       />
     );
   });
-  const [destination, setDestination] = useState([])
+  const [destination, setDestination] = useState([]);
 
   useEffect(() => {
-    if(!name){
+    if (!name) {
       return;
     }
     const url = `http://127.0.0.1:8000/attractions_api/attraction/?attraction_name=${name}`;
     fetch(url)
-    .then((res) => (res.json()))
-    .then((data) => {
-      setDestination(data.Attraction);
-    })
-  }
-  ,[name])
+      .then((res) => res.json())
+      .then((data) => {
+        setDestination(data.Attraction);
+      });
+  }, [name]);
 
   return (
     <div className="Destination">
@@ -157,9 +156,11 @@ function GeneralDestination() {
         </div>
       </div>
       <div className="bottomContainer">
-        <Button id="reviewButton" onClick={() => setShow(!show)}>
-          {show ? "Hide" : "Leave a review"}
-        </Button>
+        {localStorage.getItem("superuser") !== "true" && (
+          <Button id="reviewButton" onClick={() => setShow(!show)}>
+            {show ? "Hide" : "Leave a review"}
+          </Button>
+        )}
         {show && (
           <div className="ratingContainer">
             <div className="textContainer">
