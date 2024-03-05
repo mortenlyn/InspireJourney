@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
@@ -26,6 +26,7 @@ function GeneralDestination() {
   const [hover, setHover] = useState(null);
   const [show, setShow] = useState(false);
   const [reviewText, setReviewText] = useState("");
+  const [destinationReviews, setDestinationReviews] = useState([]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -50,6 +51,50 @@ function GeneralDestination() {
       }
     }
   }
+
+  useEffect(() => {
+    fetch(
+      "http://127.0.0.1:8000/attractions_api/getDestinationReviews/?destination=" +
+        name
+    )
+      .then((res) => res.json())
+      .then((data) => setDestinationReviews(data.ReviewList));
+  }, [rating]);
+
+  const ReviewContainer = (props) => {
+    return (
+      <div
+        style={{
+          border: "1px solid #ccc",
+          padding: "10px",
+          margin: "10px",
+          borderRadius: "5px",
+          overflowWrap: "break-word",
+        }}
+      >
+        <small>Submitted by: {props.reviewer}</small>
+        <p style={{ color: "#f5a623" }}>
+          Rating: {"★".repeat(props.rating)}
+          {"☆".repeat(5 - props.rating)}
+        </p>
+        <p>{props.review}</p>
+        <small>Date created: {props.date_created}</small>
+      </div>
+    );
+  };
+
+  const destinationReviewsMap = destinationReviews.map((review) => {
+    return (
+      <ReviewContainer
+        key={review.review_id}
+        attraction_name={review.attraction_name}
+        reviewer={review.user_name}
+        rating={review.rating}
+        date_created={review.date_created}
+        review={review.review}
+      />
+    );
+  });
 
   return (
     <div className="Destination">
@@ -136,6 +181,14 @@ function GeneralDestination() {
               Submit
             </Button>
           </div>
+        )}
+      </div>
+      <div className="reviewDiv">
+        <h2>Reviews</h2>
+        {destinationReviews.length > 0 ? (
+          destinationReviewsMap
+        ) : (
+          <p>There are no reviews for this destination</p>
         )}
       </div>
     </div>

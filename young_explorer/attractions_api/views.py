@@ -195,9 +195,30 @@ class getUserReviews(APIView):
 
         if username is not None:
             # UserReviews manually looks up the attraction_name by querying (F) on the destination name and creates a new list containing all the fields in a review and the destination name
-            userReviews = user_reviews = Review.objects.filter(user__username=username).annotate(
+            userReviews = Review.objects.filter(user__username=username).annotate(
                 attraction_name=F('attraction__name')
             ).values('review_id', 'user_id', 'attraction_id', 'attraction_name', 'review', 'rating', 'date_created')
             return Response({"Message": "List of Reviews", "ReviewList": list(userReviews)})
         else:
             return Response({"Message": "username not provided."}, status=400)
+
+
+class getDestinationReviews(APIView):
+    """
+    This view allows you to get all the reviews of a specified destination. Intended to be used to get all the reviews
+    of a destination on the destination page. It returns a standard review response, but also the name of a destination and not
+    just the destination_id (which isn't used in frontend)
+    """
+
+    permission_classes = [permission.AllowAny]
+
+    def get(self, request):
+        destination = request.query_params.get('destination')
+
+        if destination is not None:
+            attractionReviews = Review.objects.filter(attraction__name=destination).annotate(
+                user_name=F('user__username')
+            ).values('review_id', 'user_id', 'attraction_id', 'user_name', 'review', 'rating', 'date_created')
+            return Response({"Message": "List of Reviews", "ReviewList": list(attractionReviews)})
+        else:
+            return Response({"Message": "destination not provided."}, status=400)

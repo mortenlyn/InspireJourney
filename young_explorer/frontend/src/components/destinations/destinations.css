@@ -155,3 +155,8 @@
   #submitReview:hover {
     background-color: #f4a460;
   }
+
+  .reviewDiv {
+    text-align: left;
+    margin-top: 50px;
+  }
