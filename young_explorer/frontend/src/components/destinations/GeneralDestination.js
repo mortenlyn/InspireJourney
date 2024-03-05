@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import DestinationCard from "../DestinationCard";
@@ -24,6 +24,20 @@ function GeneralDestination() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [show, setShow] = useState(false);
+  const [destination, setDestination] = useState([])
+
+  useEffect(() => {
+    if(!name){
+      return;
+    }
+    const url = `http://127.0.0.1:8000/attractions_api/attraction/?attraction_name=${name}`;
+    fetch(url)
+    .then((res) => (res.json()))
+    .then((data) => {
+      setDestination(data.Attraction);
+    })
+  }
+  ,[name])
 
   return (
     <div className="Destination">
@@ -52,19 +66,19 @@ function GeneralDestination() {
           <ul className="Destination__items">
             <DestinationCard
               name={"Food in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+              text={destination.food_description}
               label="Food"
               query={name + " food"}
             ></DestinationCard>
             <DestinationCard
               name={"Where to live in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+              text={destination.housing_description}
               label="Housing"
               query={name + " house"}
             ></DestinationCard>
             <DestinationCard
               name={"What to do in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+              text={destination.activity_description}
               label="What to do"
               query={name + " event"}
             ></DestinationCard>
