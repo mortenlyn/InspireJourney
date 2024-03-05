@@ -16,7 +16,7 @@ function headersection() {
         <div className='header-container'>
           <img src='./cropped-header-bilde.jpg'
 
-            style={{ marginTop: -100 , width: 1450}}
+            style={{ marginTop: -100}}
             id='beach-picture'
             alt='beach and water'
           />
