@@ -232,12 +232,13 @@ class getDestinationReviews(APIView):
             return Response({"Message": "destination not provided."}, status=400)
 
 
-class addVisitor(APIView):
+class modifyVisitor(APIView):
 
     """
-    This view allows you to add visitors to specified Attractions by using the username of the user and the attraction name
-    An example is: http://127.0.0.1:8000/attractions_api/addVisitor/?username=test12345&attraction_name=Tokyo
-    and post
+    This view allows you to add or remove visitors to specified Attractions by using the 
+    username of the user and the attraction name
+    An example is: http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=test1234&attraction_name=Tokyo
+    and then press post button (if done in backend endpoint)
     """
     permission_classes = [permission.AllowAny]
 
@@ -249,11 +250,11 @@ class addVisitor(APIView):
         
         attraction = Attraction.objects.get(name=attraction_name)
         user = WebsiteUser.objects.get(username=username)
-        if attraction.visited_by.filter(username=user.username).exists(): ##Ensures
-            return Response({"message": "User has already visited this attraction."}, status=status.HTTP_409_CONFLICT)
+        if attraction.visited_by.filter(username=user.username).exists():
+            attraction.visited_by.remove(user)
+            return Response({"message": "User is no longer a visitor of this destination"}, status=status.HTTP_409_CONFLICT)
         else:
             attraction.visited_by.add(user)
-
             serializer = AttractionSerializer(attraction)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
