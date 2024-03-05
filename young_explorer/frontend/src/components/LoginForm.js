@@ -6,10 +6,12 @@ import { useNavigate, Link } from "react-router-dom";
 function LoginForm({ client, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
+    setError("");
     return client
       .post("/user_api/login", { email, password })
       .then(function (res) {
@@ -21,6 +23,9 @@ function LoginForm({ client, setCurrentUser }) {
         navigate("/home"); // navigate to home page
       })
       .catch(function (error) {
+        if (error.response) {
+          setError("Incorrect email or password. Please try again.");
+        }
         console.log(error);
       });
   }
@@ -28,6 +33,7 @@ function LoginForm({ client, setCurrentUser }) {
   return (
     <div className="form-container">
       <h1 className="title">Log in</h1>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <Form.Group className="login-register-form" controlId="emailForm">
           <Form.Control

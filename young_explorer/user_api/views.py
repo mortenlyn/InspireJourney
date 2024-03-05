@@ -6,6 +6,7 @@ from rest_framework import permissions as permission, status
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.exceptions import ValidationError
 
 
 class UserLogin(APIView):
@@ -47,10 +48,15 @@ class UserRegister(APIView):
         valid_data = validation.user_validation(request.data)
         serializer = serializers.RegisterSerializer(data=valid_data)
         if serializer.is_valid(raise_exception=True):
-            user = serializer.create(valid_data)
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(status=status.HTTP_400_BAD_REQUEST)
+            try:
+                user = serializer.create(valid_data)
+                if user:
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except ValidationError as e:
+                if 'email' in e.detail and 'already exists' in e.detail['email'][0]:
+                    return Response({'error': 'Email already exists'})
+    '    return Response(status=status.HTTP_400_BAD_REQUEST)'
+
 
 
 class UserLogout(APIView):
