@@ -49,6 +49,9 @@ h2 {
     margin-top: 10px;
     width: 50%;
     font-size: 25px;
+    text-overflow: word-wrap;
+    word-wrap: break-word;
+    text-align: left;
 }
 
 strong {
