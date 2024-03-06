@@ -29,6 +29,7 @@ class Attraction(models.Model):
     food_description = models.TextField(default="")
     housing_description = models.TextField(default="")
     activity_description = models.TextField(default="")
+    visited_by = models.ManyToManyField(WebsiteUser, related_name='visited_attractions') #Here the username of users are added
 
     REQUIRED_FIELDS = [name, description]
 

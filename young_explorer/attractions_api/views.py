@@ -230,3 +230,52 @@ class getDestinationReviews(APIView):
             return Response({"Message": "List of Reviews", "ReviewList": list(attractionReviews)})
         else:
             return Response({"Message": "destination not provided."}, status=400)
+
+
+class modifyVisitor(APIView):
+
+    """
+    This view allows you to add or remove visitors to specified Attractions by using the 
+    username of the user and the attraction name
+    An example is: http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=test1234&attraction_name=Tokyo
+    and then press post button (if done in backend endpoint)
+    """
+    permission_classes = [permission.AllowAny]
+
+    def post(self, request):
+        attraction_name = request.query_params.get('attraction_name')
+        username = request.query_params.get('username')
+        if not attraction_name or not username:
+            return Response({"error": "Attraction name and username are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        
+        attraction = Attraction.objects.get(name=attraction_name)
+        user = WebsiteUser.objects.get(username=username)
+
+        if attraction.visited_by.filter(username=user.username).exists():
+            attraction.visited_by.remove(user)
+            return Response({"message": "User is no longer a visitor of this destination"}, status=status.HTTP_200_OK)
+        else:
+            attraction.visited_by.add(user)
+            serializer = AttractionSerializer(attraction)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+class getAttractionsVisitedByUser(APIView):
+
+    """
+    This view gets all the attractions a user has visited.
+    An example of a call is: http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=test12345
+    """
+    permission_classes = [permission.AllowAny]
+
+    def get(self, request):
+        username = request.query_params.get('username')
+        if not username:
+            return Response({"error": "Username are required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = WebsiteUser.objects.get(username=username)
+        visited_attractions = Attraction.objects.filter(visited_by=user)
+        serializer = AttractionSerializer(visited_attractions, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+

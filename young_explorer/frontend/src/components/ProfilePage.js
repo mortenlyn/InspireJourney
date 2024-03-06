@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./ProfilePage.css";
 import ReviewContainer from "./ReviewContainer";
+import DestinationProfilePage from "./destinations/DestinationProfilePage";
 
 function ProfilePage({ currentUser }) {
   const [userReviews, setUserReviews] = useState([]);
+  const [visitedDestinations, setVisitedDestinations] = useState([]);
 
+  /*This useEffect fetches all the reviews the user have made*/
   useEffect(() => {
     fetch(
       "http://127.0.0.1:8000/attractions_api/getUserReviews/?username=" +
@@ -13,6 +16,16 @@ function ProfilePage({ currentUser }) {
     )
       .then((res) => res.json())
       .then((data) => setUserReviews(data.ReviewList));
+  }, []);
+
+  /*This useEffect fetches all the destinations the user has visited*/
+  useEffect(() => {
+    const url = `http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=${currentUser.username}`;
+    if(localStorage.getItem("superuser") === "false"){
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setVisitedDestinations(data));
+    }
   }, []);
 
   const userReviewsMap = userReviews.map((review) => {
@@ -26,6 +39,13 @@ function ProfilePage({ currentUser }) {
       />
     );
   });
+
+  const visitedDestinationsList = visitedDestinations.map((attraction, index) => (
+    <div key={index}>
+      <DestinationProfilePage name={attraction.name} key={attraction.id} />
+      <br></br>
+    </div>
+  ));
 
   if (!currentUser) {
     return (
@@ -72,6 +92,13 @@ function ProfilePage({ currentUser }) {
             userReviewsMap
           ) : (
             <p>The user hasn't made any reviews</p>
+          )}
+          <h1>These are all the destinations the user have visited </h1>
+          <br></br>
+          {visitedDestinationsList.length > 0 && visitedDestinations ? (
+            visitedDestinationsList
+          ) : (
+            <p>No visited destinations</p>
           )}
         </div>
       )}
