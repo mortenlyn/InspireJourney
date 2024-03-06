@@ -40,9 +40,9 @@ function ProfilePage({ currentUser }) {
     );
   });
 
-  const visitedDestinationsList = visitedDestinations.map((attraction) => (
-    <div key={attraction.id}>
-      <DestinationProfilePage name={attraction.name} />
+  const visitedDestinationsList = visitedDestinations.map((attraction, index) => (
+    <div key={index}>
+      <DestinationProfilePage name={attraction.name} key={attraction.id} />
       <br></br>
     </div>
   ));
