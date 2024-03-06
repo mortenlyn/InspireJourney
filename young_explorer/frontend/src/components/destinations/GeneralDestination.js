@@ -139,7 +139,7 @@ function GeneralDestination() {
     .then((data) => {
       const visitedDestinations = data.map(destination => destination.name);
       if(visitedDestinations.includes(name)){
-        setBeenHere(true)
+        setBeenHere(true);
       }
     });
   }, [])
@@ -151,6 +151,7 @@ function GeneralDestination() {
         <h3>
           Check out our other destinations <Link to="/home">here.</Link>
         </h3>
+        {localStorage.getItem("superuser") === "false" &&
         <div>
           {" "}
           {}
@@ -163,7 +164,7 @@ function GeneralDestination() {
               ? `I've been here ${checkedSymbol}`
               : `Have you been here? ${uncheckedSymbol}`}
           </Button>
-        </div>
+        </div>}
       </div>
 
       <div className="Destination__container">

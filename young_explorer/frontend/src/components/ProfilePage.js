@@ -6,7 +6,7 @@ import DestinationProfilePage from "./destinations/DestinationProfilePage";
 
 function ProfilePage({ currentUser }) {
   const [userReviews, setUserReviews] = useState([]);
-  const [visitedAttractions, setVisitedDestinations] = useState([]);
+  const [visitedDestinations, setVisitedDestinations] = useState([]);
 
   /*This useEffect fetches all the reviews the user have made*/
   useEffect(() => {
@@ -21,9 +21,11 @@ function ProfilePage({ currentUser }) {
   /*This useEffect fetches all the destinations the user has visited*/
   useEffect(() => {
     const url = `http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=${currentUser.username}`;
+    if(localStorage.getItem("superuser") === "false"){
     fetch(url)
       .then((res) => res.json())
       .then((data) => setVisitedDestinations(data));
+    }
   }, []);
 
   const userReviewsMap = userReviews.map((review) => {
@@ -38,7 +40,7 @@ function ProfilePage({ currentUser }) {
     );
   });
 
-  const visitedAttractionsList = visitedAttractions.map((attraction) => (
+  const visitedDestinationsList = visitedDestinations.map((attraction) => (
     <div key={attraction.id}>
       <DestinationProfilePage name={attraction.name} />
       <br></br>
@@ -93,8 +95,8 @@ function ProfilePage({ currentUser }) {
           )}
           <h1>These are all the destinations the user have visited </h1>
           <br></br>
-          {visitedAttractionsList.length > 0 ? (
-            visitedAttractionsList
+          {visitedDestinationsList.length > 0 && visitedDestinations ? (
+            visitedDestinationsList
           ) : (
             <p>No visited destinations</p>
           )}
