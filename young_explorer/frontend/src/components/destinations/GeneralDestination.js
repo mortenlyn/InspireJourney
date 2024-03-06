@@ -117,9 +117,10 @@ function GeneralDestination() {
     let beenHereUrl = `http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=${username}`
     fetch(beenHereUrl).then(res => res.json())
     .then((data) => {
-      const visited = data.some(destination => destination.visited_by.includes(username));
-      console.log(visited)
-      setBeenHere(visited);
+      const visitedDestinations = data.map(destination => destination.name);
+      if(visitedDestinations.includes(name)){
+        setBeenHere(true)
+      }
     });
   }, [])
 
