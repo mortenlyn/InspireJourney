@@ -10,9 +10,6 @@ import client from "../../api/apiClient";
 
 function GeneralDestination() {
   const { name } = useParams();
-
-  //const beenhereText = BeenHere ? "I've been here" : "Have you been here?";
-
   const uncheckedSymbol = "☐";
   const checkedSymbol = "☑️";
   const [rating, setRating] = useState(null);
