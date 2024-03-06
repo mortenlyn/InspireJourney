@@ -40,13 +40,13 @@ function GeneralDestination() {
     fetch(url, requestOptions)
     .then((res) => {
       if (res.status >= 400 && res.status < 600) {
-        setBeenHere(false);
+        return res.json();
       }
       else{
-        setBeenHere(true)
+        setBeenHere(!BeenHere);
+        return res.json();
       }
-      return res.json();
-    }).then((data) => console.log(data));
+    })
   }; 
 
   async function handleSubmit(event) {
