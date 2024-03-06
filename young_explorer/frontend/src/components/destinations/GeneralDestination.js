@@ -11,10 +11,6 @@ import client from "../../api/apiClient";
 function GeneralDestination() {
   const { name } = useParams();
 
-  const handleToggleBeenhere = () => {
-    setBeenHere(!BeenHere);
-  }; 
-
   //const beenhereText = BeenHere ? "I've been here" : "Have you been here?";
 
   const uncheckedSymbol = "☐";
@@ -26,6 +22,32 @@ function GeneralDestination() {
   const [destinationReviews, setDestinationReviews] = useState([]);
   const [destination, setDestination] = useState([]);
   const [BeenHere, setBeenHere] = useState(false); // Been here button is set to false by default
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const username = currentUser.username
+
+  const handleToggleBeenhere = () => {
+    setBeenHere(!BeenHere);
+    const url = `http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=${username}&attraction_name=${name}`
+
+    const requestOptions={
+    method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        attraction_name: name
+      }),
+    }
+    fetch(url, requestOptions)
+    .then((res) => {
+      if (res.status >= 400 && res.status < 600) {
+        setBeenHere(false);
+      }
+      else{
+        setBeenHere(true)
+      }
+      return res.json();
+    }).then((data) => console.log(data));
+  }; 
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -109,8 +131,6 @@ function GeneralDestination() {
   }, [name]);
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    const username = currentUser.username
     if(!username){
       return;
     }

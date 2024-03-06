@@ -247,12 +247,13 @@ class modifyVisitor(APIView):
         username = request.query_params.get('username')
         if not attraction_name or not username:
             return Response({"error": "Attraction name and username are required."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         attraction = Attraction.objects.get(name=attraction_name)
         user = WebsiteUser.objects.get(username=username)
+        
         if attraction.visited_by.filter(username=user.username).exists():
             attraction.visited_by.remove(user)
-            return Response({"message": "User is no longer a visitor of this destination"}, status=status.HTTP_409_CONFLICT)
+            return Response({"message": "User is no longer a visitor of this destination"}, status=status.HTTP_200_OK)
         else:
             attraction.visited_by.add(user)
             serializer = AttractionSerializer(attraction)
