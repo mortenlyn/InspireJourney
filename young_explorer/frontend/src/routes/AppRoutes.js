@@ -14,6 +14,8 @@ import GetAllAttractions from "../components/GetAllAttractions";
 import Profile from "../components/ProfilePage";
 import GeneralDestination from "../components/destinations/GeneralDestination";
 import SearchForm from "../components/destinations/SearchForm";
+import EditDestinationForm from "../components/destinations/EditDestinationForm";
+
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -84,6 +86,11 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         />}
+        />
+        
+        <Route
+        path="editDestination/*"
+        element={<EditDestinationForm/>}
         />
         
       </Routes>
