@@ -4,7 +4,7 @@ from .models import Attraction, Label, Review
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions as permission, status
-from .serializers import AttractionSerializer, LabelSerializer, ReviewSerializer
+from .serializers import AttractionSerializer, LabelSerializer, ReviewSerializer, UpdateAttractionSerializer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.db.models import F
@@ -44,11 +44,7 @@ class create_label(APIView):
 
 class attraction_view(APIView):
     """
-    1) Gives you an overview of all the attractions in the database
-
-    2) Permission classes regulates who can view the view. In this case anyone can.
-
-    3) This is the view called on the homepage, but it doesn't include labels yet
+    This view is used in the frontend to get all of the different attractions
     """
     permission_classes = [permission.AllowAny]
 
@@ -57,13 +53,14 @@ class attraction_view(APIView):
         return Response({"Message": "List of Attractions", "AttractionList": allAttractions})
 
 
-class addAttraction(APIView):
+class AttractionView(APIView):
 
     """
-    1) This add attraction class let you add a new attraction.
+    1) This view is used for adding, getting and editing attractions
     2) The serializer's function is described below
     3) The get method hands you a list of the attractions.
-    4) The post method allows you to create new destinations with some preadded labels
+    4) The post method allows you to create new destinations with some preadded labels, and uses the AttractionSerializer
+    5) The put method lets you update a specified attraction, and it uses the UpdateAttractionSerializer
     """
 
     permission_classes = [permission.AllowAny]
@@ -88,6 +85,29 @@ class addAttraction(APIView):
 
             return Response({"Message": "Attraction added successfully", "Attraction": attraction_data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request):
+        """
+        This view allows for updating
+        """
+        attraction_name = request.data.get('name')
+        if not attraction_name:
+            return Response({"error": "Attraction name is required."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            attraction = Attraction.objects.get(name=attraction_name)
+        except Attraction.DoesNotExist:
+            return Response({"error": "Attraction not found."}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = UpdateAttractionSerializer(attraction, data=request.data, partial=True)
+        if(serializer.is_valid()):
+            attraction = serializer.save()
+            attraction_data = serializer.data
+            label_names = [label.name for label in attraction.labels.all()]
+            attraction_data['labels'] = label_names
+            return Response({"Message": "Attraction changed successfully", "Attraction": attraction_data}, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class getSpecificAttraction(APIView):
     permission_classes = [permission.AllowAny]

@@ -3,16 +3,6 @@ from rest_framework import serializers
 from .models import Attraction, Label, Review
 
 
-"""
-Serializer for creating a new Attraction, ensures that the validation for creating a attraction.
-
-Validation rules
-1) A attraction rating must be between 1 and 5
-2) The price can't be negative
-3) There can't be any attractions with the same name (ensures no name duplicates)
-"""
-
-
 class AttractionSerializer(serializers.ModelSerializer):
 
     """
@@ -65,6 +55,33 @@ class AttractionSerializer(serializers.ModelSerializer):
         representation['labels'] = [
             label.name for label in instance.labels.all()]
         return representation
+
+class UpdateAttractionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attraction
+        fields= ['name', 'description', 'price', 'labels', 'food_description', 'housing_description', 
+                'activity_description']
+        read_only_fields = ['rating']
+    
+    def validate_price(self, value):
+        if ((value < 0)):
+            raise serializers.ValidationError("The price can't be negative")
+        return value
+    
+    def update(self, instance, validated_data):
+        label_names = validated_data.pop('labels', None)
+        if label_names is not None:
+            # Clear existing labels and add the new ones
+            instance.labels.clear()
+            for name in label_names:
+                label, created = Label.objects.get_or_create(name=name)
+                instance.labels.add(label)
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        instance.save()
+        return instance
 
 
 class LabelSerializer(serializers.Serializer):
