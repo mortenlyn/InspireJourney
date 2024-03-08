@@ -57,6 +57,10 @@ class AttractionSerializer(serializers.ModelSerializer):
         return representation
 
 class UpdateAttractionSerializer(serializers.ModelSerializer):
+
+    labels = serializers.ListSerializer(
+        child=serializers.CharField(), required=False)
+    
     class Meta:
         model = Attraction
         fields= ['name', 'description', 'price', 'labels', 'food_description', 'housing_description', 
@@ -67,17 +71,6 @@ class UpdateAttractionSerializer(serializers.ModelSerializer):
         if ((value < 0)):
             raise serializers.ValidationError("The price can't be negative")
         return value
-
-    def to_internal_value(self, data):
-        labels_data = data.get('labels', [])
-        if labels_data:
-            # Assuming labels_data contains names, convert them to label instances
-            label_instances = []
-            for name in labels_data:
-                label, _ = Label.objects.get_or_create(name=name)
-                label_instances.append(label)
-            data['labels'] = label_instances
-        return super().to_internal_value(data)
     
     def update(self, instance, validated_data):
         label_names = validated_data.pop('labels', None)

@@ -89,7 +89,7 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
         />
         
         <Route
-        path="editDestination/*"
+        path="Destination/Edit/:name"
         element={<EditDestinationForm/>}
         />
         
