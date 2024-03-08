@@ -15,7 +15,7 @@ import { Link, useParams } from "react-router-dom";
 
 function EditDestinationForm() {
   const { name } = useParams();
-  const [attractionName, setAttractionName] = useState("");
+  const [attraction, setAttraction] = useState({});
   const [attractionDescription, setAttractionDescription] = useState("");
   const [attractionFood, setAttractionFood] = useState("");
   const [attractionActivity, setAttractionActivity] = useState("");
@@ -32,11 +32,18 @@ function EditDestinationForm() {
     useState(false);
   const [priceError, setPriceError] = useState(false);
 
-  const LabelsMenuArray = labels.map((label) => (
-    <MenuItem key={label.id} value={label.name}>
-      {label.name}
-    </MenuItem> // Adjust based on your actual label object structure
-  ));
+  useEffect(() => {
+    if (!name) {
+      return;
+    }
+    const url = `http://127.0.0.1:8000/attractions_api/attraction/?attraction_name=${name}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setAttraction(data.Attraction);
+        console.log(data.Attraction);
+      });
+  }, [name]);
 
   const handlePriceChange = (event) => {
     const value = event.target.value;
@@ -98,7 +105,13 @@ function EditDestinationForm() {
       .then((data) => console.log(data));
   };
 
-  return (
+  const LabelsMenuArray = labels.map((label) => (
+    <MenuItem key={label.id} value={label.name}>
+      {label.name}
+    </MenuItem> // Adjust based on your actual label object structure
+  ));
+  
+  return(
     <Grid
       container
       spacing={2}
@@ -107,6 +120,7 @@ function EditDestinationForm() {
       style={{ minHeight: "100vh" }}
       m={2}
     >
+      {attraction ?
       <Grid item xs={12} sm={6}>
         <Grid container spacing={4}>
           <Grid item xs={12}>
@@ -117,6 +131,7 @@ function EditDestinationForm() {
               rows={4} // Specify the number of rows (optional)
               onChange={handleAttractionDescriptionChange}
               error={attractionDescriptionError}
+              defaultValue={attraction.description}
               helperText={
                 attractionDescriptionError && "Enter attraction description"
               }
@@ -130,6 +145,7 @@ function EditDestinationForm() {
               rows={4} // Specify the number of rows (optional)
               onChange={handleAttractionActivityChange}
               error={attractionActivityError}
+              defaultValue={attraction.activity_description}
               helperText={
                 attractionActivityError && "Enter attraction activites"
               }
@@ -143,6 +159,7 @@ function EditDestinationForm() {
               rows={4} // Specify the number of rows (optional)
               onChange={handleAttractionFoodChange}
               error={attractionFoodError}
+              defaultValue={attraction.food_description}
               helperText={attractionFoodError && "Enter attraction food"}
             />
           </Grid>
@@ -155,6 +172,7 @@ function EditDestinationForm() {
               onChange={handleAttractionHousingChange}
               error={attractionHousingError}
               helperText={attractionHousingError && "Enter attraction housing"}
+              defaultValue={attraction.housing_description}
             />
           </Grid>
           <Grid item xs={12} onChange={handlePriceChange}>
@@ -209,7 +227,7 @@ function EditDestinationForm() {
             </Button>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> : <p>loading</p>}
     </Grid>
   );
 }
