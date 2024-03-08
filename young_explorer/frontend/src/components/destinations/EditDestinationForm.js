@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 function EditDestinationForm(){
 
+    const [attractionName, setAttractionName] = useState("") 
     const [attractionDescription, setAttractionDescription] = useState("");
     const [attractionFood, setAttractionFood] = useState("");
     const [attractionActivity, setAttractionActivity] = useState("");
@@ -59,6 +60,33 @@ function EditDestinationForm(){
 
       const handleSelectedValues = (event) => {
         setSelected(event.target.value);
+        console.log(event.target.value)
+      }
+
+      const handleAttractionSubmit = () => {
+        const requestOptions = {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: "Tokyo",
+            description: attractionDescription,
+            price: price,
+            /*labels: selected,*/
+            food_description: attractionFood,
+            housing_description: attractionHousing,
+            activity_description: attractionActivity
+          }),
+        };
+        fetch("http://127.0.0.1:8000/attractions_api/addAttraction", requestOptions)
+        .then((res) => {
+          if (res.status >= 400 && res.status < 600) {
+            alert("The response didn't work");
+          }
+          else{
+            alert("The destination was edited succesfully")
+          }
+          return res.json();
+        }).then((data) => console.log(data));
       }
 
     return (
@@ -158,7 +186,7 @@ function EditDestinationForm(){
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={console.log("Nothing here yet")}
+                  onClick={handleAttractionSubmit}
                 >
                   Edit Destination
                 </Button>
