@@ -41,7 +41,12 @@ function EditDestinationForm() {
       .then((res) => res.json())
       .then((data) => {
         setAttraction(data.Attraction);
-        console.log(data.Attraction);
+        setAttractionDescription(data.Attraction.description);
+        setAttractionFood(data.Attraction.food_description);
+        setAttractionActivity(data.Attraction.activity_description);
+        setPrice(data.Attraction.price);
+        setAttractionHousing(data.Attraction.housing_description);
+        setSelected(data.Attraction.labels);
       });
   }, [name]);
 
@@ -110,125 +115,131 @@ function EditDestinationForm() {
       {label.name}
     </MenuItem> // Adjust based on your actual label object structure
   ));
+
   
   return(
-    <Grid
-      container
-      spacing={2}
-      justifyContent="center"
-      alignItems="center"
-      style={{ minHeight: "100vh" }}
-      m={2}
-    >
-      {attraction ?
-      <Grid item xs={12} sm={6}>
-        <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <TextField
-              label="Destination Description"
-              multiline // Set multiline to true
-              fullWidth
-              rows={4} // Specify the number of rows (optional)
-              onChange={handleAttractionDescriptionChange}
-              error={attractionDescriptionError}
-              defaultValue={attraction.description}
-              helperText={
-                attractionDescriptionError && "Enter attraction description"
-              }
-            />
+    <div>
+      <br></br><br></br>
+      <h1>Edit {attraction.name}</h1>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        style={{ minHeight: "100vh" }}
+        m={2}
+      >
+        {attraction && attraction.price ?
+        <Grid item xs={12} sm={6}>
+          <Grid container spacing={4}>
+            <Grid item xs={12}>
+              <TextField
+                label="Destination Description"
+                multiline // Set multiline to true
+                fullWidth
+                rows={4} // Specify the number of rows (optional)
+                onChange={handleAttractionDescriptionChange}
+                error={attractionDescriptionError}
+                defaultValue={attraction.description}
+                helperText={
+                  attractionDescriptionError && "Enter attraction description"
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Destination Activities"
+                multiline // Set multiline to true
+                fullWidth
+                rows={4} // Specify the number of rows (optional)
+                onChange={handleAttractionActivityChange}
+                error={attractionActivityError}
+                defaultValue={attraction.activity_description}
+                helperText={
+                  attractionActivityError && "Enter attraction activites"
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Destination Food"
+                multiline // Set multiline to true
+                fullWidth
+                rows={4} // Specify the number of rows (optional)
+                onChange={handleAttractionFoodChange}
+                error={attractionFoodError}
+                defaultValue={attraction.food_description}
+                helperText={attractionFoodError && "Enter attraction food"}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Destination Housing"
+                multiline // Set multiline to true
+                fullWidth
+                rows={4} // Specify the number of rows (optional)
+                onChange={handleAttractionHousingChange}
+                error={attractionHousingError}
+                helperText={attractionHousingError && "Enter attraction housing"}
+                defaultValue={attraction.housing_description}
+              />
+            </Grid>
+            <Grid item xs={12} onChange={handlePriceChange}>
+              <TextField
+                label="Price"
+                fullWidth
+                required
+                error={priceError}
+                defaultValue={attraction.price}
+                helperText={
+                  priceError && "Enter price (must be a positive number)"
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel id="demo-mutiple-chip-label">
+                Select Labels:{" "}
+              </InputLabel>
+              <Select
+                multiple
+                value={selected}
+                onChange={handleSelectedValues}
+                input={<Input id="select-multiple-chip" />}
+                renderValue={(selected) => (
+                  <div>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </div>
+                )}
+              >
+                {
+                  LabelsMenuArray /*Displays all the menu-items which are the labels fetched from the database*/
+                }
+              </Select>
+            </Grid>
+            <Grid item xs={12} style={{ textAlign: "center" }} size="large">
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/home"
+                style={{ marginRight: "10%" }}
+              >
+                Go to homepage
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAttractionSubmit}
+              >
+                Edit Destination
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Destination Activities"
-              multiline // Set multiline to true
-              fullWidth
-              rows={4} // Specify the number of rows (optional)
-              onChange={handleAttractionActivityChange}
-              error={attractionActivityError}
-              defaultValue={attraction.activity_description}
-              helperText={
-                attractionActivityError && "Enter attraction activites"
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Destination Food"
-              multiline // Set multiline to true
-              fullWidth
-              rows={4} // Specify the number of rows (optional)
-              onChange={handleAttractionFoodChange}
-              error={attractionFoodError}
-              defaultValue={attraction.food_description}
-              helperText={attractionFoodError && "Enter attraction food"}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Destination Housing"
-              multiline // Set multiline to true
-              fullWidth
-              rows={4} // Specify the number of rows (optional)
-              onChange={handleAttractionHousingChange}
-              error={attractionHousingError}
-              helperText={attractionHousingError && "Enter attraction housing"}
-              defaultValue={attraction.housing_description}
-            />
-          </Grid>
-          <Grid item xs={12} onChange={handlePriceChange}>
-            <TextField
-              label="Price"
-              fullWidth
-              required
-              error={priceError}
-              helperText={
-                priceError && "Enter price (must be a positive number)"
-              }
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <InputLabel id="demo-mutiple-chip-label">
-              Select Labels:{" "}
-            </InputLabel>
-            <Select
-              multiple
-              value={selected}
-              onChange={handleSelectedValues}
-              input={<Input id="select-multiple-chip" />}
-              renderValue={(selected) => (
-                <div>
-                  {selected.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </div>
-              )}
-            >
-              {
-                LabelsMenuArray /*Displays all the menu-items which are the labels fetched from the database*/
-              }
-            </Select>
-          </Grid>
-          <Grid item xs={12} style={{ textAlign: "center" }} size="large">
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              to="/home"
-              style={{ marginRight: "10%" }}
-            >
-              Go to homepage
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAttractionSubmit}
-            >
-              Edit Destination
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid> : <p>loading</p>}
-    </Grid>
+        </Grid> : <p>loading</p>}
+      </Grid>
+    </div>
   );
 }
 
