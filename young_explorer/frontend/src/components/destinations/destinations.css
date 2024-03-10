@@ -160,3 +160,56 @@
     text-align: left;
     margin-top: 50px;
   }
+
+  .reviewContainer {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+  }
+
+  #editButton {
+    background-color:burlywood;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #editButton:hover {
+    background-color: #f4a460;
+  }
+
+  #cancelButton {
+    background-color:red;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #cancelButton:hover {
+    background-color: #ff6347;
+  }
+
+  #saveEditButton {
+    background-color:rgb(50, 203, 50);
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #saveEditButton:hover {
+    background-color: #6cdb6c;
+  }
+
+  #editReviewText {
+    resize: none;
+    height: 50px;
+    width: 200px;
+    font-size: 12px;
+    padding: 4px;
+    margin: 5px;
+  }

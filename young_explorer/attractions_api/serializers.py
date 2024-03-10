@@ -15,7 +15,7 @@ class AttractionSerializer(serializers.ModelSerializer):
     attraction_reviews = serializers.StringRelatedField(
         many=True, read_only=True)
 
-    visited_by = serializers.StringRelatedField(many = True, read_only=True)
+    visited_by = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Attraction
@@ -114,11 +114,28 @@ class ReviewSerializer(serializers.Serializer):
     rating = serializers.IntegerField()
 
     def validate_rating(self, value):
+        # This makes sure that the rating is between 0 and 5
         if ((value < 0) or (value > 5)):
             raise serializers.ValidationError("Rating must be between 0 and 5")
         return value
 
-    def validate_user(self, current_user, current_attraction):
-        if Review.objects.filter(user=current_user, attraction=current_attraction).exists():
-            return False
+    def validate_user(self, current_user, current_attraction, review_id=None):
+        # This function is used to prevent a user from reviewing the same attraction more than once.
+        # It returns False if the user has already reviewed the attraction, and returns the user if they have not.
+        if review_id:
+            if Review.objects.filter(user=current_user, attraction=current_attraction).exclude(id=review_id).exists():
+                return False
+        else:
+            if Review.objects.filter(user=current_user, attraction=current_attraction).exists():
+                return False
         return current_user
+
+    def update(self, instance, validated_data):
+        # The `update` method is used to update an instance of a model with validated data.
+        # `instance` is the existing instance of the model that's being updated.
+        # `validated_data` is the new data that's been validated by the serializer.
+
+        instance.review = validated_data.get('review', instance.review)
+        instance.rating = validated_data.get('rating', instance.rating)
+        instance.save()
+        return instance
