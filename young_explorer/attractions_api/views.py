@@ -138,6 +138,7 @@ class FilterDestinations(APIView):
         filter_query = Q()
         label_names = request.query_params.get('label_names')
         search_name = request.query_params.get('search_name')
+        username = request.query_params.get('username')
         if (label_names):
             label_name_list = label_names.split(',')
             for label_name in label_name_list:
@@ -167,6 +168,10 @@ class FilterDestinations(APIView):
         if search_name:
             attractions = attractions.filter(
                 name__icontains=search_name).distinct()
+        
+        #Filters out the attractions that the user has visited
+        if username:
+            attractions = attractions.exclude(visited_by__username=username)
 
         serializer = AttractionSerializer(attractions, many=True)
         return Response(serializer.data)
