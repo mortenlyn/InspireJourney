@@ -89,14 +89,18 @@ class addAttraction(APIView):
             return Response({"Message": "Attraction added successfully", "Attraction": attraction_data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class getSpecificAttraction(APIView):
     permission_classes = [permission.AllowAny]
 
     def get(self, request):
         attraction_name = request.query_params.get('attraction_name')
-        specificAttraction = Attraction.objects.get(name__iexact=attraction_name)
-        attraction_data = AttractionSerializer(specificAttraction, many=False).data
+        specificAttraction = Attraction.objects.get(
+            name__iexact=attraction_name)
+        attraction_data = AttractionSerializer(
+            specificAttraction, many=False).data
         return Response({"Message": "Attraction found", "Attraction": attraction_data})
+
 
 class FilterDestinations(APIView):
     """
@@ -178,6 +182,22 @@ class addReview(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class editReview(APIView):
+    """
+    This view allows you to edit a review
+    """
+    permission_classes = [permission.AllowAny]
+
+    def put(self, request, pk):
+        # This gets the review with the specified pk
+        review = get_object_or_404(Review, pk=pk)
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class review_view(APIView):
     """
     This view allows you to see all of the reviews
@@ -235,7 +255,7 @@ class getDestinationReviews(APIView):
 class modifyVisitor(APIView):
 
     """
-    This view allows you to add or remove visitors to specified Attractions by using the 
+    This view allows you to add or remove visitors to specified Attractions by using the
     username of the user and the attraction name
     An example is: http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=test1234&attraction_name=Tokyo
     and then press post button (if done in backend endpoint)
@@ -248,7 +268,6 @@ class modifyVisitor(APIView):
         if not attraction_name or not username:
             return Response({"error": "Attraction name and username are required."}, status=status.HTTP_400_BAD_REQUEST)
 
-        
         attraction = Attraction.objects.get(name=attraction_name)
         user = WebsiteUser.objects.get(username=username)
 
@@ -259,7 +278,8 @@ class modifyVisitor(APIView):
             attraction.visited_by.add(user)
             serializer = AttractionSerializer(attraction)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
+
 class getAttractionsVisitedByUser(APIView):
 
     """
@@ -272,10 +292,8 @@ class getAttractionsVisitedByUser(APIView):
         username = request.query_params.get('username')
         if not username:
             return Response({"error": "Username are required."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         user = WebsiteUser.objects.get(username=username)
         visited_attractions = Attraction.objects.filter(visited_by=user)
         serializer = AttractionSerializer(visited_attractions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
