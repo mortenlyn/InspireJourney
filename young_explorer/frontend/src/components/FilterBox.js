@@ -174,7 +174,7 @@ export default function FilterBox(props) {
                 fullWidth
                 onClick={handleFilterButton}
               >
-                Filter
+                Search
               </Button>
             </Grid>
             <Grid item xs={9}>
