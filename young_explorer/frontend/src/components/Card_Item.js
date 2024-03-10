@@ -3,6 +3,7 @@ import UsePictureApiCall from "./UsePictureApiCall";
 import './DestinationBox.css';
 import {Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import EditDestinationButton from './destinations/EditDestinationButton';
 
 function CardItem(props) {
 
@@ -16,7 +17,8 @@ function CardItem(props) {
     return (
       <>
       {currentUser ? (
-                <Button color="inherit" component={Link} to={"/Destination/" + props.name} >
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Button color="inherit" component={Link} to={"/Destination/" + props.name} >
                 <li className='cards__item'>
                   <div className='cards_item_box'>
                     <figure data-category={props.label} className='cards__item__pic-wrap'>
@@ -28,6 +30,9 @@ function CardItem(props) {
                   </div>
                 </li>
               </Button>
+              {localStorage.getItem("superuser") === "true" && 
+              <EditDestinationButton name={props.name} />}
+            </div>
             ) : (
                 <div>
                     <Button color="inherit" component={Link} onClick={handleClick}>

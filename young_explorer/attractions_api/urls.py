@@ -5,7 +5,7 @@ from . import views
 # URL patterns for the API
 urlpatterns = [
     path('attractions', views.attraction_view.as_view()),
-    path('addAttraction', views.addAttraction.as_view()),
+    path('addAttraction', views.AttractionView.as_view()),
     path('attraction/', views.getSpecificAttraction.as_view()),
     path('labels', views.label_view.as_view()),
     path('addLabel', views.create_label.as_view()),
