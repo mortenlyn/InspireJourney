@@ -1,6 +1,24 @@
 .Destination {
     padding: 4rem;
     background: #fff;
+    /* text-align: center; */
+  }
+
+  .topContainer {
+    text-align: center;
+  }
+
+  .bottomContainer {
+    text-align: center;
+  }
+
+  .ratingContainer {
+    text-align: center;
+    margin: 10px;
+  }
+
+  .textContainer {
+    margin: 10px
   }
 
   h1 {
@@ -23,7 +41,7 @@
     margin: 50px 0 45px;
   }
 
-  
+
   .Destination__items {
     margin-bottom: 24px;
     display: flex;
@@ -98,6 +116,100 @@
     color: #252e48;
     font-size: 18px;
     line-height: 24px;
+  }
 
+  #reviewButton {
+    background-color:burlywood;
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
 
+  #reviewButton:hover {
+    background-color: #f4a460;
+  }
+
+  input[type=radio]{
+    display: none;
+  }
+
+  .star{
+    cursor: pointer;
+  }
+
+  .reviewText {
+    resize: none;
+    height: 100px;
+    width: 500px;
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  #submitReview {
+    background-color:burlywood;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+  }
+
+  #submitReview:hover {
+    background-color: #f4a460;
+  }
+
+  .reviewDiv {
+    text-align: left;
+    margin-top: 50px;
+  }
+
+  .reviewContainer {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+  }
+
+  #editButton {
+    background-color:burlywood;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #editButton:hover {
+    background-color: #f4a460;
+  }
+
+  #cancelButton {
+    background-color:red;
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #cancelButton:hover {
+    background-color: #ff6347;
+  }
+
+  #saveEditButton {
+    background-color:rgb(50, 203, 50);
+    color: white;
+    margin: 7px;
+    padding: 2px;
+    float: right;
+  }
+
+  #saveEditButton:hover {
+    background-color: #6cdb6c;
+  }
+
+  #editReviewText {
+    resize: none;
+    height: 50px;
+    width: 200px;
+    font-size: 12px;
+    padding: 4px;
+    margin: 5px;
   }

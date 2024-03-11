@@ -2,6 +2,8 @@
   border: 1px solid red;
 } */
 
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -17,6 +19,7 @@
     font-size: 3rem;
   }
 
+  /* Brukes denne?*/
   #header-title {
     font-family: Bradley Hand, cursive;
     color: beige;
@@ -24,11 +27,11 @@
 }
 
   #title-link {
-    font-family: Bradley Hand, cursive;
+    font-family: Pacifico;
     color: beige;
     cursor: pointer;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 30px;
   }
 
   #appbar {
@@ -37,6 +40,10 @@
       background-size: cover; /* Needed to make header-picture fill bigger screens*/
       height: 100px;
   }
+
+
+
+
 
 
   .center {
@@ -98,6 +105,7 @@
     background-color: darkorange;
   }
 
+  /*NOT IN USE ANYMORE
   #logout-btn {
     background-color: slategray;
     border: none;
@@ -139,7 +147,7 @@
 
   #login-btn:hover {
     background-color: darkslategray;
-  }
+  }*/
 
   .login-register-form {
     width: 750px;
@@ -181,6 +189,7 @@
     margin-top: 20px;
   }
 
+  /* NOT IN USE ANYMORE
   #add-btn {
     background-color: slategray;
     color: whitesmoke;
@@ -200,8 +209,8 @@
   }
 
   #add-btn.MuiButton-root:hover {
-    background-color: darkslategrey; /* Change background color on hover */
-  }
+    background-color: darkslategrey; 
+  } */
 
   #login-txt {
     text-align: center;

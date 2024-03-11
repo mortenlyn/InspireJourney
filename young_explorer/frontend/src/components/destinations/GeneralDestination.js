@@ -1,40 +1,213 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import DestinationCard from "../DestinationCard";
+import "./destinations.css";
+import "./BeenHereButton.css";
+import client from "../../api/apiClient";
+import DestinationInfoComponent from "./DestinationInfoComponent";
+import ReviewFormComponent from "./ReviewFormComponent";
+import ReviewComponent from "./ReviewComponent";
+import DestinationTopComponent from "./DestinationTopComponent";
 
 function GeneralDestination() {
   const { name } = useParams();
+  const [rating, setRating] = useState(null);
+  const [editedRating, setEditedRating] = useState(null);
+  const [hoverRating, setHoverRating] = useState(null);
+  const [hoverEditRating, setHoverEditRating] = useState(null);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewText, setReviewText] = useState("");
+  const [destinationReviews, setDestinationReviews] = useState([]);
+  const [destination, setDestination] = useState([]);
+  const [beenHere, setBeenHere] = useState(false); // Been here button is set to false by default
+  const [editMode, setEditMode] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const username = currentUser.username;
+
+  const handleToggleBeenhere = () => {
+    setBeenHere(!beenHere);
+    const url = `http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=${username}&attraction_name=${name}`;
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        attraction_name: name,
+      }),
+    };
+    fetch(url, requestOptions).then((res) => {
+      if (res.status >= 400 && res.status < 600) {
+        return res.json();
+      } else {
+        setBeenHere(!beenHere);
+        return res.json();
+      }
+    });
+  };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await client.post("/attractions_api/addReview", {
+        user: currentUser,
+        attraction: name,
+        review: reviewText,
+        rating: rating,
+      });
+      console.log(res);
+      alert("Review successfully submitted");
+      window.document.getElementById("reviewText").value = "";
+      setReviewText("");
+      setRating(null);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 409) {
+        alert("You've already reviewed this destination!");
+      } else {
+        alert("Review not submitted!");
+      }
+    }
+  }
+
+  const handleEdit = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleRatingChange = (newRating) => {
+    setEditedRating(newRating);
+  };
+
+  function handleSave(event) {
+    event.preventDefault();
+
+    client
+      .get(`/attractions_api/getUserReviews/?username=${username}`)
+      .then((res) => {
+        let id;
+
+        res.data.ReviewList.forEach((review) => {
+          if (review.attraction_name === name) {
+            id = review.review_id;
+          }
+        });
+
+        return id;
+      })
+      .then((id) => {
+        client
+          .put("/attractions_api/editReview/" + id + "/", {
+            review: document.getElementById("editReviewText").value,
+            rating: editedRating,
+          })
+          .then((res) => {
+            setReviewText(document.getElementById("editReviewText").value);
+            setEditMode(false);
+
+            // Update the state with the new review data
+            const updatedReviews = destinationReviews.map((review) => {
+              if (review.review_id === id) {
+                return {
+                  ...review,
+                  review: document.getElementById("editReviewText").value,
+                  rating: editedRating,
+                };
+              }
+              return review;
+            });
+
+            setDestinationReviews(updatedReviews);
+          })
+          .catch((error) => {
+            console.error(error);
+            alert("You need to add a review and a rating to save changes");
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    fetch(
+      "http://127.0.0.1:8000/attractions_api/getDestinationReviews/?destination=" +
+        name
+    )
+      .then((res) => res.json())
+      .then((data) => setDestinationReviews(data.ReviewList));
+  }, [rating, editedRating, showReviewForm, name]);
+
+  useEffect(() => {
+    if (!name) {
+      return;
+    }
+    const url = `http://127.0.0.1:8000/attractions_api/attraction/?attraction_name=${name}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setDestination(data.Attraction);
+      });
+  }, [name]);
+
+  useEffect(() => {
+    if (!username) {
+      return;
+    }
+    let beenHereUrl = `http://127.0.0.1:8000/attractions_api/getAttractionsVisitedByUser/?username=${username}`;
+    fetch(beenHereUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        const visitedDestinations = data.map((destination) => destination.name);
+        if (visitedDestinations.includes(name)) {
+          setBeenHere(true);
+        }
+      });
+  }, []);
 
   return (
     <div className="Destination">
-      <h1>Some information on {name}!</h1>
-      <h3>
-        Check out our other destinations <Link to="/home">here.</Link>
-      </h3>
-      <div className="Destination__container">
-        <div className="destination__wrapper">
-          <ul className="Destination__items">
-            <DestinationCard
-              name={"Food in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
-              label="Food"
-              query={name + " food"}
-            ></DestinationCard>
-            <DestinationCard
-              name={"Where to live in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
-              label="Housing"
-              query={name + " house"}
-            ></DestinationCard>
-            <DestinationCard
-              name={"What to do in " + name}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
-              label="What to do"
-              query={name + " event"}
-            ></DestinationCard>
-          </ul>
-        </div>
+      <DestinationTopComponent
+        name={name}
+        beenHere={beenHere}
+        handleToggleBeenHere={handleToggleBeenhere}
+      />
+
+      <DestinationInfoComponent destination={destination} name={name} />
+
+      <ReviewFormComponent
+        show={showReviewForm}
+        setShow={setShowReviewForm}
+        rating={rating}
+        setRating={setRating}
+        setReviewText={setReviewText}
+        hoverRating={hoverRating}
+        setHoverRating={setHoverRating}
+        handleSubmit={handleSubmit}
+        beenHere={beenHere}
+      />
+
+      <div className="reviewDiv">
+        <h2>Reviews</h2>
+        {destinationReviews.length > 0 ? (
+          destinationReviews.map((review) => (
+            <ReviewComponent
+              key={review.review_id}
+              reviewer={review.user_name}
+              username={username}
+              rating={review.rating}
+              editedRating={editedRating}
+              review={review.review}
+              dateCreated={review.date_created}
+              editMode={editMode}
+              handleEdit={handleEdit}
+              handleSave={handleSave}
+              handleRatingChange={handleRatingChange}
+              hoverEditRating={hoverEditRating}
+              setHoverEditRating={setHoverEditRating}
+            />
+          ))
+        ) : (
+          <p>There are no reviews for this destination</p>
+        )}
       </div>
     </div>
   );
