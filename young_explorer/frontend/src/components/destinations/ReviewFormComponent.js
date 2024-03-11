@@ -20,9 +20,11 @@ const ReviewFormComponent = ({
           {show ? "Hide" : "Leave a review"}
         </Button>
       )}
-      {!beenHere && (
+
+      {!beenHere && localStorage.getItem("superuser") === "false" && (
         <h3>You must have visited this destination to leave a review</h3>
       )}
+
       {show && (
         <div className="ratingContainer">
           <div className="textContainer">
