@@ -6,13 +6,11 @@ import TestImage from "../cropImage";
 
 function Home(props) {
   return <TestImage currentUser={props.currentUser}/>;
-  //return  (
+  /*return  (
     <div>
       <Header_section/>;
       <DestinationBox currentUser={props.currentUser}/>;
-    </div>
-    
-   );
+    </div>*/
 }
 
 export default Home;
