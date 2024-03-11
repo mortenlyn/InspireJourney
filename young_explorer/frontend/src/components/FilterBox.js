@@ -187,7 +187,7 @@ export default function FilterBox(props) {
                   color="primary"
                   />
                 }
-                label="Removed visited destinations"
+                label="Remove visited destinations"
               />
             </Grid>
             <Grid item xs={9}>
