@@ -1,40 +1,70 @@
+.ProfilePage {
+    margin: 40px auto;
+    border-radius: 8%;
+    width: 80%;
+    background-color: beige;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: block;
+    justify-content: center;
+}
+
 .profile-card {
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
+    /*border: 1px solid #e0e0e0;
+    border-radius: 10%;
     background-color: white;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);*/
     width: 50%;
     display: block;
     text-align: center;
 }
 
+#UserProfileTitle {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2em;
+}
+
 #homebutton {
-    background-color: orange;
+    background-color: rgb(172, 152, 114);
     margin-top: 50px;
     text-align: center;
-    font-size: 15px;
-    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fefefe;
     padding: 7.5px 10px;
     width: 250px;
     height: 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
 }
 
 #homebutton:hover {
-    background-color: darkorange;
+    background-color: rgba(172, 152, 114, 0.517);
     cursor: pointer;
 }
 
-h2 {
-    font-size: 2em;
-    font-weight: bold;
+h1 {
+    font-size: 1.8em;
     color: #333;
     text-align: center;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+    margin-bottom: 15px;
     letter-spacing: 1px;
 }
+
+h2 {
+    font-size: 1.5em;
+    font-weight: lighter;
+    color: rgb(81, 74, 64);
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+
 
 .profile-info {
     display: flex;
@@ -42,6 +72,7 @@ h2 {
     margin-top: 20px;
     margin-bottom: 20px;
     align-items: center;
+    
 }
 
 .user-info-paragraph {
@@ -56,4 +87,21 @@ h2 {
 
 strong {
     padding-right: 4px;
+}
+
+#userImage {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.Reviews_Visited {
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    background-color: rgba(172, 152, 114, 0.223);
+    text-align: center;
+    display: block;
+    justify-content: center;
 }
