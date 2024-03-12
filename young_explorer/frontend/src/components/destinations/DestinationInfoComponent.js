@@ -5,8 +5,8 @@ const DestinationInfoComponent = ({ destination, name }) => {
   return (
     <div className="Destination__container">
       <div className="destination__wrapper">
-        <ul className="Destination__items">
-          <DestinationCard
+        <div className="Destination__items">
+          <DestinationCard 
             name={"Food in " + name}
             text={destination.food_description}
             label="Food"
@@ -24,7 +24,7 @@ const DestinationInfoComponent = ({ destination, name }) => {
             label="What to do"
             query={name + " event"}
           ></DestinationCard>
-        </ul>
+        </div>
       </div>
     </div>
   );

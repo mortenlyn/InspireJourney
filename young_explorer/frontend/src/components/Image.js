@@ -4,7 +4,7 @@ import React from 'react';
 function ImageComponent(props) {
   return (
     <div>
-      <img src={props.imageUrl} alt="An image" />
+      <img style={{width: "100%", height: "100%", objectFit: "contain"}} src={props.imageUrl} alt="An image" />
       <h1>{props.description}</h1>
     </div>
   );
