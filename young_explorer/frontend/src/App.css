@@ -11,6 +11,15 @@
     font-family: 'PT Sans', sans-serif;
   }
 
+  .darkMode {
+    background-color: black;
+    color: whitesmoke;
+  }
+  .lightMode {
+    background-color: whitesmoke;
+    color:black;
+  }
+  
   .home {
     display: flex;
     height: 90vh;

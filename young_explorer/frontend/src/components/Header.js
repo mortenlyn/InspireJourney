@@ -9,9 +9,15 @@ import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { FaRegUserCircle } from "react-icons/fa";
 import './header.css';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => !prevMode);
+  };
 
   const logout = () => {
     client
@@ -60,7 +66,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Young Explorer{" "}
           </Link>
         </Typography>
-
+        <DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>
         <div class="dropdown">
           <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
           {isMenuOpen && (
@@ -83,8 +89,8 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
                 <Button class="dropdown-item" onClick={login}>
                   Log In
                 </Button>
-        )}
-
+              )
+              }
             </div>
           )}
         </div>

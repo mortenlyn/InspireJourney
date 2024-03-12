@@ -7,6 +7,14 @@
     color: rgba(245, 245, 220, 0.718);
 }
 
+#darkmode-btn {
+    margin-right: 10px;
+    color: beige;
+}
+
+#darkmode-btn:hover {
+    color: rgba(245, 245, 220, 0.718);
+}
 
 .dropdown-menu {
     position: absolute;
