@@ -104,12 +104,25 @@ export default function FilterBox(props) {
   return (
     <div>
       <div>
-        <div style={{ padding: "10px", backgroundColor: "#f5f5f5" }}>
+        <br></br>
+        <h1>Check out these destinations!</h1>
+        {CardItemArray.length > 0 && filteredAttractions ? (
+          CardItemArray
+        ) : (
+          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
+        }
+      </div>
+      <div style={{width: "95%", justifyContent: "center", margin: "0 auto", 
+      boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)", marginBottom: "40px", borderRadius: "10px",
+      marginTop: "40px"}}>
+        <div style={{ padding: "30px", backgroundColor: "rgba(207, 190, 169, 0.506)", borderRadius: "10px"}}>
           <h3
             style={{
               textAlign: "center",
-              marginBottom: "10px",
+              marginBottom: "20px",
               marginTop: "10px",
+              color: "gray",
+              fontSize: "1.8em"
             }}
           >
             Filter content
@@ -167,12 +180,13 @@ export default function FilterBox(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={3} style={{ textAlign: "center" }}>
+            <Grid item xs={9} style={{ textAlign: "center"}}>
               <Button
                 variant="contained"
                 color="primary"
                 fullWidth
                 onClick={handleFilterButton}
+                style={{width: 100}}
               >
                 Search
               </Button>
@@ -200,16 +214,6 @@ export default function FilterBox(props) {
             </Grid>
           </Grid>
         </div>
-      </div>
-
-      <div>
-        <br></br>
-        <h1>Check out these destinations!</h1>
-        {CardItemArray.length > 0 && filteredAttractions ? (
-          CardItemArray
-        ) : (
-          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
-        }
       </div>
     </div>
   );
