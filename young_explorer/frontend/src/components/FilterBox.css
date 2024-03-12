@@ -1,0 +1,12 @@
+.filter_button {
+    outline:none;
+    cursor:pointer;
+}
+
+.filter_box {
+    display:none;
+}
+
+.filter_button:focus + .filter_box{
+    display:block;
+}

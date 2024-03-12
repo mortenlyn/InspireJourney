@@ -14,6 +14,8 @@ import {
 import useGetLabels from "../hooks/useGetLabels";
 import CardItem from "./Card_Item";
 import GetAllAttractions from "./GetAllAttractions";
+import "./FilterBox.css";
+//import FilterLogo from '../assets/filter-6551.svg';
 
 export default function FilterBox(props) {
   const [price, setPrice] = useState({ min: "", max: "" });
@@ -103,16 +105,10 @@ export default function FilterBox(props) {
 
   return (
     <div>
-      <div>
-        <br></br>
-        <h1>Check out these destinations!</h1>
-        {CardItemArray.length > 0 && filteredAttractions ? (
-          CardItemArray
-        ) : (
-          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
-        }
+      <div className="filter_button" tabindex="1" style={{textAlign: "center"}}>
+        Filter Content
       </div>
-      <div style={{width: "95%", justifyContent: "center", margin: "0 auto", 
+      <div className="filter_box" style={{width: "95%", justifyContent: "center", margin: "0 auto", 
       boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)", marginBottom: "40px", borderRadius: "10px",
       marginTop: "40px"}}>
         <div style={{ padding: "30px", backgroundColor: "rgba(207, 190, 169, 0.506)", borderRadius: "10px"}}>
@@ -214,6 +210,15 @@ export default function FilterBox(props) {
             </Grid>
           </Grid>
         </div>
+      </div>
+      <div>
+        <br></br>
+        <h1>Check out these destinations!</h1>
+        {CardItemArray.length > 0 && filteredAttractions ? (
+          CardItemArray
+        ) : (
+          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
+        }
       </div>
     </div>
   );
