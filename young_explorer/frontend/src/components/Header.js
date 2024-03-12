@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import { FaRegUserCircle } from "react-icons/fa";
 import './header.css';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
@@ -66,7 +67,8 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Young Explorer{" "}
           </Link>
         </Typography>
-        <DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>
+        {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
+          (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))}
         <div class="dropdown">
           <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
           {isMenuOpen && (
