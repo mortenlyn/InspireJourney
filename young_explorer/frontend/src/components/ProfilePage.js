@@ -64,7 +64,7 @@ function ProfilePage({ currentUser }) {
             <img id="userImage" src="./travelyoung.jpg" style={{width: 200}}></img>
           </div>
           <div className="profile-info">
-            <p className="user-info-paragraph">
+            <p className="user-info-email">
               <strong>Email:</strong> {currentUser.email}
             </p>
             {localStorage.getItem("superuser") === "true" ? (
@@ -73,12 +73,11 @@ function ProfilePage({ currentUser }) {
                   You're logged in as an admin.
                 </p>
                 <p className="user-info-paragraph">
-                  You can add destinations to the website by clicking the "+"
-                  button in the header .
+                  You can add destinations to the website by clicking the "+" button in the dropdown menu.
                 </p>
               </>
             ) : (
-              <p className="user-info-paragraph">
+              <p className="user-info-email">
                 <strong>Name:</strong> {currentUser.username}
               </p>
             )}
