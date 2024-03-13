@@ -59,7 +59,7 @@ function ProfilePage({ currentUser }) {
     <div className="ProfilePage">
       <div>
         <div className="profile-card">
-          <h1 id="UserProfileTitle">User Profile</h1>
+          <h1 id="UserProfileTitle">Your profile</h1>
           <div id="userImageBox">
             <img id="userImage" src="./travelyoung.jpg" style={{width: 200}}></img>
           </div>
@@ -87,15 +87,15 @@ function ProfilePage({ currentUser }) {
       {localStorage.getItem("superuser") === "false" && (
         <div>
           <div className="Reviews_Visited">
-            <h1>These are all the reviews you have made</h1>
+            <h1>Your reviews</h1>
             {userReviews.length > 0 && userReviews ? (
               userReviewsMap
             ) : (
-              <p>The user hasn't made any reviews</p>
+              <p>You haven't made any reviews</p>
             )}
           </div>
           <div className="Reviews_Visited">
-            <h1>These are all the destinations you have visited </h1>
+            <h1>Your destinations</h1>
             <br></br>
             {visitedDestinationsList.length > 0 && visitedDestinations ? (
               visitedDestinationsList
