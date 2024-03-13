@@ -178,17 +178,6 @@ export default function FilterBox(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={9} style={{ textAlign: "center"}}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={handleFilterButton}
-                style={{width: 100}}
-              >
-                Search
-              </Button>
-            </Grid>
             <Grid item xs={9}>
               <FormControlLabel
                 control={
@@ -209,6 +198,17 @@ export default function FilterBox(props) {
                 helperText={"Enter search information"}
                 onChange={handleSearchName}
               />
+            </Grid>
+            <Grid item xs={9} style={{ textAlign: "center"}}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleFilterButton}
+                style={{width: 100}}
+              >
+                Search
+              </Button>
             </Grid>
           </Grid>
         </div>
