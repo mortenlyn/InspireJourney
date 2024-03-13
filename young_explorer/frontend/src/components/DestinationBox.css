@@ -28,7 +28,6 @@
     margin: 0 auto;
     max-width: 1200px;
     width: 90%;
-    background-color: #1f98f4;
   }
 
   .cards__item {
@@ -43,7 +42,6 @@
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
-    background-color: red;
   }
 
 
