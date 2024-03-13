@@ -25,7 +25,7 @@ const ReviewFormComponent = ({
         <h3>You must have visited this destination to leave a review</h3>
       )}
 
-      {show && (
+      {show && beenHere && (
         <div className="ratingContainer">
           <div className="textContainer">
             <textarea
@@ -59,7 +59,7 @@ const ReviewFormComponent = ({
           })}
         </div>
       )}
-      {show && (
+      {show && beenHere && (
         <Button id="submitReview" onClick={handleSubmit}>
           Submit
         </Button>
