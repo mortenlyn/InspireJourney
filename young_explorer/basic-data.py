@@ -398,6 +398,99 @@ except mysql.connector.Error as error:
     print("Error inserting 15th record:", error)
     database.rollback()
 
+
+
+sql100 = """
+INSERT IGNORE INTO user_api_websiteuser (password, last_login, is_staff, is_superuser, is_active, username, email)
+VALUES
+('12345678', NULL, 0, 0, 1, 'Bob', 'bob@bob.no')
+"""
+
+try:
+    # Execute the SQL query
+    mycursor.execute(sql100)
+    
+    # Commit changes to the database
+    database.commit()
+    
+    print("User 'Bob' created successfully.")
+except mysql.connector.Error as error:
+    # Rollback changes if there's an error
+    print("Error creating user:", error)
+    database.rollback()
+
+
+import mysql.connector
+
+# Define the SQL query to fetch user_id for Bob
+sql_user_id = "SELECT user_id FROM user_api_websiteuser WHERE email = 'Bob@bob.no'"
+
+# Define the SQL queries to fetch attraction_id for each destination
+sql_attraction_id = {
+    "Santorini, Greece": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Santorini, Greece'",
+    "Maui, Hawaii": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Maui, Hawaii'",
+    "Safari in Serengeti National Park, Tanzania": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Safari in Serengeti National Park, Tanzania'",
+    "Kyoto, Japan": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Kyoto, Japan'",
+    "Machu Picchu, Peru": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Machu Picchu, Peru'",
+    "Safari in Kruger National Park, South Africa": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Safari in Kruger National Park, South Africa'",
+    "Galápagos Islands, Ecuador": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Galápagos Islands, Ecuador'",
+    "The Great Barrier Reef, Australia": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'The Great Barrier Reef, Australia'",
+    "Bora Bora, French Polynesia": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Bora Bora, French Polynesia'",
+    "Patagonia, Argentina and Chile": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Patagonia, Argentina and Chile'"
+}
+
+# Execute the SQL query to fetch user_id for Bob
+mycursor.execute(sql_user_id)
+user_id = mycursor.fetchone()[0]
+
+# Define the reviews data for Bob
+reviews_data = [
+    {"destination": "Santorini, Greece", "rating": 5, "review": "Amazing place!", "date_created": "2024-03-14"},
+    {"destination": "Maui, Hawaii", "rating": 4, "review": "Beautiful beaches!", "date_created": "2024-03-14"},
+    {"destination": "Safari in Serengeti National Park, Tanzania", "rating": 5, "review": "Incredible wildlife!", "date_created": "2024-03-14"},
+    {"destination": "Kyoto, Japan", "rating": 4, "review": "Rich culture!", "date_created": "2024-03-14"},
+    {"destination": "Machu Picchu, Peru", "rating": 5, "review": "Breath-taking ruins!", "date_created": "2024-03-14"},
+    {"destination": "Safari in Kruger National Park, South Africa", "rating": 5, "review": "Unforgettable experience!", "date_created": "2024-03-14"},
+    {"destination": "Galápagos Islands, Ecuador", "rating": 5, "review": "Unique wildlife!", "date_created": "2024-03-14"},
+    {"destination": "The Great Barrier Reef, Australia", "rating": 4, "review": "Colorful underwater world!", "date_created": "2024-03-14"},
+    {"destination": "Bora Bora, French Polynesia", "rating": 5, "review": "Paradise on earth!", "date_created": "2024-03-14"},
+    {"destination": "Patagonia, Argentina and Chile", "rating": 4, "review": "Stunning landscapes!", "date_created": "2024-03-14"}
+]
+
+# Insert reviews for each destination
+for review_data in reviews_data:
+    destination = review_data["destination"]
+    rating = review_data["rating"]
+    review = review_data["review"]
+    date_created = review_data["date_created"]
+    
+    # Execute the SQL query to fetch attraction_id for the destination
+    mycursor.execute(sql_attraction_id[destination])
+    attraction_id = mycursor.fetchone()[0]
+    
+    # Define the SQL query to insert the review
+    sql_insert_review = f"""
+    INSERT INTO attractions_api_review (review, rating, date_created, attraction_id, user_id)
+    VALUES ('{review}', {rating}, '{date_created}', {attraction_id}, {user_id})
+    """
+    
+    try:
+        # Execute the SQL query to insert the review
+        mycursor.execute(sql_insert_review)
+        
+        for result in mycursor.fetchall():
+            pass
+        
+        # Commit changes to the database
+        database.commit()
+        
+        print(f"Review for {destination} inserted successfully.")
+    except mysql.connector.Error as error:
+        # Rollback changes if there's an error
+        print(f"Error inserting review for {destination}: {error}")
+        database.rollback()
+
+
 # Close the cursor and database connection
 mycursor.close()
 database.close()
