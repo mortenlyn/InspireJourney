@@ -21,7 +21,7 @@ function headersection() {
             alt='beach and water'
           />
           <div className="header-text-contiainer">
-          <h1 id="header-text" style={{ position: 'absolute', top: '300px', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
+          <h1 id="header-text" style={{ position: 'absolute', top: '270px', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
           </div>
           </div>
         </div>
