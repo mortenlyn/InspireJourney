@@ -15,7 +15,16 @@ mycursor = database.cursor()
 sql1 = """
 INSERT IGNORE INTO attractions_api_attraction (name, description, price, rating, date_created, food_description, housing_description, activity_description)
 VALUES
-('Santorini, Greece', 'Santorini is a volcanic island in the Cyclades group of the Greek islands. It is famous for its dramatic views, stunning sunsets, and whitewashed buildings.', 400, 0, '2024-03-12', 'Traditional Greek cuisine with fresh ingredients, including moussaka, souvlaki, and Greek salads.', 'Cave houses and luxury hotels built into the cliffs offer breathtaking views of the Aegean Sea.', 'Explore ancient ruins, relax on black sand beaches, and indulge in wine tasting tours.');
+('Santorini, Greece', 'Santorini is a volcanic island in the Cyclades group of the Greek islands. It is famous for its dramatic views, stunning sunsets, and whitewashed buildings.', 400, 0, '2024-03-12', 'Traditional Greek cuisine with fresh ingredients, including moussaka, souvlaki, and Greek salads.', 'Cave houses and luxury hotels built into the cliffs offer breathtaking views of the Aegean Sea.', 'Explore ancient ruins, relax on black sand beaches, and indulge in wine tasting tours.'),
+('Maui, Hawaii', 'Maui is an island in the Central Pacific, part of the Hawaiian archipelago. It is known for its stunning beaches, lush rainforests, and diverse landscapes.', 350, 0, '2024-03-12', 'Fresh seafood, Hawaiian plate lunches, and tropical fruits like pineapple and coconut.', 'Luxury resorts and beachfront villas offer accommodations with ocean views and access to world-class amenities.', 'Experience snorkeling with sea turtles, hiking through bamboo forests, and watching sunrise at the summit of Haleakalā.'),
+('Safari in Serengeti National Park, Tanzania', 'Serengeti National Park, located in Tanzania, is renowned for its vast savannahs, diverse wildlife, and annual migration of millions of wildebeest, zebras, and other animals.', 600, 0, '2024-03-12', 'Traditional Tanzanian cuisine featuring grilled meats, stews, and local vegetables.', 'Luxury tented camps and lodges provide comfortable accommodations in the heart of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), witness the Great Migration, and explore the parks diverse ecosystems.'),
+('Kyoto, Japan', 'Kyoto is a city on the island of Honshu in Japan. Its famous for its classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines, and traditional wooden houses.', 400, 0, '2024-03-12', 'Traditional Japanese cuisine such as sushi, sashimi, and tempura.', 'Ryokans (traditional Japanese inns) offer authentic accommodations with tatami floors and communal baths.', 'Explore historic temples and gardens, participate in tea ceremonies, and experience traditional Japanese arts and crafts.'),
+('Machu Picchu, Peru', 'Machu Picchu is an ancient Incan citadel set high in the Andes Mountains of Peru. Its renowned for its well-preserved ruins, dramatic landscapes, and panoramic views.', 450, 0, '2024-03-12', 'Peruvian cuisine featuring ceviche, quinoa, and roasted meats.', 'Stay in nearby hotels or lodges in Aguas Calientes, the gateway to Machu Picchu.', 'Explore the ruins of Machu Picchu, hike the Inca Trail, and visit nearby attractions such as the Sacred Valley and Huayna Picchu.'),
+('Safari in Kruger National Park, South Africa', 'Kruger National Park is one of Africas largest game reserves, known for its abundant wildlife and diverse ecosystems. Its located in northeastern South Africa.', 550, 0, '2024-03-12', 'Traditional South African cuisine such as braai (barbecue), biltong (dried meat), and potjiekos (stew).', 'Luxury lodges and safari camps offer comfortable accommodations with views of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), enjoy bush walks, and experience the magic of the African bush.'),
+('Galápagos Islands, Ecuador', 'The Galápagos Islands are a volcanic archipelago in the Pacific Ocean, located about 1,000 kilometers (620 miles) west of Ecuador. They are renowned for their unique wildlife and pristine ecosystems.', 600, 0, '2024-03-12', 'Ecuadorian cuisine featuring fresh seafood, ceviche, and traditional dishes such as encebollado (fish soup) and llapingachos (potato patties).', 'Stay in eco-friendly lodges and boutique hotels on the islands.', 'Explore the islands diverse landscapes, observe endemic species such as giant tortoises, marine iguanas, and blue-footed boobies, and snorkel with sea lions and penguins.'),
+('The Great Barrier Reef, Australia', 'The Great Barrier Reef is the worlds largest coral reef system, located off the coast of Queensland, Australia. Its renowned for its stunning marine biodiversity and vibrant coral reefs.', 500, 0, '2024-03-12', 'Australian cuisine featuring fresh seafood, grilled meats, and tropical fruits.', 'Stay in luxury resorts and eco-friendly lodges on the nearby islands or coastal towns.', 'Snorkel or dive among colorful coral gardens, swim with tropical fish and turtles, and explore the reef by boat or helicopter.'),
+('Bora Bora, French Polynesia', 'Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Its surrounded by sand-fringed motus (islets) and a turquoise lagoon protected by a coral reef.', 700, 0, '2024-03-12', 'French Polynesian cuisine featuring fresh seafood, tropical fruits, and coconut-based dishes like poisson cru (raw fish marinated in lime juice and coconut milk).', 'Overwater bungalows and luxury resorts offer accommodations with private decks and direct access to the lagoon.', 'Relax on white sand beaches, swim or snorkel in the crystal-clear lagoon, and enjoy water sports such as paddleboarding and jet skiing.'),
+('Patagonia, Argentina and Chile', 'Patagonia is a sparsely populated region at the southern end of South America, shared by Argentina and Chile. Its known for its stunning landscapes, including mountains, glaciers, and grasslands.', 600, 0, '2024-03-12', 'Argentinian and Chilean cuisine featuring grilled meats, empanadas, and hearty stews.', 'Stay in remote lodges and estancias (ranches) with breathtaking views of the Andes and the Southern Patagonian Ice Field.', 'Hike among towering peaks, explore glaciers and fjords, and spot wildlife such as guanacos, pumas, and Andean condors.');
 """
 
 sql2 = """
@@ -93,8 +102,8 @@ INSERT IGNORE INTO attractions_api_label (name) VALUES
 
 sql3 = """
 -- Insert labels for Paris
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Paris' AND
@@ -106,8 +115,8 @@ JOIN attractions_api_label l ON (
 
 sql4 = """
 -- Insert labels for Rome
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Rome' AND
@@ -117,8 +126,8 @@ JOIN attractions_api_label l ON (
 
 sql5 = """
 -- Insert labels for Barcelona
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Barcelona' AND
@@ -128,8 +137,8 @@ JOIN attractions_api_label l ON (
 
 sql6 = """
 -- Insert labels for Tokyo
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Tokyo' AND
@@ -139,8 +148,8 @@ JOIN attractions_api_label l ON (
 
 sql7 = """
 -- Insert labels for New York City
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'New York City' AND
@@ -150,8 +159,8 @@ JOIN attractions_api_label l ON (
 
 sql8 = """
 -- Insert labels for Sydney
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Sydney' AND
@@ -161,8 +170,8 @@ JOIN attractions_api_label l ON (
 
 sql9 = """
 -- Insert labels for Rio de Janeiro
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Rio de Janeiro' AND
@@ -172,8 +181,8 @@ JOIN attractions_api_label l ON (
 
 sql10 = """
 -- Insert labels for Cape Town
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Cape Town' AND
@@ -183,8 +192,8 @@ JOIN attractions_api_label l ON (
 
 sql11 = """
 -- Insert labels for Bangkok
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Bangkok' AND
@@ -194,8 +203,8 @@ JOIN attractions_api_label l ON (
 
 sql12 = """
 -- Insert labels for Dubai
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Dubai' AND
@@ -205,8 +214,8 @@ JOIN attractions_api_label l ON (
 
 sql13 = """
 -- Insert labels for Bora Bora
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Bora Bora, French Polynesia' AND
@@ -216,8 +225,8 @@ JOIN attractions_api_label l ON (
 
 sql14 = """
 -- Insert labels for Santorini
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Santorini, Greece' AND
@@ -227,8 +236,8 @@ JOIN attractions_api_label l ON (
 
 sql15 = """
 -- Insert labels for Maui
-INSERT INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.label_id
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Maui, Hawaii' AND
