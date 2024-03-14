@@ -5,14 +5,13 @@ import DestinationDescription  from "../DesitinationDescription";
 const DestinationInfoComponent = ({ destination, name }) => {
   return (
     <div className="Destination__container">
-       
+               <ul className="Destination__items">
       <DestinationDescription
-            name = {"Desc of " + name}
+            name = {"Description of " + name}
             className  = "destination-description"
             text={destination.description}
-            
-    
           ></DestinationDescription>
+          </ul>
       <div className="destination__wrapper">
         <ul className="Destination__items">
           <DestinationCard

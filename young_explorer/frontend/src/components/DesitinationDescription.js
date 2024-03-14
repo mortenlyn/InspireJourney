@@ -5,14 +5,14 @@ import './DestinationBox.css';
 function DestinationDescription(props) {
     return (
       <>
-        
-          <div className='dest_box'>
-            <div className='dest_info'>
-              <h5 className='dest_text'>{props.name}</h5>
+        <li className='cards__item'>
+          <div className='cards_item_box'>
+            <div className='cards__item__info'>
+              <h5 className='cards__item__text'>{props.name}</h5>
               <p>{props.text}</p>
             </div>
           </div>
-        
+        </li>
       </>
     )
   }
