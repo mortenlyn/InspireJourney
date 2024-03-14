@@ -8,6 +8,8 @@ import {
   Input,
   Chip,
   InputLabel,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import useGetLabels from "../hooks/useGetLabels";
 import CardItem from "./Card_Item";
@@ -19,7 +21,8 @@ export default function FilterBox(props) {
   const { labels, loading, error } = useGetLabels();
   const [filteredAttractions, setFilteredAttractions] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
-  const [searchName, setSearchName] = useState("")
+  const [searchName, setSearchName] = useState("");
+  const [removeVisited, setRemoveVisited] = useState(false);
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
   
@@ -39,6 +42,11 @@ export default function FilterBox(props) {
     setSearchName(event.target.value);
   };
 
+  const handleRemoveVisited = (event) => {
+    setRemoveVisited(event.target.checked);
+    console.log(event.target.checked)
+  }
+
   const handleFilterButton = () => {
     if (price) {
       url += "min_price=" + price.min + "&max_price=" + price.max;
@@ -49,6 +57,11 @@ export default function FilterBox(props) {
 
     if(searchName) {
       url += "&search_name=" + searchName;
+    }
+    if(removeVisited === true){
+      const username = props.currentUser.username
+      console.log(username)
+      url += `&username=${username}`    
     }
     fetch(url)
       .then((response) => response.json())
@@ -161,8 +174,21 @@ export default function FilterBox(props) {
                 fullWidth
                 onClick={handleFilterButton}
               >
-                Filter
+                Search
               </Button>
+            </Grid>
+            <Grid item xs={9}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                  checked={removeVisited}
+                  onChange={handleRemoveVisited}
+                  name="Remove destinations"
+                  color="primary"
+                  />
+                }
+                label="Remove visited destinations"
+              />
             </Grid>
             <Grid item xs={9}>
               <TextField
