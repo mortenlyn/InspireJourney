@@ -14,6 +14,8 @@ import {
 import useGetLabels from "../hooks/useGetLabels";
 import CardItem from "./Card_Item";
 import GetAllAttractions from "./GetAllAttractions";
+import "./FilterBox.css";
+import { FaSlidersH } from "react-icons/fa";
 
 export default function FilterBox(props) {
   const [price, setPrice] = useState({ min: "", max: "" });
@@ -23,6 +25,7 @@ export default function FilterBox(props) {
   const [filterApplied, setFilterApplied] = useState(false);
   const [searchName, setSearchName] = useState("");
   const [removeVisited, setRemoveVisited] = useState(false);
+  const [showFilterBox, setShowFilterBox] = useState(false); 
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
   
@@ -99,17 +102,27 @@ export default function FilterBox(props) {
     );
   });
 
+
   
 
   return (
     <div>
-      <div>
-        <div style={{ padding: "10px", backgroundColor: "#f5f5f5" }}>
+      {/* Toggle the visibility of filter_box when filter_button is clicked */}
+      <div className="filter_button" onClick={() => setShowFilterBox(!showFilterBox)} > 
+        <FaSlidersH id="sliderIcon"/> 
+        <p id="filterText">Filter</p>
+      </div>
+      <div className={`filter_box ${showFilterBox ? "show" : ""}`} style={{display: showFilterBox ? 'block' : 'none', width: "95%", justifyContent: "center", margin: "0 auto", 
+      boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)", marginBottom: "40px", borderRadius: "10px",
+      marginTop: "40px"}}>
+        <div style={{ padding: "30px", backgroundColor: "rgba(207, 190, 169, 0.506)", borderRadius: "10px"}}>
           <h3
             style={{
               textAlign: "center",
-              marginBottom: "10px",
+              marginBottom: "20px",
               marginTop: "10px",
+              color: "gray",
+              fontSize: "1.8em"
             }}
           >
             Filter content
@@ -167,16 +180,6 @@ export default function FilterBox(props) {
                 variant="outlined"
               />
             </Grid>
-            <Grid item xs={3} style={{ textAlign: "center" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={handleFilterButton}
-              >
-                Search
-              </Button>
-            </Grid>
             <Grid item xs={9}>
               <FormControlLabel
                 control={
@@ -198,10 +201,20 @@ export default function FilterBox(props) {
                 onChange={handleSearchName}
               />
             </Grid>
+            <Grid item xs={9} style={{ textAlign: "center"}}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleFilterButton}
+                style={{width: 100}}
+              >
+                Search
+              </Button>
+            </Grid>
           </Grid>
         </div>
       </div>
-
       <div>
         <br></br>
         <h1>Check out these destinations!</h1>
