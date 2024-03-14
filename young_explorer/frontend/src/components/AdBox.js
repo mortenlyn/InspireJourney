@@ -5,7 +5,7 @@ const AdBox = () => {
   return (
     <div className="AdBox">
       <p>Reklame</p>
-      {'This is an ad'}
+      This is an ad
     </div>
   );
 };
