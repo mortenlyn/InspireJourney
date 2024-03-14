@@ -1,11 +1,27 @@
 import React from "react";
 import DestinationCard from "../DestinationCard";
+import DestinationDescription  from "../DesitinationDescription";
 
 const DestinationInfoComponent = ({ destination, name }) => {
   return (
     <div className="Destination__container">
+       
+      <DestinationDescription
+            name = {"Desc of " + name}
+            className  = "destination-description"
+            text={destination.description}
+            
+    
+          ></DestinationDescription>
       <div className="destination__wrapper">
         <ul className="Destination__items">
+          <DestinationCard
+            name={"Weather in  " + name}
+            text={"Vær kommer!!"}
+            label="Description"
+            query={"rain"}
+            className = "destination-description"
+          ></DestinationCard>
           <DestinationCard
             name={"Food in " + name}
             text={destination.food_description}
