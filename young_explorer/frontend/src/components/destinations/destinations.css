@@ -119,7 +119,12 @@
     font-size: 18px;
     line-height: 24px;
   }
-
+  #destination-description{
+    text-align: center;
+  }
+  #description-text{
+    text-align: center;
+  }
   #reviewButton {
     background-color:burlywood;
     color: white;
