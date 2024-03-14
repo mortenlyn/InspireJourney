@@ -4,14 +4,6 @@
     width: 50px;
 }
 
-.filter_box {
-    display:none;
-}
-
-.filter_button:focus + .filter_box{
-    display:block;
-}
-
 #sliderIcon {
     font-size: 2.5rem;
     color: #333;

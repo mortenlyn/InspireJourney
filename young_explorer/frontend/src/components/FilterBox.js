@@ -25,6 +25,7 @@ export default function FilterBox(props) {
   const [filterApplied, setFilterApplied] = useState(false);
   const [searchName, setSearchName] = useState("");
   const [removeVisited, setRemoveVisited] = useState(false);
+  const [showFilterBox, setShowFilterBox] = useState(false); 
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
   
@@ -106,11 +107,12 @@ export default function FilterBox(props) {
 
   return (
     <div>
-      <div className="filter_button" tabindex="1">
+      {/* Toggle the visibility of filter_box when filter_button is clicked */}
+      <div className="filter_button" onClick={() => setShowFilterBox(!showFilterBox)} > 
         <FaSlidersH id="sliderIcon"/> 
         <p id="filterText">Filter</p>
       </div>
-      <div className="filter_box" style={{width: "95%", justifyContent: "center", margin: "0 auto", 
+      <div className={`filter_box ${showFilterBox ? "show" : ""}`} style={{display: showFilterBox ? 'block' : 'none', width: "95%", justifyContent: "center", margin: "0 auto", 
       boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)", marginBottom: "40px", borderRadius: "10px",
       marginTop: "40px"}}>
         <div style={{ padding: "30px", backgroundColor: "rgba(207, 190, 169, 0.506)", borderRadius: "10px"}}>
