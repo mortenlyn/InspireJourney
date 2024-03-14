@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./Card_Item";
+import AdBox from "./AdBox";
 
 export default function GetAllAttractions(props) {
   const [attractions, setAttractions] = useState([]);
@@ -21,14 +22,20 @@ export default function GetAllAttractions(props) {
     rating: 0
   */
 
-  const CardItemArray = attractions.map((attraction) => {
+  const CardItemArray = attractions.map((attraction, iteration) => {
     return (
-      <CardItem
-        key={attraction.attraction_id}
-        label="Destination"
-        name={attraction.name}
-        currentUser={props.currentUser}
-      />
+        <>
+        <CardItem
+          label="Destination"
+          name={attraction.name}
+          currentUser={props.currentUser}
+        />
+        {attractions.length > 2 && (iteration + 1) % 3 === 0 ? (<AdBox />)
+          : (attractions.length === 2 && iteration === 1) ? (<AdBox />) 
+          : (attractions.length === 1) ? (<AdBox />)
+          : (null)
+          }
+        </>
     );
   });
 
