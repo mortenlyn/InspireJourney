@@ -132,6 +132,13 @@
     margin-bottom: 10px;
   }
 
+  .frontpage_description{
+    width: 50ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   #reviewButton:hover {
     background-color: #f4a460;
   }
