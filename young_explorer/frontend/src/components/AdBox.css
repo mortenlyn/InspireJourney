@@ -1,0 +1,13 @@
+.AdBox {
+    padding: 20px;
+    background-color: #f0f0f0; /* Example background color */
+    border: 1px solid #ccc;
+    width: calc(33.33% - 20px); /* Adjust the width as needed */
+    margin: 10px; /* Adjust margins as needed */
+  }
+  
+  .AdBox p {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
