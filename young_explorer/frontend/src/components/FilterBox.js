@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import {
   Grid,
   TextField,
@@ -25,7 +25,6 @@ export default function FilterBox(props) {
   const [removeVisited, setRemoveVisited] = useState(false);
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
-  
   const handleSelectedLabelsChange = (event) => {
     setSelectedLabels(event.target.value);
   };
@@ -44,8 +43,8 @@ export default function FilterBox(props) {
 
   const handleRemoveVisited = (event) => {
     setRemoveVisited(event.target.checked);
-    console.log(event.target.checked)
-  }
+    console.log(event.target.checked);
+  };
 
   const handleFilterButton = () => {
     if (price) {
@@ -55,13 +54,13 @@ export default function FilterBox(props) {
       url += `&label_names=${selectedLabels.join(",")}`;
     }
 
-    if(searchName) {
+    if (searchName) {
       url += "&search_name=" + searchName;
     }
-    if(removeVisited === true){
-      const username = props.currentUser.username
-      console.log(username)
-      url += `&username=${username}`    
+    if (removeVisited === true) {
+      const username = props.currentUser.username;
+      console.log(username);
+      url += `&username=${username}`;
     }
     fetch(url)
       .then((response) => response.json())
@@ -98,8 +97,6 @@ export default function FilterBox(props) {
       />
     );
   });
-
-  
 
   return (
     <div>
@@ -181,10 +178,10 @@ export default function FilterBox(props) {
               <FormControlLabel
                 control={
                   <Checkbox
-                  checked={removeVisited}
-                  onChange={handleRemoveVisited}
-                  name="Remove destinations"
-                  color="primary"
+                    checked={removeVisited}
+                    onChange={handleRemoveVisited}
+                    name="Remove destinations"
+                    color="primary"
                   />
                 }
                 label="Remove visited destinations"
@@ -207,9 +204,11 @@ export default function FilterBox(props) {
         <h1>Check out these destinations!</h1>
         {CardItemArray.length > 0 && filteredAttractions ? (
           CardItemArray
+        ) : !filterApplied ? (
+          <GetAllAttractions currentUser={props.currentUser} />
         ) : (
-          !filterApplied ? <GetAllAttractions currentUser ={props.currentUser}/> : <p>Your criteria doesn't match any</p>)
-        }
+          <p>Your criteria doesn't match any</p>
+        )}
       </div>
     </div>
   );

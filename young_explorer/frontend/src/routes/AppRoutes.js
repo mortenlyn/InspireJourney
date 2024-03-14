@@ -15,8 +15,7 @@ import Profile from "../components/ProfilePage";
 import GeneralDestination from "../components/destinations/GeneralDestination";
 import SearchForm from "../components/destinations/SearchForm";
 import EditDestinationForm from "../components/destinations/EditDestinationForm";
-import GetWeatherForecast from "../hooks/useWeatherForecast";
-
+// import GetWeatherForecast from "../hooks/useWeatherForecast";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
@@ -80,25 +79,26 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
           element={<Profile client={client} currentUser={currentUser} />}
         />
 
-        <Route 
-        path="filter/*"
-        element={<SearchForm  
-        client={client}
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        />}
-        />
-        
         <Route
-        path="Destination/Edit/:name"
-        element={<EditDestinationForm />}
+          path="filter/*"
+          element={
+            <SearchForm
+              client={client}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          }
         />
 
         <Route
-        path="testRoute/"
-        element={<GetWeatherForecast cityname={"Paris"}/>}
+          path="Destination/Edit/:name"
+          element={<EditDestinationForm />}
         />
-        
+
+        {/* <Route
+          path="testRoute/"
+          element={<GetWeatherForecast cityname={"Paris"} />}
+        /> */}
       </Routes>
     </Router>
   );
