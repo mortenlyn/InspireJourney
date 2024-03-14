@@ -12,7 +12,7 @@ export default function GetAllAttractions(props) {
 
   /*
     Fields from GET-Request (fetch)
-    --------- 
+    ---------
     attraction_id: 23
     date_created: "2024-02-19"
     description: "This is paris"
@@ -33,6 +33,8 @@ export default function GetAllAttractions(props) {
   });
 
   return (
-    <div>{attractions.length > 0 ? CardItemArray : "Loading..."}</div>
+    <div className="cards_container">
+      {attractions.length > 0 ? CardItemArray : "Loading..."}
+    </div>
   );
 }

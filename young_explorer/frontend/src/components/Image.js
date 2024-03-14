@@ -1,10 +1,13 @@
-
-import React from 'react';
+import React from "react";
 /*Genert av kunstig intelligens(Chat GPT)*/
 function ImageComponent(props) {
   return (
     <div>
-      <img style={{width: "100%", height: "100%", objectFit: "contain"}} src={props.imageUrl} alt="An image" />
+      <img
+        src={props.imageUrl}
+        alt="An image"
+        style={{ width: "500px", height: "400px", objectFit: "cover" }}
+      />
       <h1>{props.description}</h1>
     </div>
   );
