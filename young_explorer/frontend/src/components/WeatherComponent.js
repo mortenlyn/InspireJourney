@@ -18,8 +18,8 @@ function WeatherComponent(props) {
 
   return typeof weather.main != "undefined" ? (
     <>
-      <li className="cards__item">
-        <div className="cards_item_box">
+      <li className="weather_item">
+        <div className="weather_item_box">
           <h3>Weather in {props.name}</h3>
           <button id="myButton" onClick={getWeather}>
             Get Weather
@@ -28,19 +28,17 @@ function WeatherComponent(props) {
           <h2>Condition: {weather.weather[0].main}</h2>
           <h2>Humidity: {weather.main.humidity} %</h2>
           <h2>Wind: {Math.round(weather.wind.speed)} m/s</h2>
-          <div className="cards__item__info"></div>
         </div>
       </li>
     </>
   ) : (
     <>
-      <li className="cards__item">
-        <div className="cards_item_box">
+      <li className="weather_item">
+        <div className="weather_item_box">
           <h3>Weather in {props.name}</h3>
           <button id="myButton" onClick={getWeather}>
             Get Weather
           </button>
-          <div className="cards__item__info"></div>
         </div>
       </li>
     </>
