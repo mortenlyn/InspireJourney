@@ -1,6 +1,7 @@
 import { useState } from "react";
 import weatherAPI from "../api/weatherAPI";
 import "./WeatherComponent.css";
+import rain from "../assets/rain.jpg"
 
 function WeatherComponent(props) {
   const [weather, setWeather] = useState({});
@@ -28,7 +29,23 @@ function WeatherComponent(props) {
           <h2>Condition: {weather.weather[0].main}</h2>
           <h2>Humidity: {weather.main.humidity} %</h2>
           <h2>Wind: {Math.round(weather.wind.speed)} m/s</h2>
-        </div>
+        
+         
+          {weather.weather[0].main == "Rain" ? (
+            <>
+              <img src={rain} alt="High Humidity" />
+              <p>Its raining ing {props.name}, you should bring and umbrella!</p>
+            </>
+          ) : null}
+
+           {weather.weather[0].main == "Thunderstorm" ? (
+            <>
+              <img src={rain} alt="High Humidity" />
+              <p>Its raining ing {props.name}, you should bring and umbrella!</p>
+            </>
+          ) : null}
+
+          </div>
       </li>
     </>
   ) : (
