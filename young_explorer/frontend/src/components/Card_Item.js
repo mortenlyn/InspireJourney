@@ -17,7 +17,6 @@ function CardItem(props) {
       }
     }
 
-    
     return (
       <>
       {currentUser ? (
@@ -30,7 +29,9 @@ function CardItem(props) {
                     </figure>
                     <div className='cards__item__info'>
                       <h5 className='cards__item__text'>{props.name}</h5>
-                      <p><AverageRating rating={props.averageRating} /></p>
+                      
+                      <div>Rating: <AverageRating rating={props.averageRating} /></div>
+                      
                     </div>
                   </div>
                 </li>
@@ -48,7 +49,7 @@ function CardItem(props) {
                         </figure>
                         <div className='cards__item__info'>
                             <h5 className='cards__item__text'>{props.name} </h5>
-                            <p><AverageRating rating={props.averageRating} /></p>
+                            <div>Rating: <AverageRating rating={props.averageRating} /></div>
                         </div>
                     </div>
                     </li>
