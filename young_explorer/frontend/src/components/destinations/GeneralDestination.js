@@ -24,6 +24,18 @@ function GeneralDestination() {
   const username = currentUser.username;
 
   const handleToggleBeenhere = () => {
+    if (beenHere) {
+      if (
+        window.confirm(
+          "Are you sure you have not been here? Any review you've left will be deleted."
+        ) == true
+      ) {
+        setBeenHere(!beenHere);
+        handleDelete();
+      } else {
+        return;
+      }
+    }
     setBeenHere(!beenHere);
     const url = `http://127.0.0.1:8000/attractions_api/modifyVisitor/?username=${username}&attraction_name=${name}`;
 
@@ -77,10 +89,8 @@ function GeneralDestination() {
     setEditedRating(newRating);
   };
 
-  function handleSave(event) {
-    event.preventDefault();
-
-    client
+  function getReviewId() {
+    return client
       .get(`/attractions_api/getUserReviews/?username=${username}`)
       .then((res) => {
         let id;
@@ -92,7 +102,13 @@ function GeneralDestination() {
         });
 
         return id;
-      })
+      });
+  }
+
+  function handleSave(event) {
+    event.preventDefault();
+
+    getReviewId()
       .then((id) => {
         client
           .put("/attractions_api/editReview/" + id + "/", {
@@ -125,6 +141,24 @@ function GeneralDestination() {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  function handleDelete() {
+    getReviewId().then((id) => {
+      if (typeof id === "undefined") {
+        return;
+      }
+
+      client.delete("/attractions_api/deleteReview/" + id + "/").then(() => {
+        alert("Review successfully deleted");
+
+        // Remove the deleted review from the state
+        const updatedReviews = destinationReviews.filter(
+          (review) => review.review_id !== id
+        );
+        setDestinationReviews(updatedReviews);
+      });
+    });
   }
 
   useEffect(() => {
