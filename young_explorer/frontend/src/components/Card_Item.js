@@ -4,6 +4,8 @@ import './DestinationBox.css';
 import {Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import EditDestinationButton from './destinations/EditDestinationButton';
+import AverageRating from './destinations/AverageRating';
+
 
 function CardItem(props) {
 
@@ -14,6 +16,8 @@ function CardItem(props) {
         alert("Please log in to view this destination.");
       }
     }
+
+    
     return (
       <>
       {currentUser ? (
@@ -26,6 +30,7 @@ function CardItem(props) {
                     </figure>
                     <div className='cards__item__info'>
                       <h5 className='cards__item__text'>{props.name}</h5>
+                      <p><AverageRating rating={props.averageRating} /></p>
                     </div>
                   </div>
                 </li>
@@ -42,7 +47,8 @@ function CardItem(props) {
                             <UsePictureApiCall query={props.name} className='cards__item__img'/>
                         </figure>
                         <div className='cards__item__info'>
-                            <h5 className='cards__item__text'>{props.name}</h5>
+                            <h5 className='cards__item__text'>{props.name} </h5>
+                            <p><AverageRating rating={props.averageRating} /></p>
                         </div>
                     </div>
                     </li>

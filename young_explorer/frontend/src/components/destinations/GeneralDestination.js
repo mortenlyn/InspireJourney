@@ -2,7 +2,7 @@ import { React, useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./destinations.css";
 import "./BeenHereButton.css";
-import client from "../../api/apiClient";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";import client from "../../api/apiClient";
 import DestinationInfoComponent from "./DestinationInfoComponent";
 import ReviewFormComponent from "./ReviewFormComponent";
 import ReviewComponent from "./ReviewComponent";
@@ -69,6 +69,28 @@ function GeneralDestination() {
     }
   }
 
+  
+  const renderAverageRating = () => {
+    const average = averageReview();
+    const integerPart = Math.floor(average); // Integer part of the average rating
+    const fractionalPart = average - integerPart; // Fractional part of the average rating
+    const stars = [];
+  
+    // Fill stars up to the integer part of the average rating
+    for (let i = 0; i < integerPart; i++) {
+      stars.push(<FaStar key={i} color="gold" />);
+    }
+  
+    // Fill the next star partially if there's a fractional part
+    if (fractionalPart > 0) {
+      stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
+    }
+  
+    // Fill the remaining stars with gray color
+  
+    return stars;
+  }
+
   const handleEdit = () => {
     setEditMode(!editMode);
   };
@@ -76,6 +98,16 @@ function GeneralDestination() {
   const handleRatingChange = (newRating) => {
     setEditedRating(newRating);
   };
+
+  const averageReview = () => {
+    if (destinationReviews.length === 0) {
+      return 0; // Return 0 if there are no reviews
+    }
+
+    const totalRating = destinationReviews.reduce((acc, review) => acc + review.rating, 0);
+    return totalRating / destinationReviews.length;
+  }
+
 
   function handleSave(event) {
     event.preventDefault();
@@ -187,6 +219,7 @@ function GeneralDestination() {
 
       <div className="reviewDiv">
         <h2>Reviews</h2>
+        <p>Average Rating: {renderAverageRating()}</p> 
         {destinationReviews.length > 0 ? (
           destinationReviews.map((review) => (
             <ReviewComponent
