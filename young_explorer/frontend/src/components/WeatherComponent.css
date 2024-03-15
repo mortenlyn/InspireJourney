@@ -29,3 +29,24 @@
     align-items: center;
     padding: 20px;
   }
+
+  .weather_item_info {
+    padding: 20px 30px 30px;
+    text-align: left;
+    align-items: left;
+  }
+
+  .weather_item_text {
+    color: #252e48;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  #weatherh2 {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  #weather_text {
+    text-align: left;
+  }
