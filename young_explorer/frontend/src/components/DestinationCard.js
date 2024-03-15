@@ -20,5 +20,6 @@ function DestinationCard(props) {
       </>
     )
   }
+ 
   
   export default DestinationCard;
