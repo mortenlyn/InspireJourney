@@ -29,9 +29,10 @@ function CardItem(props) {
                     </figure>
                     <div className='cards__item__info'>
                       <h5 className='cards__item__text'>{props.name}</h5>
+                      <div><AverageRating rating={props.averageRating} /></div>
+
                       <p className = 'frontpage_description'>{props.text}</p>
                       
-                      <div>Rating: <AverageRating rating={props.averageRating} /></div>
                       
                     </div>
                   </div>
@@ -50,8 +51,9 @@ function CardItem(props) {
                         </figure>
                         <div className='cards__item__info'>
                             <h5 className='cards__item__text'>{props.name} </h5>
+                            <div><AverageRating rating={props.averageRating} /></div>
+
                             <p className = 'frontpage_description'>{props.text}</p>
-                            <div>Rating: <AverageRating rating={props.averageRating} /></div>
                         </div>
                     </div>
                     </li>
