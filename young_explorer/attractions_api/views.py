@@ -85,7 +85,7 @@ class AttractionView(APIView):
 
             return Response({"Message": "Attraction added successfully", "Attraction": attraction_data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def put(self, request):
         """
         This view allows for updating
@@ -93,21 +93,21 @@ class AttractionView(APIView):
         attraction_name = request.data.get('name')
         if not attraction_name:
             return Response({"error": "Attraction name is required."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         try:
             attraction = Attraction.objects.get(name=attraction_name)
         except Attraction.DoesNotExist:
             return Response({"error": "Attraction not found."}, status=status.HTTP_404_NOT_FOUND)
-        
-        serializer = UpdateAttractionSerializer(attraction, data=request.data, partial=True)
-        if(serializer.is_valid()):
+
+        serializer = UpdateAttractionSerializer(
+            attraction, data=request.data, partial=True)
+        if (serializer.is_valid()):
             attraction = serializer.save()
             attraction_data = serializer.data
             label_names = [label.name for label in attraction.labels.all()]
             attraction_data['labels'] = label_names
             return Response({"Message": "Attraction changed successfully", "Attraction": attraction_data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 class getSpecificAttraction(APIView):
@@ -168,8 +168,8 @@ class FilterDestinations(APIView):
         if search_name:
             attractions = attractions.filter(
                 name__icontains=search_name).distinct()
-        
-        #Filters out the attractions that the user has visited
+
+        # Filters out the attractions that the user has visited
         if username:
             attractions = attractions.exclude(visited_by__username=username)
 
@@ -221,6 +221,19 @@ class editReview(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class deleteReview(APIView):
+    """
+    This view allows you to delete a review
+    """
+
+    permission_classes = [permission.AllowAny]
+
+    def delete(self, request, pk):
+        review = get_object_or_404(Review, pk=pk)
+        review.delete()
+        return Response({"Message": "Review deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class review_view(APIView):
