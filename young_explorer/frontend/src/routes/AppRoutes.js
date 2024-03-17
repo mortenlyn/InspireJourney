@@ -15,7 +15,6 @@ import Profile from "../components/ProfilePage";
 import GeneralDestination from "../components/destinations/GeneralDestination";
 import SearchForm from "../components/destinations/SearchForm";
 import EditDestinationForm from "../components/destinations/EditDestinationForm";
-// import GetWeatherForecast from "../hooks/useWeatherForecast";
 
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
