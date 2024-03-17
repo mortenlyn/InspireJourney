@@ -56,12 +56,15 @@ function ProfilePage({ currentUser }) {
     );
   }
   return (
-    <div>
-      <div className="ProfilePage">
+    <div className="ProfilePage">
+      <div>
         <div className="profile-card">
-          <h2>User Profile</h2>
+          <h1 id="UserProfileTitle">Your profile</h1>
+          <div id="userImageBox">
+            <img id="userImage" src="./travelyoung.jpg" style={{width: 200}}></img>
+          </div>
           <div className="profile-info">
-            <p className="user-info-paragraph">
+            <p className="user-info-email">
               <strong>Email:</strong> {currentUser.email}
             </p>
             {localStorage.getItem("superuser") === "true" ? (
@@ -70,38 +73,41 @@ function ProfilePage({ currentUser }) {
                   You're logged in as an admin.
                 </p>
                 <p className="user-info-paragraph">
-                  You can add destinations to the website by clicking the "+"
-                  button in the header .
+                  You can add destinations to the website by clicking the "+" button in the dropdown menu.
                 </p>
               </>
             ) : (
-              <p className="user-info-paragraph">
+              <p className="user-info-email">
                 <strong>Name:</strong> {currentUser.username}
               </p>
             )}
           </div>
-          <Link to="/home">
-            <button id="homebutton">Return to homepage</button>
-          </Link>
         </div>
       </div>
       {localStorage.getItem("superuser") === "false" && (
         <div>
-          <h1>These are all the reviews the user have made</h1>
-          {userReviews.length > 0 && userReviews ? (
-            userReviewsMap
-          ) : (
-            <p>The user hasn't made any reviews</p>
-          )}
-          <h1>These are all the destinations the user have visited </h1>
-          <br></br>
-          {visitedDestinationsList.length > 0 && visitedDestinations ? (
-            visitedDestinationsList
-          ) : (
-            <p>No visited destinations</p>
-          )}
+          <div className="Reviews_Visited">
+            <h1>Your reviews</h1>
+            {userReviews.length > 0 && userReviews ? (
+              userReviewsMap
+            ) : (
+              <p>You haven't made any reviews</p>
+            )}
+          </div>
+          <div className="Reviews_Visited">
+            <h1>Your destinations</h1>
+            <br></br>
+            {visitedDestinationsList.length > 0 && visitedDestinations ? (
+              visitedDestinationsList
+            ) : (
+              <p>No visited destinations</p>
+            )}
+          </div>
         </div>
       )}
+      <Link to="/home">
+          <button id="homebutton">Return to homepage</button>
+      </Link>
     </div>
   );
 }

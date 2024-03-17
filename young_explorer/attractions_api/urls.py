@@ -18,4 +18,6 @@ urlpatterns = [
     path('modifyVisitor/', views.modifyVisitor.as_view()),
     path('getAttractionsVisitedByUser/',
          views.getAttractionsVisitedByUser.as_view()),
+    path('deleteReview/<int:pk>/',
+         views.deleteReview.as_view(), name='deleteReview'),
 ]
