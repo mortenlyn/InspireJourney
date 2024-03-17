@@ -94,11 +94,6 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
           path="Destination/Edit/:name"
           element={<EditDestinationForm />}
         />
-
-        {/* <Route
-          path="testRoute/"
-          element={<GetWeatherForecast cityname={"Paris"} />}
-        /> */}
       </Routes>
     </Router>
   );
