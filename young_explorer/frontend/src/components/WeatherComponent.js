@@ -28,7 +28,6 @@ function WeatherComponent(props) {
         .then((res) => res.json())
         .then((data) => {
           setWeather(data);
-          console.log(weather);
         });
     };
 
