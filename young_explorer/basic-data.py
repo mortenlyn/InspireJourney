@@ -22,7 +22,7 @@ VALUES
 ('South Africa', 'Kruger National Park is one of Africas largest game reserves, known for its abundant wildlife and diverse ecosystems. Its located in northeastern South Africa.', 550, 0, '2024-03-12', 'Traditional South African cuisine such as braai (barbecue), biltong (dried meat), and potjiekos (stew).', 'Luxury lodges and safari camps offer comfortable accommodations with views of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), enjoy bush walks, and experience the magic of the African bush.'),
 ('Ecuador', 'The Galápagos Islands are a volcanic archipelago in the Pacific Ocean, located about 1,000 kilometers (620 miles) west of Ecuador. They are renowned for their unique wildlife and pristine ecosystems.', 600, 0, '2024-03-12', 'Ecuadorian cuisine featuring fresh seafood, ceviche, and traditional dishes such as encebollado (fish soup) and llapingachos (potato patties).', 'Stay in eco-friendly lodges and boutique hotels on the islands.', 'Explore the islands diverse landscapes, observe endemic species such as giant tortoises, marine iguanas, and blue-footed boobies, and snorkel with sea lions and penguins.'),
 ('Sydney, Australia', 'The Great Barrier Reef is the worlds largest coral reef system, located off the coast of Queensland, Australia. Its renowned for its stunning marine biodiversity and vibrant coral reefs.', 500, 0, '2024-03-12', 'Australian cuisine featuring fresh seafood, grilled meats, and tropical fruits.', 'Stay in luxury resorts and eco-friendly lodges on the nearby islands or coastal towns.', 'Snorkel or dive among colorful coral gardens, swim with tropical fish and turtles, and explore the reef by boat or helicopter.'),
-('Denpasar, Indonesia', 'Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Its surrounded by sand-fringed motus (islets) and a turquoise lagoon protected by a coral reef.', 700, 0, '2024-03-12', 'French Polynesian cuisine featuring fresh seafood, tropical fruits, and coconut-based dishes like poisson cru (raw fish marinated in lime juice and coconut milk).', 'Overwater bungalows and luxury resorts offer accommodations with private decks and direct access to the lagoon.', 'Relax on white sand beaches, swim or snorkel in the crystal-clear lagoon, and enjoy water sports such as paddleboarding and jet skiing.'),
+('Denpasar, Indonesia', 'Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Its surrounded by sand-fringed motus (islets) and a turquoise lagoon protected by a coral reef.', 700, 0, '2024-03-12', 'French Polynesian cuisine featuring fresh seafood, tropical fruits, and coconut-based dishes like poisson cru (raw fish marinated in lime juice and coconut milk).', 'Overwater bungalows and luxury resorts offer accommodations with private decks and direct access to the lagoon.', 'Relax on white sand beaches, swim or snorkel in the crystal-clear lagoon, and enjoy water sports such as paddleboarding and jet skiing. Bungee jumping from hills are also a popular activity for tourists'),
 ('Patagonia', 'Patagonia is a sparsely populated region at the southern end of South America, shared by Argentina and Chile. Its known for its stunning landscapes, including mountains, glaciers, and grasslands.', 600, 0, '2024-03-12', 'Argentinian and Chilean cuisine featuring grilled meats, empanadas, and hearty stews.', 'Stay in remote lodges and estancias (ranches) with breathtaking views of the Andes and the Southern Patagonian Ice Field.', 'Hike among towering peaks, explore glaciers and fjords, and spot wildlife such as guanacos, pumas, and Andean condors.');
 """
 sql111 = """
@@ -35,6 +35,7 @@ VALUES
 ('New York City', 'New York City is a bustling metropolis in the United States, known for its iconic skyline, diverse culture, and vibrant energy.', 0, 0, '2024-03-12', 'International cuisine representing cultures from around the world, including pizza, bagels, and street food.', 'Choose from luxury hotels in Manhattan, trendy boutique accommodations in Brooklyn, or cozy bed and breakfasts in Greenwich Village.', 'Visit famous landmarks such as the Statue of Liberty, Empire State Building, and Times Square, explore world-class museums and galleries, and experience Broadway shows and live music.'),
 ('Bangkok', 'Bangkok is the capital city of Thailand, known for its ornate temples, vibrant street life, and bustling markets.', 0, 0, '2024-03-12', 'Thai cuisine featuring dishes like pad thai, green curry, and mango sticky rice.', 'Stay in luxury hotels along the Chao Phraya River or boutique accommodations in historic neighborhoods like Sukhumvit.', 'Visit iconic temples such as Wat Arun and Wat Pho, explore bustling markets like Chatuchak Weekend Market, and experience the vibrant nightlife of Khao San Road.'),
 ('Cape Town', 'Cape Town is a coastal city in South Africa, known for its stunning natural beauty, diverse culture, and rich history.', 0, 0, '2024-03-12', 'South African cuisine including braai (barbecue), bobotie, and seafood dishes.', 'Choose from luxury hotels along the waterfront or boutique guesthouses in historic neighborhoods like Bo-Kaap.', 'Visit iconic landmarks such as Table Mountain and Robben Island, explore the Cape Winelands, and enjoy outdoor activities such as hiking and surfing.'),
+('Madagascar', 'Madagascar is a island nation outside the south east of Africa. Its known for its jungles and dangerous wildlife', 6000, 0, '2024-03-12', 'Eat exotic food made by fresh ingredients in the jungle', 'Stay in remote lodges throughout the jungle. Be careful of the dangerous wildlife outside when going outside you lodge', 'Some training enthusiaists try to train their survival skills in the jungle'),
 ('Rio de Janeiro', 'Rio de Janeiro is a coastal city in Brazil, known for its breathtaking beaches, vibrant carnival celebrations, and iconic landmarks.', 0, 0, '2024-03-12', 'Brazilian cuisine featuring feijoada, churrasco, and caipirinha cocktails.', 'Stay in beachfront hotels in Copacabana or boutique accommodations in charming neighborhoods like Santa Teresa.', 'Visit famous landmarks such as Christ the Redeemer and Sugarloaf Mountain, relax on the beaches of Ipanema and Copacabana, and experience the energy of Rios carnival festivities.')
 """
 sql2 = """
@@ -97,6 +98,8 @@ INSERT IGNORE INTO attractions_api_label (name) VALUES
 ('Tropical'),
 ('Relaxation'),
 ('Island'),
+('Bungee-jumping'),
+('Training'),
 ('Scenic');
 """
 
@@ -273,7 +276,7 @@ SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Denpasar, Indonesia' AND
-    l.name IN ('Beach', 'Tropical', 'Island')
+    l.name IN ('Beach', 'Tropical', 'Island', 'Bungee-jumping')
 );
 """
 
@@ -285,6 +288,17 @@ FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Patagonia' AND
     l.name IN ('Mountain', 'Nature', 'Adventure', 'South America')
+);
+"""
+
+sql26 = """
+-- Insert labels for Madagascar
+INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
+SELECT a.attraction_id, l.id
+FROM attractions_api_attraction a
+JOIN attractions_api_label l ON (
+    a.name = 'Madagascar' AND
+    l.name IN ('Jungle', 'Nature', 'Training', 'Africa')
 );
 """
 
@@ -507,6 +521,17 @@ except mysql.connector.Error as error:
     print("Error inserting labels for Patagonia:", error)
     database.rollback()
 
+# Try statement for SQL26
+try:
+    # Execute the SQL query for inserting labels for Madagascar
+    mycursor.execute(sql26)
+    # Commit changes to the database
+    database.commit()
+    print("Labels inserted successfully for Madagascar.")
+except mysql.connector.Error as error:
+    # Rollback changes if there's an error
+    print("Error inserting labels for Madagascar:", error)
+    database.rollback()
 
 sql100 = """
 INSERT IGNORE INTO user_api_websiteuser (password, last_login, is_staff, is_superuser, is_active, username, email)
