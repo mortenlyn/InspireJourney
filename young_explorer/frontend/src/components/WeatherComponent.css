@@ -1,0 +1,52 @@
+  #myButton {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .weather_item {
+    margin: 1rem;
+    flex: 1 1 auto;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .weather_item_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .weather_item_info {
+    padding: 20px 30px 30px;
+    text-align: left;
+    align-items: left;
+  }
+
+  .weather_item_text {
+    color: #252e48;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  #weatherh2 {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  #weather_text {
+    text-align: left;
+  }
