@@ -28,6 +28,7 @@ export default function GetAllAttractions(props) {
         <CardItem
           label="Destination"
           name={attraction.name}
+          text = {attraction.description}
           currentUser={props.currentUser}
         />
         {attractions.length > 2 && (iteration + 1) % 3 === 0 ? (<AdBox />)
