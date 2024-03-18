@@ -16,7 +16,6 @@ import GeneralDestination from "../components/destinations/GeneralDestination";
 import SearchForm from "../components/destinations/SearchForm";
 import EditDestinationForm from "../components/destinations/EditDestinationForm";
 
-
 const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
   return (
     <Router>
@@ -79,20 +78,21 @@ const AppRoutes = ({ client, currentUser, setCurrentUser }) => {
           element={<Profile client={client} currentUser={currentUser} />}
         />
 
-        <Route 
-        path="filter/*"
-        element={<SearchForm  
-        client={client}
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        />}
-        />
-        
         <Route
-        path="Destination/Edit/:name"
-        element={<EditDestinationForm/>}
+          path="filter/*"
+          element={
+            <SearchForm
+              client={client}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          }
         />
-        
+
+        <Route
+          path="Destination/Edit/:name"
+          element={<EditDestinationForm />}
+        />
       </Routes>
     </Router>
   );

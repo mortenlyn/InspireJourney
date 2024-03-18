@@ -1,26 +1,21 @@
 import React from "react";
 import DestinationCard from "../DestinationCard";
-import DestinationDescription  from "../DesitinationDescription";
+import DestinationDescription from "../DesitinationDescription";
+import DestinationsWeather from "../WeatherComponent";
 
 const DestinationInfoComponent = ({ destination, name }) => {
   return (
     <div className="Destination__container">
-               <ul className="Destination__items">
-      <DestinationDescription
-            name = {"Description of " + name}
-            className  = "destination-description"
-            text={destination.description}
-          ></DestinationDescription>
-          </ul>
+      <ul className="Destination__items">
+        <DestinationDescription
+          name={"Description of " + name}
+          className="destination-description"
+          text={destination.description}
+        ></DestinationDescription>
+      </ul>
       <div className="destination__wrapper">
         <ul className="Destination__items">
-          <DestinationCard
-            name={"Weather in  " + name}
-            text={"Vær kommer!!"}
-            label="Description"
-            query={"rain"}
-            className = "destination-description"
-          ></DestinationCard>
+          <DestinationsWeather name={name}></DestinationsWeather>
           <DestinationCard
             name={"Food in " + name}
             text={destination.food_description}
