@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./Card_Item";
+import AdBox from "./AdBox";
 
 export default function GetAllAttractions(props) {
   const [attractions, setAttractions] = useState([]);
@@ -41,16 +42,23 @@ export default function GetAllAttractions(props) {
     return totalRating / destinationReviews.length;
   }
 
-  const CardItemArray = attractions.map((attraction) => {
+  const CardItemArray = attractions.map((attraction, iteration) => {
     return (
-      <CardItem
-        key={attraction.attraction_id}
-        label="Destination"
-        name={attraction.name}
-        text = {attraction.description}
-        currentUser={props.currentUser}
-        averageRating={attraction.averageRating}
-      />
+      <>
+        <CardItem
+          key={attraction.attraction_id}
+          label="Destination"
+          name={attraction.name}
+          text = {attraction.description}
+          currentUser={props.currentUser}
+          averageRating={attraction.averageRating}
+        />
+        {attractions.length > 2 && (iteration + 1) % 3 === 0 ? (<AdBox />)
+          : (attractions.length === 2 && iteration === 1) ? (<AdBox />) 
+          : (attractions.length === 1) ? (<AdBox />)
+          : (null)
+        }
+      </>
     );
   });
 
