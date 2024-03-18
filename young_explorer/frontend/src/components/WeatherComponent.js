@@ -71,7 +71,7 @@ function WeatherComponent(props) {
             <img
               src={weatherIcons[weather.weather[0].main]}
               alt="Weather conditions"
-              width="200px"
+              width="275px"
             />
           )}
           <div className="weather_item_info">

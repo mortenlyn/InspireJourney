@@ -36,6 +36,7 @@
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+    max-width: 500px;
   }
 
   .description_item {
@@ -101,7 +102,7 @@
     color: #252e48;
     font-size: 18px;
     line-height: 24px;
-
+  }
 
   .cards_container {
     display: flex;

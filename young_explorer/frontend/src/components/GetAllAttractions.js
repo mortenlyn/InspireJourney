@@ -35,6 +35,8 @@ export default function GetAllAttractions(props) {
   });
 
   return (
-    <div>{attractions.length > 0 ? CardItemArray : "Loading..."}</div>
+    <div className="cards_container">
+      {attractions.length > 0 ? CardItemArray : "Loading..."}
+    </div>
   );
 }
