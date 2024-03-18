@@ -84,21 +84,18 @@ function GeneralDestination() {
   
   const renderAverageRating = () => {
     const average = averageReview();
-    const integerPart = Math.floor(average); // Integer part of the average rating
-    const fractionalPart = average - integerPart; // Fractional part of the average rating
+    const integerPart = Math.floor(average); 
+    const fractionalPart = average - integerPart; 
     const stars = [];
   
-    // Fill stars up to the integer part of the average rating
     for (let i = 0; i < integerPart; i++) {
       stars.push(<FaStar key={i} color="gold" />);
     }
   
-    // Fill the next star partially if there's a fractional part
     if (fractionalPart > 0) {
       stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
     }
   
-    // Fill the remaining stars with gray color
   
     return stars;
   }

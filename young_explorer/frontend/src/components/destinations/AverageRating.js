@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 
 function AverageRating({ rating }) {
   const integerPart = Math.floor(rating);
@@ -11,7 +11,7 @@ function AverageRating({ rating }) {
     stars.push(<FaStar key={i} color="gold" />);
   }
   if (fractionalPart > 0) {
-    stars.push(<FaStar key="half" color="gold" />);
+    stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
   }
 
   return (
