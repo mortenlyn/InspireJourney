@@ -14,7 +14,6 @@ export default function GetAllAttractions(props) {
             const reviewData = await response.json();
 
             const averageRating = averageReview(reviewData.ReviewList);
-            console.log(`Avg rating ${attraction.name}:`, averageRating);
             return { ...attraction, averageRating };
           })
         );
