@@ -1,7 +1,6 @@
 .Destination {
     padding: 4rem;
     background: #fff;
-    /* text-align: center; */
   }
 
   .topContainer {
@@ -51,6 +50,14 @@
     margin: 0 auto;
     max-width: 1200px;
     width: 90%;
+  }
+
+  .Description_container {
+    margin: 10px;
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    align-items: center;
   }
 
   .cards__item {
@@ -121,6 +128,12 @@
   }
   #destination-description{
     text-align: center;
+    max-width: 1000px !important;
+    width: 100% !important;
+  }
+
+  #destination-description-item {
+    align-items: center;
   }
   #description-text{
     text-align: center;

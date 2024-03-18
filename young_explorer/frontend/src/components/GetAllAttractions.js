@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardItem from "./Card_Item";
+import "./DestinationBox.css";
 
 export default function GetAllAttractions(props) {
   const [attractions, setAttractions] = useState([]);

@@ -21,6 +21,7 @@
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+    max-width: 500px;
   }
 
   .weather_item_box {

@@ -6,7 +6,7 @@ import DestinationsWeather from "../WeatherComponent";
 const DestinationInfoComponent = ({ destination, name }) => {
   return (
     <div className="Destination__container">
-      <ul className="Destination__items">
+      <ul className="Description_container">
         <DestinationDescription
           name={"Description of " + name}
           className="destination-description"

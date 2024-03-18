@@ -37,7 +37,7 @@ function WeatherComponent(props) {
 
   return typeof weather.main != "undefined" ? (
     <>
-      <li className="weather_item">
+      <div className="weather_item">
         <div className="weather_item_box">
           {Math.round(weather.main.temp) > 0 ? (
             <h1 id="weatherh1">
@@ -71,7 +71,7 @@ function WeatherComponent(props) {
             <img
               src={weatherIcons[weather.weather[0].main]}
               alt="Weather conditions"
-              width="275px"
+              width="200px"
             />
           )}
           <div className="weather_item_info">
@@ -80,7 +80,7 @@ function WeatherComponent(props) {
             </h5>
           </div>
         </div>
-      </li>
+      </div>
     </>
   ) : (
     <>
