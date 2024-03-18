@@ -251,6 +251,7 @@ function GeneralDestination() {
 
       <div className="reviewDiv">
         <h2>Reviews</h2>
+        <p>Average Rating: {renderAverageRating()}</p> 
         {destinationReviews.length > 0 ? (
           destinationReviews.map((review) => (
             <ReviewComponent
