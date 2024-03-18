@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 function AverageRating({ rating }) {
   const integerPart = Math.floor(rating);
@@ -13,11 +13,13 @@ function AverageRating({ rating }) {
   if (fractionalPart > 0) {
     stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
   }
+  const totalStars = integerPart + (fractionalPart > 0 ? 1 : 0);
+  for (let i = totalStars; i < 5; i++) {
+    stars.push(<FaRegStar key={`empty-${i}`} color="gray" />);
+  }
 
   return (
-    <div className="average-rating">
-      {stars}
-    </div>
+    rating != 0 ? <div className="average-rating" style={{ fontSize: '30px' }}>{stars} ({rating}/5)</div> : <div>*The destination haven't been rated yet</div>
   );
 }
 

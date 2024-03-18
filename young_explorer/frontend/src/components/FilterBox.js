@@ -83,6 +83,7 @@ export default function FilterBox(props) {
           const reviewData = await response.json();
 
           const averageRating = averageReview(reviewData.ReviewList);
+          console.log(averageRating);
           return { ...attraction, averageRating };
         })
       );

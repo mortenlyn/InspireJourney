@@ -7,8 +7,7 @@ import DestinationInfoComponent from "./DestinationInfoComponent";
 import ReviewFormComponent from "./ReviewFormComponent";
 import ReviewComponent from "./ReviewComponent";
 import DestinationTopComponent from "./DestinationTopComponent";
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import averageReview from "./AverageRating";
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 
 function GeneralDestination() {
@@ -101,6 +100,11 @@ function GeneralDestination() {
     if (fractionalPart > 0) {
       stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
     }
+
+    const totalStars = integerPart + (fractionalPart > 0 ? 1 : 0);
+    for (let i = totalStars; i < 5; i++) {
+      stars.push(<FaRegStar key={`empty-${i}`} color="gray" />);
+  }
   
   
     return stars;
@@ -251,7 +255,7 @@ function GeneralDestination() {
 
       <div className="reviewDiv">
         <h2>Reviews</h2>
-        <p>Average Rating: {renderAverageRating()}</p> 
+        <p style={{ fontSize: '40px' }}>Average Rating: {renderAverageRating()} ({averageReview()}/5)</p> 
         {destinationReviews.length > 0 ? (
           destinationReviews.map((review) => (
             <ReviewComponent
