@@ -16,6 +16,7 @@ import CardItem from "./Card_Item";
 import GetAllAttractions from "./GetAllAttractions";
 import "./FilterBox.css";
 import { FaSlidersH } from "react-icons/fa";
+import AdBox from "./AdBox";
 
 export default function FilterBox(props) {
   const [price, setPrice] = useState({ min: "", max: "" });
@@ -92,12 +93,20 @@ export default function FilterBox(props) {
 
   const CardItemArray = filteredAttractions.map((attraction, iteration) => {
     return (
-      <CardItem
-        key={iteration}
-        label="Destination"
-        name={attraction.name}
-        currentUser={props.currentUser}
-      />
+        <>
+        <CardItem
+          key={iteration}
+          label="Destination"
+          name={attraction.name}
+          currentUser={props.currentUser}
+        />
+        {filteredAttractions.length > 2 && (iteration + 1) % 3 === 0 ? (<AdBox />)
+          : (filteredAttractions.length === 2 && iteration === 1) ? (<AdBox />) 
+          : (filteredAttractions.length === 1) ? (
+          <AdBox />) 
+          : (null)
+          }
+        </>
     );
   });
 
