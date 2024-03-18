@@ -97,6 +97,7 @@ export default function FilterBox(props) {
         label="Destination"
         name={attraction.name}
         currentUser={props.currentUser}
+        text={attraction.description}
       />
     );
   });
