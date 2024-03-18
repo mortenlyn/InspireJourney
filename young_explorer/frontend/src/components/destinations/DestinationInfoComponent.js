@@ -2,6 +2,8 @@ import React from "react";
 import DestinationCard from "../DestinationCard";
 import DestinationDescription from "../DesitinationDescription";
 import DestinationsWeather from "../WeatherComponent";
+import DestinationDescription from "../DesitinationDescription";
+import DestinationsWeather from "../WeatherComponent";
 
 const DestinationInfoComponent = ({ destination, name }) => {
   return (
@@ -14,6 +16,9 @@ const DestinationInfoComponent = ({ destination, name }) => {
         ></DestinationDescription>
       </ul>
       <div className="destination__wrapper">
+        <ul className="Destination__items">
+          <DestinationsWeather name={name}></DestinationsWeather>
+          <DestinationCard
         <ul className="Destination__items">
           <DestinationsWeather name={name}></DestinationsWeather>
           <DestinationCard
@@ -34,6 +39,7 @@ const DestinationInfoComponent = ({ destination, name }) => {
             label="What to do"
             query={name + " event"}
           ></DestinationCard>
+        </ul>
         </ul>
       </div>
     </div>
