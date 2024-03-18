@@ -85,6 +85,24 @@ function GeneralDestination() {
     setEditMode(!editMode);
   };
 
+  const renderAverageRating = () => {
+    const average = averageReview();
+    const integerPart = Math.floor(average); 
+    const fractionalPart = average - integerPart; 
+    const stars = [];
+  
+    for (let i = 0; i < integerPart; i++) {
+      stars.push(<FaStar key={i} color="gold" />);
+    }
+  
+    if (fractionalPart > 0) {
+      stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
+    }
+  
+  
+    return stars;
+  }
+
   const handleRatingChange = (newRating) => {
     setEditedRating(newRating);
   };
