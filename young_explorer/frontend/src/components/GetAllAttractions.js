@@ -11,17 +11,6 @@ export default function GetAllAttractions(props) {
       .then((data) => setAttractions(data.AttractionList));
   }, []);
 
-  /*
-    Fields from GET-Request (fetch)
-    ---------
-    attraction_id: 23
-    date_created: "2024-02-19"
-    description: "This is paris"
-    name:"Paris"
-    price: 3000
-    rating: 0
-  */
-
   const CardItemArray = attractions.map((attraction) => {
     return (
       <CardItem

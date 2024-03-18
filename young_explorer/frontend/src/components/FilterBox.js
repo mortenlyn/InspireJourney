@@ -96,31 +96,49 @@ export default function FilterBox(props) {
         key={iteration}
         label="Destination"
         name={attraction.name}
+        text={attraction.description}
         currentUser={props.currentUser}
       />
     );
   });
 
-
-
   return (
     <div>
       {/* Toggle the visibility of filter_box when filter_button is clicked */}
-      <div className="filter_button" onClick={() => setShowFilterBox(!showFilterBox)} >
-        <FaSlidersH id="sliderIcon"/>
+      <div
+        className="filter_button"
+        onClick={() => setShowFilterBox(!showFilterBox)}
+      >
+        <FaSlidersH id="sliderIcon" />
         <p id="filterText">Filter</p>
       </div>
-      <div className={`filter_box ${showFilterBox ? "show" : ""}`} style={{display: showFilterBox ? 'block' : 'none', width: "95%", justifyContent: "center", margin: "0 auto",
-      boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)", marginBottom: "40px", borderRadius: "10px",
-      marginTop: "40px"}}>
-        <div style={{ padding: "30px", backgroundColor: "rgba(207, 190, 169, 0.506)", borderRadius: "10px"}}>
+      <div
+        className={`filter_box ${showFilterBox ? "show" : ""}`}
+        style={{
+          display: showFilterBox ? "block" : "none",
+          width: "95%",
+          justifyContent: "center",
+          margin: "0 auto",
+          boxShadow: "0 6px 20px rgba(56, 125, 255, 0.17)",
+          marginBottom: "40px",
+          borderRadius: "10px",
+          marginTop: "40px",
+        }}
+      >
+        <div
+          style={{
+            padding: "30px",
+            backgroundColor: "rgba(207, 190, 169, 0.506)",
+            borderRadius: "10px",
+          }}
+        >
           <h3
             style={{
               textAlign: "center",
               marginBottom: "20px",
               marginTop: "10px",
               color: "gray",
-              fontSize: "1.8em"
+              fontSize: "1.8em",
             }}
           >
             Filter content
@@ -199,13 +217,13 @@ export default function FilterBox(props) {
                 onChange={handleSearchName}
               />
             </Grid>
-            <Grid item xs={9} style={{ textAlign: "center"}}>
+            <Grid item xs={9} style={{ textAlign: "center" }}>
               <Button
                 variant="contained"
                 color="primary"
                 fullWidth
                 onClick={handleFilterButton}
-                style={{width: 100}}
+                style={{ width: 100 }}
               >
                 Search
               </Button>
@@ -214,15 +232,16 @@ export default function FilterBox(props) {
         </div>
       </div>
       <div>
-        <br></br>
         <h1>Check out these destinations!</h1>
-        {CardItemArray.length > 0 && filteredAttractions ? (
-          CardItemArray
-        ) : !filterApplied ? (
-          <GetAllAttractions currentUser={props.currentUser} />
-        ) : (
-          <p>Your criteria doesn't match any</p>
-        )}
+        <div className="cards_container">
+          {CardItemArray.length > 0 && filteredAttractions ? (
+            CardItemArray
+          ) : !filterApplied ? (
+            <GetAllAttractions currentUser={props.currentUser} />
+          ) : (
+            <p>Your criteria doesn't match any</p>
+          )}
+        </div>
       </div>
     </div>
   );
