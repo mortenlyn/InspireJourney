@@ -34,6 +34,7 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    align-items: center;
   }
 
   .Destination__wrapper {
@@ -64,6 +65,7 @@
     overflow: hidden;
     text-decoration: none;
   }
+
 
   .cards__item__pic-wrap {
     position: relative;
@@ -117,12 +119,24 @@
     font-size: 18px;
     line-height: 24px;
   }
-
+  #destination-description{
+    text-align: center;
+  }
+  #description-text{
+    text-align: center;
+  }
   #reviewButton {
     background-color:burlywood;
     color: white;
     margin-top: 15px;
     margin-bottom: 10px;
+  }
+
+  .frontpage_description{
+    width: 50ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   #reviewButton:hover {

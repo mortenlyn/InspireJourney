@@ -27,6 +27,7 @@ export default function GetAllAttractions(props) {
         key={attraction.attraction_id}
         label="Destination"
         name={attraction.name}
+        text={attraction.description}
         currentUser={props.currentUser}
       />
     );

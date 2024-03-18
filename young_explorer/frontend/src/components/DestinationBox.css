@@ -21,7 +21,6 @@
 
   .Destination__items {
     margin-bottom: 24px;
-    display: block;
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
@@ -34,8 +33,7 @@
     margin: 1rem;
     flex: 1 1 auto;
     border-radius: 10px;
-    /* width: 40%; */
-    height: 100%;
+    width: 40%;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
@@ -44,8 +42,6 @@
     text-decoration: none;
     max-width: 500px;
   }
-
-
 
   .cards__item__pic-wrap {
     position: relative;

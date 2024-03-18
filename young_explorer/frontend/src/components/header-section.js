@@ -14,13 +14,16 @@ function headersection() {
     
       return (
         <div className='header-container'>
-          <img src='./cropped-header-bilde.jpg'
+          <div><img src='./cropped-header-bilde.jpg'
 
             style={{ marginTop: -100}}
             id='beach-picture'
             alt='beach and water'
           />
-          <h1 id="header-text" style={{ position: 'absolute', top: '35%', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
+          <div className="header-text-contiainer">
+          <h1 id="header-text" style={{ position: 'absolute', top: '270px', left: '50%',  transform: 'translate(-50%, -50%)', zIndex: 1 }}>Adventure Awaits</h1>
+          </div>
+          </div>
         </div>
       )
 
