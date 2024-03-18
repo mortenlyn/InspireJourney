@@ -7,6 +7,9 @@ import DestinationInfoComponent from "./DestinationInfoComponent";
 import ReviewFormComponent from "./ReviewFormComponent";
 import ReviewComponent from "./ReviewComponent";
 import DestinationTopComponent from "./DestinationTopComponent";
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import averageReview from "./AverageRating";
+
 
 function GeneralDestination() {
   const { name } = useParams();

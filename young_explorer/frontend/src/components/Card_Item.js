@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import EditDestinationButton from "./destinations/EditDestinationButton";
 import getWeather from "./WeatherComponent";
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import AverageRating from "./destinations/AverageRating";
 
 function CardItem(props) {
   const currentUser = props.currentUser;
@@ -36,6 +38,8 @@ function CardItem(props) {
                 </figure>
                 <div className="cards__item__info">
                   <h5 className="cards__item__text">{props.name}</h5>
+                  <div><AverageRating rating={props.averageRating} /></div>
+
                   <p className="frontpage_description">{props.text}</p>
                 </div>
               </div>
@@ -61,6 +65,8 @@ function CardItem(props) {
                 </figure>
                 <div className="cards__item__info">
                   <h5 className="cards__item__text">{props.name}</h5>
+                  <div><AverageRating rating={props.averageRating} /></div>
+
                   <p className="frontpage_description">{props.text}</p>
                 </div>
               </div>
