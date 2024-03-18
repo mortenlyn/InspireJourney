@@ -4,7 +4,6 @@ import "./DestinationBox.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import EditDestinationButton from "./destinations/EditDestinationButton";
-import getWeather from "./WeatherComponent";
 
 function CardItem(props) {
   const currentUser = props.currentUser;

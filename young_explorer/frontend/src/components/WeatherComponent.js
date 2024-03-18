@@ -59,10 +59,10 @@ function WeatherComponent(props) {
           <h1 id="weatherh1">Humidity: {weather.main.humidity} %</h1>
           <h1 id="weatherh1">Wind: {Math.round(weather.wind.speed)} m/s</h1>
           {weather.weather[0].description === "few clouds" ? (
-            <img src={fewclouds} alt="Weather conditions" />
+            <img src={fewclouds} alt="Weather conditions" width="200px" />
           ) : !kindsofweather.includes(weather.weather[0].main) ? (
             <>
-              <img src={shrug} alt="Weather conditions" width="200" />
+              <img src={shrug} alt="Weather conditions" width="180px" />
               <h1 id="weatherh1">
                 Sorry, we don't have an icon for this weather
               </h1>
@@ -71,7 +71,7 @@ function WeatherComponent(props) {
             <img
               src={weatherIcons[weather.weather[0].main]}
               alt="Weather conditions"
-              width="275px"
+              width="200px"
             />
           )}
           <div className="weather_item_info">

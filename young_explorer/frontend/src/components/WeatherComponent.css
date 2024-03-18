@@ -14,7 +14,6 @@
     margin: 1rem;
     flex: 1 1 auto;
     border-radius: 10px;
-    width: 40%;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
@@ -22,13 +21,14 @@
     overflow: hidden;
     text-decoration: none;
     max-width: 500px;
+    height: 510px;
   }
 
   .weather_item_box {
     display: flex;
     flex-direction: column;
+    height: 100%;
     align-items: center;
-    padding: 20px;
   }
 
   .weather_item_info {
@@ -43,7 +43,7 @@
     line-height: 24px;
   }
 
-  #weatherh2 {
+  #weatherh1 {
     margin-top: 10px;
     font-weight: bold;
   }
