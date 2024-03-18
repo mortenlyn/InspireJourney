@@ -110,6 +110,15 @@ function GeneralDestination() {
     setEditedRating(newRating);
   };
 
+  const averageReview = () => {
+    if (destinationReviews.length === 0) {
+      return 0; // Return 0 if there are no reviews
+    }
+
+    const totalRating = destinationReviews.reduce((acc, review) => acc + review.rating, 0);
+    return totalRating / destinationReviews.length;
+  }
+
   function getReviewId() {
     return client
       .get(`/attractions_api/getUserReviews/?username=${username}`)
