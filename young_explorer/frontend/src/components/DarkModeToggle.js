@@ -4,24 +4,25 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 export const DarkModeToggle = ({ handleChange, isChecked }) => {
-    // const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(false);
 
-    // const toggleDarkMode = () => {
-    //   setDarkMode(prevMode => !prevMode);
-    // };
+    const toggleDarkMode = () => {
+      setDarkMode(prevMode => !prevMode);
+    };
 
     return (
       <div className="toggle-container">
-        {/* {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
-          (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))} */}
-        <input
+        <input 
           type="checkbox"
           id="check"
           className="toggle"
           onChange={handleChange}
           checked={isChecked}
         />
-        <label htmlFor="check">Dark Mode</label>
+        <label htmlFor="check">
+          {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
+            (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))}
+        </label>
       </div>
     );
   };
