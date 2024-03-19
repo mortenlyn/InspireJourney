@@ -7,6 +7,8 @@ import DestinationInfoComponent from "./DestinationInfoComponent";
 import ReviewFormComponent from "./ReviewFormComponent";
 import ReviewComponent from "./ReviewComponent";
 import DestinationTopComponent from "./DestinationTopComponent";
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+
 
 function GeneralDestination() {
   const { name } = useParams();
@@ -85,9 +87,41 @@ function GeneralDestination() {
     setEditMode(!editMode);
   };
 
+  const renderAverageRating = () => {
+    const average = averageReview();
+    const integerPart = Math.floor(average); 
+    const fractionalPart = average - integerPart; 
+    const stars = [];
+  
+    for (let i = 0; i < integerPart; i++) {
+      stars.push(<FaStar key={i} color="gold" />);
+    }
+  
+    if (fractionalPart > 0) {
+      stars.push(<FaStarHalfAlt key={integerPart} color="gold" />);
+    }
+
+    const totalStars = integerPart + (fractionalPart > 0 ? 1 : 0);
+    for (let i = totalStars; i < 5; i++) {
+      stars.push(<FaRegStar key={`empty-${i}`} color="gray" />);
+  }
+  
+  
+    return stars;
+  }
+
   const handleRatingChange = (newRating) => {
     setEditedRating(newRating);
   };
+
+  const averageReview = () => {
+    if (destinationReviews.length === 0) {
+      return 0; // Return 0 if there are no reviews
+    }
+
+    const totalRating = destinationReviews.reduce((acc, review) => acc + review.rating, 0);
+    return totalRating / destinationReviews.length;
+  }
 
   function getReviewId() {
     return client
@@ -221,6 +255,11 @@ function GeneralDestination() {
 
       <div className="reviewDiv">
         <h2>Reviews</h2>
+        <p style={{ fontSize: "20px" }}>
+          Average Rating: {renderAverageRating()} (
+          {Math.round(averageReview() * 10) / 10}
+          /5)
+        </p> 
         {destinationReviews.length > 0 ? (
           destinationReviews.map((review) => (
             <ReviewComponent
