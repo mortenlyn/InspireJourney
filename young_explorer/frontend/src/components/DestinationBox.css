@@ -118,6 +118,7 @@
   .cards_item_box {
     display: flex;
     flex-direction: column;
+    background-color: var(--foreground-color);
   }
 
   p {

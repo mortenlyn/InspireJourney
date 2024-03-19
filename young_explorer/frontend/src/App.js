@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App" data-theme={isDark ? "dark" : "light"}>
-      <DarkModeToggle 
+      <DarkModeToggle
         isChecked={isDark}
         handleChange={() => setIsDark(!isDark)}
       />

@@ -5,6 +5,7 @@
     width: 80%; /* Endrer bredden på boksen*/
     margin: auto;
     margin-top: 20px; 
+    margin-bottom: 20px;
     border-radius: 10px;
     text-align: center;
     background-color: var(--foreground-color);
