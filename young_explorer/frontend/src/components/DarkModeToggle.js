@@ -20,8 +20,8 @@ export const DarkModeToggle = ({ handleChange, isChecked }) => {
           checked={isChecked}
         />
         <label htmlFor="check">
-          {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
-            (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))}
+          {darkMode ? (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
+            (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))}
         </label>
       </div>
     );

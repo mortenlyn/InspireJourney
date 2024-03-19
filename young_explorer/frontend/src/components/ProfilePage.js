@@ -36,13 +36,14 @@ function ProfilePage({ currentUser }) {
         rating={review.rating}
         date_created={review.date_created}
         review={review.review}
+        
       />
     );
   });
 
   const visitedDestinationsList = visitedDestinations.map((attraction, index) => (
     <div key={index}>
-      <DestinationProfilePage name={attraction.name} key={attraction.id} />
+      <DestinationProfilePage name={attraction.name} key={attraction.id}/>
       <br></br>
     </div>
   ));
@@ -106,7 +107,7 @@ function ProfilePage({ currentUser }) {
         </div>
       )}
       <Link to="/home">
-          <button id="homebutton">Return to homepage</button>
+          <button id="homebutton" style={{marginBottom: "50px"}}>Return to homepage</button>
       </Link>
     </div>
   );

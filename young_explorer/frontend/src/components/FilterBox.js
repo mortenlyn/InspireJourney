@@ -171,7 +171,7 @@ export default function FilterBox(props) {
               textAlign: "center",
               marginBottom: "20px",
               marginTop: "10px",
-              color: "gray",
+              color: "var(--primary-text-color)",
               fontSize: "1.8em",
             }}
           >

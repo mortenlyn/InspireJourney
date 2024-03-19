@@ -23,7 +23,7 @@
 }
 
 #UserProfileTitle {
-    color: var(--primary-text-color);
+    color: var(--toggle-fg);
     margin-bottom: 15px;
     font-size: 2em;
 }
