@@ -113,7 +113,7 @@ export default function FilterBox(props) {
 
 
   return (
-    <div>
+    <div style={{backgroundColor: "var(--background-color)"}}>
       {/* Toggle the visibility of filter_box when filter_button is clicked */}
       <div className="filter_button" onClick={() => setShowFilterBox(!showFilterBox)} >
         <FaSlidersH id="sliderIcon"/>
@@ -222,9 +222,9 @@ export default function FilterBox(props) {
           </Grid>
         </div>
       </div>
-      <div>
+      <div style={{backgroundColor: "var(--background-color)"}}>
         <br></br>
-        <h1>Check out these destinations!</h1>
+        <h1 style={{color: "var(--primary-text-color)"}}>Check out these destinations!</h1>
         {CardItemArray.length > 0 && filteredAttractions ? (
           CardItemArray
         ) : !filterApplied ? (

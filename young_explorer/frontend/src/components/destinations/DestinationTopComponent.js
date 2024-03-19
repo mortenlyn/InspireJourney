@@ -8,7 +8,7 @@ const checkedSymbol = "☑";
 const DestinationTopComponent = ({ name, beenHere, handleToggleBeenHere }) => {
   return (
     <div className="topContainer">
-      <h1>Some information on {name}!</h1>
+      <h1 style={{color: "var(--primary-text-color)"}}>Some information on {name}!</h1>
       <h3>
         Check out our other destinations <Link to="/home">here.</Link>
       </h3>
