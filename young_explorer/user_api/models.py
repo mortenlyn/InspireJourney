@@ -35,6 +35,7 @@ class WebsiteUserManager(BaseUserManager):
             raise TypeError('Users need a password')
 
         user = self.create_user(email, password)
+        user.username = username
         user.is_superuser = True
         user.is_staff = True
         user.save()
