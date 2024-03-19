@@ -13,14 +13,14 @@ function App() {
 
   return (
     <div className="App" data-theme={isDark ? "dark" : "light"}>
+      <DarkModeToggle 
+        isChecked={isDark}
+        handleChange={() => setIsDark(!isDark)}
+      />
       <AppRoutes
         client={client}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
-      />
-      <DarkModeToggle 
-        isChecked={isDark}
-        handleChange={() => setIsDark(!isDark)}
       />
     </div>
   );

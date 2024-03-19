@@ -3,7 +3,7 @@
     --foreground-color: #fff;
     --primary-text-color: #252e48;
     --secondary-text-color: #252e48;
-    --toggle-bg: #f0eb9d;
+    --toggle-bg: #fff;
     --toggle-fg: #ffd000;
   }
   
@@ -12,6 +12,6 @@
     --foreground-color: #252e48;
     --primary-text-color: #f6f6f6;
     --secondary-text-color: wheat;
-    --toggle-bg: #283452;
+    --toggle-bg: beige;
     --toggle-fg: #00a6ff;
 }

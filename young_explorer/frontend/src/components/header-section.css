@@ -31,7 +31,8 @@
     font-weight: 600;
     font-size: 7vw;
     text-transform: uppercase;
-    background-color: beige;
+    /* background-color: beige; */
+    background-color: var(--toggle-bg);
     mix-blend-mode: screen;
     overflow: hidden;
     white-space: nowrap;

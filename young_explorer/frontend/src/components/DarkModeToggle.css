@@ -1,7 +1,15 @@
 .toggle-container {
     padding: 20px;
+    /* position: absolute; */
+    right: 80px;
+    top: 20px;
+    position: absolute;
+    z-index: 1;
+
+
 }
 
 label {
     color: var(--secondary-text-color);
 }
+

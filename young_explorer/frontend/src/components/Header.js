@@ -9,7 +9,6 @@ import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { FaRegUserCircle } from "react-icons/fa";
 import './header.css';
-import { DarkModeToggle } from "./DarkModeToggle";
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
