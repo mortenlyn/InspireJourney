@@ -18,8 +18,12 @@ function AverageRating({ rating }) {
     stars.push(<FaRegStar key={`empty-${i}`} color="gray" />);
   }
 
-  return (
-    rating != 0 ? <div className="average-rating" style={{ fontSize: '30px' }}>{stars} ({rating}/5)</div> : <div>*The destination haven't been rated yet</div>
+  return rating != 0 ? (
+    <div className="average-rating" style={{ fontSize: "20px" }}>
+      {stars} ({Math.round(rating * 10) / 10}/5)
+    </div>
+  ) : (
+    <div>*The destination has not been rated yet</div>
   );
 }
 
