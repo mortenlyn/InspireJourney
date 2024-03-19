@@ -29,14 +29,16 @@ export default function FilterBox(props) {
   const [showFilterBox, setShowFilterBox] = useState(false);
   let url = `http://127.0.0.1:8000/attractions_api/filter/?`;
 
-
   const averageReview = (destinationReviews) => {
     if (destinationReviews.length === 0) {
       return 0; // Return 0 if there are no reviews
     }
-    const totalRating = destinationReviews.reduce((acc, review) => acc + review.rating, 0);
+    const totalRating = destinationReviews.reduce(
+      (acc, review) => acc + review.rating,
+      0
+    );
     return totalRating / destinationReviews.length;
-  }
+  };
 
   const handleSelectedLabelsChange = (event) => {
     setSelectedLabels(event.target.value);
@@ -76,23 +78,25 @@ export default function FilterBox(props) {
       url += `&username=${username}`;
     }
     fetch(url)
-    .then((res) => res.json())
-    .then(async (data) => {
-      const attractionsWithRatings = await Promise.all(
-        data.map(async (attraction) => {
-          const response = await fetch(`http://127.0.0.1:8000/attractions_api/getDestinationReviews/?destination=${attraction.name}`);
-          const reviewData = await response.json();
+      .then((res) => res.json())
+      .then(async (data) => {
+        const attractionsWithRatings = await Promise.all(
+          data.map(async (attraction) => {
+            const response = await fetch(
+              `http://127.0.0.1:8000/attractions_api/getDestinationReviews/?destination=${attraction.name}`
+            );
+            const reviewData = await response.json();
 
-          const averageRating = averageReview(reviewData.ReviewList);
-          console.log(averageRating);
-          return { ...attraction, averageRating };
-        })
-      );
-      setFilteredAttractions(attractionsWithRatings);
-    })
-    .catch((error) => {
-      console.error("Error fetching attractions:", error);
-    });
+            const averageRating = averageReview(reviewData.ReviewList);
+            console.log(averageRating);
+            return { ...attraction, averageRating };
+          })
+        );
+        setFilteredAttractions(attractionsWithRatings);
+      })
+      .catch((error) => {
+        console.error("Error fetching attractions:", error);
+      });
     setFilterApplied(true);
   };
 
@@ -112,7 +116,6 @@ export default function FilterBox(props) {
 
   const CardItemArray = filteredAttractions.map((attraction, iteration) => {
     return (
-
       <>
         <CardItem
           key={iteration}
@@ -120,17 +123,17 @@ export default function FilterBox(props) {
           name={attraction.name}
           currentUser={props.currentUser}
           averageRating={attraction.averageRating}
-          text = {attraction.description}
+          text={attraction.description}
         />
-        {filteredAttractions.length > 2 && (iteration + 1) % 3 === 0 ? (<AdBox />)
-            : (filteredAttractions.length === 2 && iteration === 1) ? (<AdBox />)
-            : (filteredAttractions.length === 1) ? (
-            <AdBox />)
-            : (null)
-        }
+        {filteredAttractions.length > 2 && (iteration + 1) % 4 === 0 ? (
+          <AdBox />
+        ) : filteredAttractions.length === 2 && iteration === 1 ? (
+          <AdBox />
+        ) : filteredAttractions.length === 1 ? (
+          <AdBox />
+        ) : null}
       </>
-
-);
+    );
   });
 
   return (
