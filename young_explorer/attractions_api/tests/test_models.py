@@ -5,7 +5,7 @@ from attractions_api.models import Attraction, Label, Review
 
 class AttractionModelTest(TestCase):
     @classmethod
-    def setUp(cls):
+    def setUpTestData(cls):
         Attraction.objects.create(
             name='Test Attraction',
             description='Test description',
@@ -40,7 +40,7 @@ class AttractionModelTest(TestCase):
 
 class LabelModelTest(TestCase):
     @classmethod
-    def setUp(cls):
+    def setUpTestData(cls):
         Label.objects.create(name='Test Label')
 
     def test_label_name(self):
@@ -50,7 +50,7 @@ class LabelModelTest(TestCase):
 
 class ReviewModelTest(TestCase):
     @classmethod
-    def setUp(cls):
+    def setUpTestData(cls):
         user = WebsiteUser.objects.create(username='test_user')
         attraction = Attraction.objects.create(
             name='Test Attraction',
