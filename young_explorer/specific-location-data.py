@@ -18,27 +18,27 @@ sql_user_id = "SELECT user_id FROM user_api_websiteuser WHERE email = 'bob@bob.n
 
 # Define the SQL queries to fetch attraction_id for each destination
 sql_attraction_id = {
-    "Santorini, Greece": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Santorini, Greece'",
-    "Tanzania": "SELECT attraction_id FROM attractions_api_attraction WHERE name = ' Tanzania'",
-    "Kyoto, Japan": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Kyoto, Japan'",
-    "Peru": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Peru'",
-    "South Africa": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'South Africa'",
-    "Ecuador": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Ecuador'",
-    "Sydney, Australia": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Sydney, Australia'",
-    "Denpasar, Indonesia": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Denpasar, Indonesia'",
+    "Santorini": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Santorini'",
+    "Serengeti National Park": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Serengeti National Park'",
+    "Kyoto": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Kyoto'",
+    "Machu Picchu": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Machu Picchu'",
+    "Cape Town": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Cape Town'",
+    "Galapagos Islands": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Galapagos Islands'",
+    "Sydney": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Sydney'",
+    "Denpasar": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Denpasar'",
     "Patagonia": "SELECT attraction_id FROM attractions_api_attraction WHERE name = 'Patagonia'"
 }
 
 # Define the reviews data for Bob
 reviews_data = [
-    {"destination": "Santorini, Greece", "rating": 5, "review": "Amazing place!", "date_created": "2024-03-14"},
-    {"destination": "Tanzania", "rating": 5, "review": "Incredible wildlife!", "date_created": "2024-03-14"},
-    {"destination": "Kyoto, Japan", "rating": 4, "review": "Rich culture!", "date_created": "2024-03-14"},
-    {"destination": "Peru", "rating": 5, "review": "Breath-taking ruins!", "date_created": "2024-03-14"},
-    {"destination": "South Africa", "rating": 5, "review": "Unforgettable experience!", "date_created": "2024-03-14"},
-    {"destination": "Ecuador", "rating": 5, "review": "Unique wildlife!", "date_created": "2024-03-14"},
-    {"destination": "Sydney, Australia", "rating": 4, "review": "Colorful place in the world!", "date_created": "2024-03-14"},
-    {"destination": "Denpasar, Indonesia", "rating": 5, "review": "Paradise on earth!", "date_created": "2024-03-14"},
+    {"destination": "Santorini", "rating": 5, "review": "Amazing place!", "date_created": "2024-03-14"},
+    {"destination": "Serengeti National Park", "rating": 5, "review": "Incredible wildlife!", "date_created": "2024-03-14"},
+    {"destination": "Kyoto", "rating": 4, "review": "Rich culture!", "date_created": "2024-03-14"},
+    {"destination": "Machu Picchu", "rating": 5, "review": "Breath-taking ruins!", "date_created": "2024-03-14"},
+    {"destination": "Cape Town", "rating": 5, "review": "Unforgettable experience!", "date_created": "2024-03-14"},
+    {"destination": "Galapagos Islands", "rating": 5, "review": "Unique wildlife!", "date_created": "2024-03-14"},
+    {"destination": "Sydney", "rating": 4, "review": "Colorful place in the world!", "date_created": "2024-03-14"},
+    {"destination": "Denpasar", "rating": 5, "review": "Paradise on earth!", "date_created": "2024-03-14"},
     {"destination": "Patagonia", "rating": 4, "review": "Stunning landscapes!", "date_created": "2024-03-14"}
 ]
 

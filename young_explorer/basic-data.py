@@ -15,14 +15,13 @@ mycursor = database.cursor()
 sql1 = """
 INSERT IGNORE INTO attractions_api_attraction (name, description, price, rating, date_created, food_description, housing_description, activity_description)
 VALUES
-('Santorini, Greece', 'Santorini is a volcanic island in the Cyclades group of the Greek islands. It is famous for its dramatic views, stunning sunsets, and whitewashed buildings.', 400, 0, '2024-03-12', 'Traditional Greek cuisine with fresh ingredients, including moussaka, souvlaki, and Greek salads.', 'Cave houses and luxury hotels built into the cliffs offer breathtaking views of the Aegean Sea.', 'Explore ancient ruins, relax on black sand beaches, and indulge in wine tasting tours.'),
-('Tanzania', 'Serengeti National Park, located in Tanzania, is renowned for its vast savannahs, diverse wildlife, and annual migration of millions of wildebeest, zebras, and other animals.', 600, 0, '2024-03-12', 'Traditional Tanzanian cuisine featuring grilled meats, stews, and local vegetables.', 'Luxury tented camps and lodges provide comfortable accommodations in the heart of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), witness the Great Migration, and explore the parks diverse ecosystems.'),
-('Kyoto, Japan', 'Kyoto is a city on the island of Honshu in Japan. Its famous for its classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines, and traditional wooden houses.', 400, 0, '2024-03-12', 'Traditional Japanese cuisine such as sushi, sashimi, and tempura.', 'Ryokans (traditional Japanese inns) offer authentic accommodations with tatami floors and communal baths.', 'Explore historic temples and gardens, participate in tea ceremonies, and experience traditional Japanese arts and crafts.'),
-('Peru', 'Machu Picchu is an ancient Incan citadel set high in the Andes Mountains of Peru. Its renowned for its well-preserved ruins, dramatic landscapes, and panoramic views.', 450, 0, '2024-03-12', 'Peruvian cuisine featuring ceviche, quinoa, and roasted meats.', 'Stay in nearby hotels or lodges in Aguas Calientes, the gateway to Machu Picchu.', 'Explore the ruins of Machu Picchu, hike the Inca Trail, and visit nearby attractions such as the Sacred Valley and Huayna Picchu.'),
-('South Africa', 'Kruger National Park is one of Africas largest game reserves, known for its abundant wildlife and diverse ecosystems. Its located in northeastern South Africa.', 550, 0, '2024-03-12', 'Traditional South African cuisine such as braai (barbecue), biltong (dried meat), and potjiekos (stew).', 'Luxury lodges and safari camps offer comfortable accommodations with views of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), enjoy bush walks, and experience the magic of the African bush.'),
-('Ecuador', 'The Galápagos Islands are a volcanic archipelago in the Pacific Ocean, located about 1,000 kilometers (620 miles) west of Ecuador. They are renowned for their unique wildlife and pristine ecosystems.', 600, 0, '2024-03-12', 'Ecuadorian cuisine featuring fresh seafood, ceviche, and traditional dishes such as encebollado (fish soup) and llapingachos (potato patties).', 'Stay in eco-friendly lodges and boutique hotels on the islands.', 'Explore the islands diverse landscapes, observe endemic species such as giant tortoises, marine iguanas, and blue-footed boobies, and snorkel with sea lions and penguins.'),
-('Sydney, Australia', 'The Great Barrier Reef is the worlds largest coral reef system, located off the coast of Queensland, Australia. Its renowned for its stunning marine biodiversity and vibrant coral reefs.', 500, 0, '2024-03-12', 'Australian cuisine featuring fresh seafood, grilled meats, and tropical fruits.', 'Stay in luxury resorts and eco-friendly lodges on the nearby islands or coastal towns.', 'Snorkel or dive among colorful coral gardens, swim with tropical fish and turtles, and explore the reef by boat or helicopter.'),
-('Denpasar, Indonesia', 'Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Its surrounded by sand-fringed motus (islets) and a turquoise lagoon protected by a coral reef.', 700, 0, '2024-03-12', 'French Polynesian cuisine featuring fresh seafood, tropical fruits, and coconut-based dishes like poisson cru (raw fish marinated in lime juice and coconut milk).', 'Overwater bungalows and luxury resorts offer accommodations with private decks and direct access to the lagoon.', 'Relax on white sand beaches, swim or snorkel in the crystal-clear lagoon, and enjoy water sports such as paddleboarding and jet skiing. Bungee jumping from hills are also a popular activity for tourists'),
+('Santorini', 'Santorini is a volcanic island in the Cyclades group of the Greek islands. It is famous for its dramatic views, stunning sunsets, and whitewashed buildings.', 400, 0, '2024-03-12', 'Traditional Greek cuisine with fresh ingredients, including moussaka, souvlaki, and Greek salads.', 'Cave houses and luxury hotels built into the cliffs offer breathtaking views of the Aegean Sea.', 'Explore ancient ruins, relax on black sand beaches, and indulge in wine tasting tours.'),
+('Serengeti National Park', 'Serengeti National Park, located in Tanzania, is renowned for its vast savannahs, diverse wildlife, and annual migration of millions of wildebeest, zebras, and other animals.', 600, 0, '2024-03-12', 'Traditional Tanzanian cuisine featuring grilled meats, stews, and local vegetables.', 'Luxury tented camps and lodges provide comfortable accommodations in the heart of the wilderness.', 'Embark on game drives to spot the Big Five (lion, elephant, buffalo, leopard, and rhinoceros), witness the Great Migration, and explore the parks diverse ecosystems.'),
+('Kyoto', 'Kyoto is a city on the island of Honshu in Japan. Its famous for its classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines, and traditional wooden houses.', 400, 0, '2024-03-12', 'Traditional Japanese cuisine such as sushi, sashimi, and tempura.', 'Ryokans (traditional Japanese inns) offer authentic accommodations with tatami floors and communal baths.', 'Explore historic temples and gardens, participate in tea ceremonies, and experience traditional Japanese arts and crafts.'),
+('Machu Picchu', 'Machu Picchu is an ancient Incan citadel set high in the Andes Mountains of Peru. Its renowned for its well-preserved ruins, dramatic landscapes, and panoramic views.', 450, 0, '2024-03-12', 'Peruvian cuisine featuring ceviche, quinoa, and roasted meats.', 'Stay in nearby hotels or lodges in Aguas Calientes, the gateway to Machu Picchu.', 'Explore the ruins of Machu Picchu, hike the Inca Trail, and visit nearby attractions such as the Sacred Valley and Huayna Picchu.'),
+('Galapagos Islands', 'The Galápagos Islands are a volcanic archipelago in the Pacific Ocean, located about 1,000 kilometers (620 miles) west of Ecuador. They are renowned for their unique wildlife and pristine ecosystems.', 600, 0, '2024-03-12', 'Ecuadorian cuisine featuring fresh seafood, ceviche, and traditional dishes such as encebollado (fish soup) and llapingachos (potato patties).', 'Stay in eco-friendly lodges and boutique hotels on the islands.', 'Explore the islands diverse landscapes, observe endemic species such as giant tortoises, marine iguanas, and blue-footed boobies, and snorkel with sea lions and penguins.'),
+('Sydney', 'The Great Barrier Reef is the worlds largest coral reef system, located off the coast of Queensland, Australia. Its renowned for its stunning marine biodiversity and vibrant coral reefs.', 500, 0, '2024-03-12', 'Australian cuisine featuring fresh seafood, grilled meats, and tropical fruits.', 'Stay in luxury resorts and eco-friendly lodges on the nearby islands or coastal towns.', 'Snorkel or dive among colorful coral gardens, swim with tropical fish and turtles, and explore the reef by boat or helicopter.'),
+('Denpasar', 'Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Its surrounded by sand-fringed motus (islets) and a turquoise lagoon protected by a coral reef.', 700, 0, '2024-03-12', 'French Polynesian cuisine featuring fresh seafood, tropical fruits, and coconut-based dishes like poisson cru (raw fish marinated in lime juice and coconut milk).', 'Overwater bungalows and luxury resorts offer accommodations with private decks and direct access to the lagoon.', 'Relax on white sand beaches, swim or snorkel in the crystal-clear lagoon, and enjoy water sports such as paddleboarding and jet skiing. Bungee jumping from hills are also a popular activity for tourists'),
 ('Patagonia', 'Patagonia is a sparsely populated region at the southern end of South America, shared by Argentina and Chile. Its known for its stunning landscapes, including mountains, glaciers, and grasslands.', 600, 0, '2024-03-12', 'Argentinian and Chilean cuisine featuring grilled meats, empanadas, and hearty stews.', 'Stay in remote lodges and estancias (ranches) with breathtaking views of the Andes and the Southern Patagonian Ice Field.', 'Hike among towering peaks, explore glaciers and fjords, and spot wildlife such as guanacos, pumas, and Andean condors.');
 """
 sql111 = """
@@ -35,7 +34,7 @@ VALUES
 ('New York City', 'New York City is a bustling metropolis in the United States, known for its iconic skyline, diverse culture, and vibrant energy.', 0, 0, '2024-03-12', 'International cuisine representing cultures from around the world, including pizza, bagels, and street food.', 'Choose from luxury hotels in Manhattan, trendy boutique accommodations in Brooklyn, or cozy bed and breakfasts in Greenwich Village.', 'Visit famous landmarks such as the Statue of Liberty, Empire State Building, and Times Square, explore world-class museums and galleries, and experience Broadway shows and live music.'),
 ('Bangkok', 'Bangkok is the capital city of Thailand, known for its ornate temples, vibrant street life, and bustling markets.', 0, 0, '2024-03-12', 'Thai cuisine featuring dishes like pad thai, green curry, and mango sticky rice.', 'Stay in luxury hotels along the Chao Phraya River or boutique accommodations in historic neighborhoods like Sukhumvit.', 'Visit iconic temples such as Wat Arun and Wat Pho, explore bustling markets like Chatuchak Weekend Market, and experience the vibrant nightlife of Khao San Road.'),
 ('Cape Town', 'Cape Town is a coastal city in South Africa, known for its stunning natural beauty, diverse culture, and rich history.', 0, 0, '2024-03-12', 'South African cuisine including braai (barbecue), bobotie, and seafood dishes.', 'Choose from luxury hotels along the waterfront or boutique guesthouses in historic neighborhoods like Bo-Kaap.', 'Visit iconic landmarks such as Table Mountain and Robben Island, explore the Cape Winelands, and enjoy outdoor activities such as hiking and surfing.'),
-('Madagascar', 'Madagascar is a island nation outside the south east of Africa. Its known for its jungles and dangerous wildlife', 6000, 0, '2024-03-12', 'Eat exotic food made by fresh ingredients in the jungle', 'Stay in remote lodges throughout the jungle. Be careful of the dangerous wildlife outside when going outside you lodge', 'Some training enthusiaists try to train their survival skills in the jungle'),
+('Antananarivo', 'Madagascar is a island nation outside the south east of Africa. Its known for its jungles and dangerous wildlife', 6000, 0, '2024-03-12', 'Eat exotic food made by fresh ingredients in the jungle', 'Stay in remote lodges throughout the jungle. Be careful of the dangerous wildlife outside when going outside you lodge', 'Some training enthusiaists try to train their survival skills in the jungle'),
 ('Rio de Janeiro', 'Rio de Janeiro is a coastal city in Brazil, known for its breathtaking beaches, vibrant carnival celebrations, and iconic landmarks.', 0, 0, '2024-03-12', 'Brazilian cuisine featuring feijoada, churrasco, and caipirinha cocktails.', 'Stay in beachfront hotels in Copacabana or boutique accommodations in charming neighborhoods like Santa Teresa.', 'Visit famous landmarks such as Christ the Redeemer and Sugarloaf Mountain, relax on the beaches of Ipanema and Copacabana, and experience the energy of Rios carnival festivities.')
 """
 sql2 = """
@@ -88,7 +87,6 @@ INSERT IGNORE INTO attractions_api_label (name) VALUES
 ('Modern'),
 ('Asia'),
 ('North America'),
-('Australia'),
 ('South America'),
 ('Adventure'),
 ('Africa'),
@@ -166,7 +164,7 @@ SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
     a.name = 'Sydney' AND
-    l.name IN ('City', 'Beach', 'Nature', 'Australia')
+    l.name IN ('City', 'Beach', 'Nature')
 );
 """
 
@@ -204,78 +202,67 @@ JOIN attractions_api_label l ON (
 """
 
 sql16 = """
--- Insert labels for Santorini, Greece
+-- Insert labels for Santorini
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Santorini, Greece' AND
+    a.name = 'Santorini' AND
     l.name IN ('Beach', 'Scenic', 'Europe')
 );
 """
 
 sql18 = """
--- Insert labels for Tanzania
+-- Insert labels for Serengeti National Park
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Tanzania' AND
+    a.name = 'Serengeti National Park' AND
     l.name IN ('Wildlife', 'Nature', 'Adventure', 'Africa')
 );
 """
 
 sql19 = """
--- Insert labels for Kyoto, Japan
+-- Insert labels for Kyoto
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Kyoto, Japan' AND
+    a.name = 'Kyoto' AND
     l.name IN ('Culture', 'History', 'Asia')
 );
 """
 
 sql20 = """
--- Insert labels for Peru
+-- Insert labels for Machu Picchu
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Peru' AND
+    a.name = 'Machu Picchu' AND
     l.name IN ('Ancient', 'Adventure', 'Nature', 'South America')
 );
 """
 
-sql21 = """
--- Insert labels for South Africa
-INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
-SELECT a.attraction_id, l.id
-FROM attractions_api_attraction a
-JOIN attractions_api_label l ON (
-    a.name = 'South Africa' AND
-    l.name IN ('Wildlife', 'Nature', 'Adventure', 'Africa')
-);
-"""
-
 sql22 = """
--- Insert labels for Ecuador
+-- Insert labels for Galapagos Islands
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Ecuador' AND
+    a.name = 'Galapagos Islands' AND
     l.name IN ('Wildlife', 'Nature', 'Adventure', 'South America')
 );
 """
 
 sql24 = """
--- Insert labels for Denpasar, Indonesia
+-- Insert labels for Denpasar
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Denpasar, Indonesia' AND
+    a.name = 'Denpasar' AND
     l.name IN ('Beach', 'Tropical', 'Island', 'Bungee-jumping')
 );
 """
@@ -292,12 +279,12 @@ JOIN attractions_api_label l ON (
 """
 
 sql26 = """
--- Insert labels for Madagascar
+-- Insert labels for Antananarivo
 INSERT IGNORE INTO attractions_api_attraction_labels (attraction_id, label_id)
 SELECT a.attraction_id, l.id
 FROM attractions_api_attraction a
 JOIN attractions_api_label l ON (
-    a.name = 'Madagascar' AND
+    a.name = 'Antananarivo' AND
     l.name IN ('Jungle', 'Nature', 'Training', 'Africa')
 );
 """
@@ -427,14 +414,14 @@ except mysql.connector.Error as error:
     database.rollback()
 
 try:
-    # Execute the SQL query for inserting labels for Santorini, Greece
+    # Execute the SQL query for inserting labels for Santorini
     mycursor.execute(sql16)
     # Commit changes to the database
     database.commit()
-    print("Labels inserted successfully for Santorini, Greece.")
+    print("Labels inserted successfully for Santorini.")
 except mysql.connector.Error as error:
     # Rollback changes if there's an error
-    print("Error inserting labels for Santorini, Greece:", error)
+    print("Error inserting labels for Santorini:", error)
     database.rollback()
 
 # Try statement for SQL18
@@ -451,38 +438,26 @@ except mysql.connector.Error as error:
 
 # Try statement for SQL19
 try:
-    # Execute the SQL query for inserting labels for Kyoto, Japan
+    # Execute the SQL query for inserting labels for Kyoto
     mycursor.execute(sql19)
     # Commit changes to the database
     database.commit()
-    print("Labels inserted successfully for Kyoto, Japan.")
+    print("Labels inserted successfully for Kyoto.")
 except mysql.connector.Error as error:
     # Rollback changes if there's an error
-    print("Error inserting labels for Kyoto, Japan:", error)
+    print("Error inserting labels for Kyoto:", error)
     database.rollback()
 
 # Try statement for SQL20
 try:
-    # Execute the SQL query for inserting labels for Peru
+    # Execute the SQL query for inserting labels for Machu Pichu
     mycursor.execute(sql20)
     # Commit changes to the database
     database.commit()
-    print("Labels inserted successfully for Peru.")
+    print("Labels inserted successfully for Machu Picchu.")
 except mysql.connector.Error as error:
     # Rollback changes if there's an error
-    print("Error inserting labels for Peru:", error)
-    database.rollback()
-
-# Try statement for SQL21
-try:
-    # Execute the SQL query for inserting labels for South Africa
-    mycursor.execute(sql21)
-    # Commit changes to the database
-    database.commit()
-    print("Labels inserted successfully for South Africa.")
-except mysql.connector.Error as error:
-    # Rollback changes if there's an error
-    print("Error inserting labels for South Africa:", error)
+    print("Error inserting labels for Machu Picchu:", error)
     database.rollback()
 
 # Try statement for SQL22
@@ -499,14 +474,14 @@ except mysql.connector.Error as error:
 
 # Try statement for SQL24
 try:
-    # Execute the SQL query for inserting labels for Denpasar, Indonesia
+    # Execute the SQL query for inserting labels for Denpasar
     mycursor.execute(sql24)
     # Commit changes to the database
     database.commit()
-    print("Labels inserted successfully for Denpasar, Indonesia.")
+    print("Labels inserted successfully for Denpasar.")
 except mysql.connector.Error as error:
     # Rollback changes if there's an error
-    print("Error inserting labels for Denpasar, Indonesia:", error)
+    print("Error inserting labels for Denpasar:", error)
     database.rollback()
 
 # Try statement for SQL25
