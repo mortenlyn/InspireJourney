@@ -255,7 +255,11 @@ function GeneralDestination() {
 
       <div className="reviewDiv">
         <h2>Reviews</h2>
-        <p style={{ fontSize: '40px' }}>Average Rating: {renderAverageRating()} ({averageReview()}/5)</p> 
+        <p style={{ fontSize: "20px" }}>
+          Average Rating: {renderAverageRating()} (
+          {Math.round(averageReview() * 10) / 10}
+          /5)
+        </p> 
         {destinationReviews.length > 0 ? (
           destinationReviews.map((review) => (
             <ReviewComponent
