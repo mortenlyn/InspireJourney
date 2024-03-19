@@ -1,7 +1,6 @@
 .Destination {
     padding: 4rem;
     background: #fff;
-    /* text-align: center; */
   }
 
   .topContainer {
@@ -35,6 +34,7 @@
     margin-left: auto;
     margin-right: auto;
     align-items: center;
+    align-items: center;
   }
 
   .Destination__wrapper {
@@ -51,6 +51,14 @@
     margin: 0 auto;
     max-width: 1200px;
     width: 90%;
+  }
+
+  .Description_container {
+    margin: 10px;
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    align-items: center;
   }
 
   .cards__item {
@@ -121,6 +129,12 @@
   }
   #destination-description{
     text-align: center;
+    max-width: 1000px !important;
+    width: 100% !important;
+  }
+
+  #destination-description-item {
+    align-items: center;
   }
   #description-text{
     text-align: center;
@@ -130,6 +144,13 @@
     color: white;
     margin-top: 15px;
     margin-bottom: 10px;
+  }
+
+  .frontpage_description{
+    width: 50ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .frontpage_description{

@@ -4,7 +4,6 @@ import "./DestinationBox.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import EditDestinationButton from "./destinations/EditDestinationButton";
-import getWeather from "./WeatherComponent";
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import AverageRating from "./destinations/AverageRating";
 
