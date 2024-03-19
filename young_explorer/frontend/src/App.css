@@ -11,14 +11,20 @@
     font-family: 'PT Sans', sans-serif;
   }
 
-  .darkMode {
+.App {
+  background-color: var(--background-color);
+
+}
+
+
+  /* .darkMode {
     background-color: black;
     color: whitesmoke;
   }
   .lightMode {
     background-color: whitesmoke;
     color:black;
-  }
+  } */
   
   .home {
     display: flex;
@@ -37,7 +43,7 @@
 
   #title-link {
     font-family: Pacifico;
-    color: beige;
+    color: var(--primary-text-color);
     cursor: pointer;
     text-decoration: none;
     font-size: 30px;

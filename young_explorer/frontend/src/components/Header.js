@@ -9,16 +9,10 @@ import { useNavigate, Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { FaRegUserCircle } from "react-icons/fa";
 import './header.css';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import { DarkModeToggle } from "./DarkModeToggle";
 
 const Header = ({ client, currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => !prevMode);
-  };
 
   const logout = () => {
     client
@@ -32,6 +26,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         console.log(error);
       });
   };
+  
   const profile = () => {
     navigate("/profile");
   };
@@ -67,8 +62,9 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Young Explorer{" "}
           </Link>
         </Typography>
-        {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
-          (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))}
+        {/* {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
+          (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))} */}
+        {/* <DarkModeToggle isChecked={isDark}/> */}
         <div class="dropdown">
           <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
           {isMenuOpen && (
