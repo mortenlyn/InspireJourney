@@ -4,7 +4,7 @@
     --primary-text-color: #252e48;
     --secondary-text-color: #252e48;
     --toggle-bg: #fff;
-    --toggle-fg: #ffd000;
+    --toggle-fg: #4a3d34;
   }
   
 [data-theme="dark"] {
@@ -13,5 +13,5 @@
     --primary-text-color: #f6f6f6;
     --secondary-text-color: wheat;
     --toggle-bg: beige;
-    --toggle-fg: #00a6ff;
+    --toggle-fg: wheat;
 }

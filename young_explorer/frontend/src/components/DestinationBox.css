@@ -112,6 +112,7 @@
     justify-content: space-between;
     align-items: center;
     width: 1200px;
+    color: var(--primary-text-color);
   }
 
   .cards_item_box {

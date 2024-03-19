@@ -10,7 +10,7 @@ const DestinationTopComponent = ({ name, beenHere, handleToggleBeenHere }) => {
     <div className="topContainer">
       <h1 style={{color: "var(--primary-text-color)"}}>Some information on {name}!</h1>
       <h3>
-        Check out our other destinations <Link to="/home">here.</Link>
+        Check out our other destinations <Link style={{color: "var(--toggle-fg)"}} to="/home">here.</Link>
       </h3>
       {localStorage.getItem("superuser") === "false" && (
         <div>
