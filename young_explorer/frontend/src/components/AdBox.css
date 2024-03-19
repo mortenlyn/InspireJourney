@@ -1,0 +1,14 @@
+.AdBox {
+    padding: 200px; /* Endrer høyden på boksen */
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc;
+    width: 80%; /* Endrer bredden på boksen*/
+    margin: auto;
+    margin-top: 20px; 
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .AdBox p {
+    font-weight: bold;
+  }

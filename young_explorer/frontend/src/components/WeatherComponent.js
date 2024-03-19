@@ -8,6 +8,7 @@ import fewclouds from "../assets/fewclouds.svg";
 import Thunderstorm from "../assets/Thunderstorm.svg";
 import Clouds from "../assets/Clouds.svg";
 import shrug from "../assets/shrug.svg";
+import weatherQuestion from "../assets/weatherQuestion.png";
 
 function WeatherComponent(props) {
   const [weather, setWeather] = useState({});
@@ -36,7 +37,7 @@ function WeatherComponent(props) {
 
   return typeof weather.main != "undefined" ? (
     <>
-      <li className="weather_item">
+      <div className="weather_item">
         <div className="weather_item_box">
           {Math.round(weather.main.temp) > 0 ? (
             <h1 id="weatherh1">
@@ -58,10 +59,10 @@ function WeatherComponent(props) {
           <h1 id="weatherh1">Humidity: {weather.main.humidity} %</h1>
           <h1 id="weatherh1">Wind: {Math.round(weather.wind.speed)} m/s</h1>
           {weather.weather[0].description === "few clouds" ? (
-            <img src={fewclouds} alt="Weather conditions" />
+            <img src={fewclouds} alt="Weather conditions" width="200px" />
           ) : !kindsofweather.includes(weather.weather[0].main) ? (
             <>
-              <img src={shrug} alt="Weather conditions" width="200" />
+              <img src={shrug} alt="Weather conditions" width="180px" />
               <h1 id="weatherh1">
                 Sorry, we don't have an icon for this weather
               </h1>
@@ -70,7 +71,7 @@ function WeatherComponent(props) {
             <img
               src={weatherIcons[weather.weather[0].main]}
               alt="Weather conditions"
-              width="275px"
+              width="200px"
             />
           )}
           <div className="weather_item_info">
@@ -79,13 +80,19 @@ function WeatherComponent(props) {
             </h5>
           </div>
         </div>
-      </li>
+      </div>
     </>
   ) : (
     <>
       <li className="weather_item">
         <div className="weather_item_box">
-          <h3>Weather in {props.name}</h3>
+          <>
+            <h1 style={{ marginTop: "20px" }}>Sorry!</h1>
+            <h3>
+              We couldn't find any information about the weather in {props.name}
+            </h3>
+            <img src={weatherQuestion} alt="Weather conditions" width="400px" />
+          </>
         </div>
       </li>
     </>
