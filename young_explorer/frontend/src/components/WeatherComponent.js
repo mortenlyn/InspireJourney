@@ -8,6 +8,7 @@ import fewclouds from "../assets/fewclouds.svg";
 import Thunderstorm from "../assets/Thunderstorm.svg";
 import Clouds from "../assets/Clouds.svg";
 import shrug from "../assets/shrug.svg";
+import weatherQuestion from "../assets/weatherQuestion.png";
 
 function WeatherComponent(props) {
   const [weather, setWeather] = useState({});
@@ -86,7 +87,13 @@ function WeatherComponent(props) {
     <>
       <li className="weather_item">
         <div className="weather_item_box">
-          <h3>Weather in {props.name}</h3>
+          <>
+            <h1 style={{ marginTop: "20px" }}>Sorry!</h1>
+            <h3>
+              We couldn't find any information about the weather in {props.name}
+            </h3>
+            <img src={weatherQuestion} alt="Weather conditions" width="400px" />
+          </>
         </div>
       </li>
     </>
