@@ -6,7 +6,7 @@
 
 #sliderIcon {
     font-size: 2.5rem;
-    color: #333;
+    color: var(--primary-text-color);
 }
 
 #sliderIcon:hover {
@@ -14,5 +14,5 @@
 }
 
 #filterText {
-    color: #333;
+    color: var(--primary-text-color);
 }

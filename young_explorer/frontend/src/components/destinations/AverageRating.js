@@ -23,7 +23,7 @@ function AverageRating({ rating }) {
       {stars} ({Math.round(rating * 10) / 10}/5)
     </div>
   ) : (
-    <div>*The destination has not been rated yet</div>
+    <div style={{minHeight: "30px"}}>*The destination has not been rated yet</div>
   );
 }
 

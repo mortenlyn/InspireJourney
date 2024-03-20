@@ -58,6 +58,7 @@
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+    background-color: var(--foreground-color);
   }
 
   .cards__item__pic-wrap {
@@ -108,7 +109,7 @@
   }
 
   .cards__item__text {
-    color: #252e48;
+    /* color: #252e48; */
     font-size: 18px;
     line-height: 24px;
   }
@@ -119,11 +120,18 @@
     justify-content: space-between;
     align-items: center;
     width: 1200px;
+    color: var(--primary-text-color);
   }
 
   .cards_item_box {
     display: flex;
     flex-direction: column;
+    background-color: var(--foreground-color);
     justify-content: center;
     margin: 0 auto 0 auto;
   }
+
+  p {
+    color: var(--primary-text-color);
+  } 
+

@@ -1,0 +1,19 @@
+:root {
+    --background-color: #fff;
+    --foreground-color: #fff;
+    --primary-text-color: #252e48;
+    --secondary-text-color: #252e48;
+    --toggle-bg: #fff;
+    --toggle-fg: #4a3d34;
+    --toggle-gg: beige;
+  }
+  
+[data-theme="dark"] {
+    --background-color: #1b1b25;
+    --foreground-color: #252e48;
+    --primary-text-color: #f6f6f6;
+    --secondary-text-color: wheat;
+    --toggle-bg: beige;
+    --toggle-fg: wheat;
+    --toggle-gg: #252e48;
+}

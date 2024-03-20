@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import CardItem from "./Card_Item";
 import "./DestinationBox.css";
 import GetAllAttractions from "./GetAllAttractions";
+import { DarkModeToggle } from "./components/DarkModeToggle";
+
+
 
 const Destination_box = (props) => {
+  const [isDark, setIsDark] = useState(false);
+
   return (
     <div className="Destination">
       <h1>Check out these destinations!</h1>

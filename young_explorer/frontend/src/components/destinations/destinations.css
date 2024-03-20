@@ -1,14 +1,17 @@
 .Destination {
     padding: 4rem;
-    background: #fff;
+    background-color: var(--background-color);
+    /* text-align: center; */
   }
 
   .topContainer {
     text-align: center;
+    color: var(--primary-text-color);
   }
 
   .bottomContainer {
     text-align: center;
+    color: var(--primary-text-color);
   }
 
   .ratingContainer {
@@ -128,7 +131,8 @@
   }
 
   .cards__item__text {
-    color: #252e48;
+    /* color: #252e48; */
+    color: var(--primary-text-color);
     font-size: 18px;
     line-height: 24px;
   }
@@ -183,11 +187,11 @@
     width: 500px;
     font-size: 20px;
     padding: 10px;
+    color: var(--primary-text-color);
   }
 
   #submitReview {
     background-color:burlywood;
-    color: white;
     margin: 7px;
     padding: 2px;
   }
@@ -207,6 +211,7 @@
     margin: 10px;
     border-radius: 5px;
     overflow-wrap: break-word;
+    color: var(--primary-text-color);
   }
 
   #editButton {

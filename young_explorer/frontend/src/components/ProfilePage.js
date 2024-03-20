@@ -36,13 +36,14 @@ function ProfilePage({ currentUser }) {
         rating={review.rating}
         date_created={review.date_created}
         review={review.review}
+        
       />
     );
   });
 
   const visitedDestinationsList = visitedDestinations.map((attraction, index) => (
     <div key={index}>
-      <DestinationProfilePage name={attraction.name} key={attraction.id} />
+      <DestinationProfilePage name={attraction.name} key={attraction.id}/>
       <br></br>
     </div>
   ));
@@ -56,58 +57,61 @@ function ProfilePage({ currentUser }) {
     );
   }
   return (
-    <div className="ProfilePage">
-      <div>
-        <div className="profile-card">
-          <h1 id="UserProfileTitle">Your profile</h1>
-          <div id="userImageBox">
-            <img id="userImage" src="./travelyoung.jpg" style={{width: 200}}></img>
-          </div>
-          <div className="profile-info">
-            <p className="user-info-email">
-              <strong>Email:</strong> {currentUser.email}
-            </p>
-            {localStorage.getItem("superuser") === "true" ? (
-              <>
-                <p className="user-info-paragraph">
-                  You're logged in as an admin.
-                </p>
-                <p className="user-info-paragraph">
-                  You can add destinations to the website by clicking the "+" button in the dropdown menu.
-                </p>
-              </>
-            ) : (
-              <p className="user-info-email">
-                <strong>Name:</strong> {currentUser.username}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-      {localStorage.getItem("superuser") === "false" && (
+    // La til en div rundt ProfilePage slik at det ikke blir en hvit stripe nederst på profile-siden ved darkmode
+    <div style={{marginBottom: "-100px"}}>
+      <div className="ProfilePage">
         <div>
-          <div className="Reviews_Visited">
-            <h1>Your reviews</h1>
-            {userReviews.length > 0 && userReviews ? (
-              userReviewsMap
-            ) : (
-              <p>You haven't made any reviews</p>
-            )}
-          </div>
-          <div className="Reviews_Visited">
-            <h1>Your destinations</h1>
-            <br></br>
-            {visitedDestinationsList.length > 0 && visitedDestinations ? (
-              visitedDestinationsList
-            ) : (
-              <p>No visited destinations</p>
-            )}
+          <div className="profile-card">
+            <h1 id="UserProfileTitle">Your profile</h1>
+            <div id="userImageBox">
+              <img id="userImage" src="./travelyoung.jpg" style={{width: 200}}></img>
+            </div>
+            <div className="profile-info">
+              <p className="user-info-email">
+                <strong>Email:</strong> {currentUser.email}
+              </p>
+              {localStorage.getItem("superuser") === "true" ? (
+                <>
+                  <p className="user-info-paragraph">
+                    You're logged in as an admin.
+                  </p>
+                  <p className="user-info-paragraph">
+                    You can add destinations to the website by clicking the "+" button in the dropdown menu.
+                  </p>
+                </>
+              ) : (
+                <p className="user-info-email">
+                  <strong>Name:</strong> {currentUser.username}
+                </p>
+              )}
+            </div>
           </div>
         </div>
-      )}
-      <Link to="/home">
-          <button id="homebutton">Return to homepage</button>
-      </Link>
+        {localStorage.getItem("superuser") === "false" && (
+          <div>
+            <div className="Reviews_Visited">
+              <h1>Your reviews</h1>
+              {userReviews.length > 0 && userReviews ? (
+                userReviewsMap
+              ) : (
+                <p>You haven't made any reviews</p>
+              )}
+            </div>
+            <div className="Reviews_Visited">
+              <h1>Your destinations</h1>
+              <br></br>
+              {visitedDestinationsList.length > 0 && visitedDestinations ? (
+                visitedDestinationsList
+              ) : (
+                <p>No visited destinations</p>
+              )}
+            </div>
+          </div>
+        )}
+        <Link to="/home">
+            <button id="homebutton" style={{marginBottom: "50px"}}>Return to homepage</button>
+        </Link>
+      </div>
     </div>
   );
 }
