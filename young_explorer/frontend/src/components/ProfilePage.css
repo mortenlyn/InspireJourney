@@ -1,12 +1,14 @@
+
 .ProfilePage {
     margin: 40px auto;
     border-radius: 10px;
     width: 80%;
-    background-color: beige;
+    background-color: var(--toggle-gg);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     text-align: center;
     display: block;
     justify-content: center;
+
 }
 
 .profile-card {
@@ -22,7 +24,7 @@
 }
 
 #UserProfileTitle {
-    color: #333;
+    color: var(--toggle-fg);
     margin-bottom: 15px;
     font-size: 2em;
 }
@@ -49,16 +51,16 @@
 
 h1 {
     font-size: 1.8em;
-    color: #333;
     text-align: center;
     margin-bottom: 15px;
     letter-spacing: 1px;
 }
 
+
 h2 {
     font-size: 1.5em;
     font-weight: lighter;
-    color: rgb(81, 74, 64);
+    color: var(--toggle-fg);
     text-align: center;
     margin-bottom: 10px;
     letter-spacing: 1px;
@@ -115,4 +117,5 @@ strong {
     display: block;
     justify-content: center;
     border-radius: 10px;
+    color: var(--primary-text-color);
 }

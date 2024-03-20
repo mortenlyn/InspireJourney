@@ -137,7 +137,7 @@ export default function FilterBox(props) {
   });
 
   return (
-    <div>
+    <div style={{backgroundColor: "var(--background-color)"}}>
       {/* Toggle the visibility of filter_box when filter_button is clicked */}
       <div
         className="filter_button"
@@ -171,7 +171,7 @@ export default function FilterBox(props) {
               textAlign: "center",
               marginBottom: "20px",
               marginTop: "10px",
-              color: "gray",
+              color: "var(--primary-text-color)",
               fontSize: "1.8em",
             }}
           >
@@ -265,17 +265,16 @@ export default function FilterBox(props) {
           </Grid>
         </div>
       </div>
-      <div>
-        <h1>Check out these destinations!</h1>
-        <div className="cards_container">
-          {CardItemArray.length > 0 && filteredAttractions ? (
-            CardItemArray
-          ) : !filterApplied ? (
-            <GetAllAttractions currentUser={props.currentUser} />
-          ) : (
-            <p>Your criteria doesn't match any</p>
-          )}
-        </div>
+      <div style={{backgroundColor: "var(--background-color)"}}>
+        <br></br>
+        <h1 style={{color: "var(--primary-text-color)"}}>Check out these destinations!</h1>
+        {CardItemArray.length > 0 && filteredAttractions ? (
+          CardItemArray
+        ) : !filterApplied ? (
+          <GetAllAttractions currentUser={props.currentUser} />
+        ) : (
+          <p>Your criteria doesn't match any</p>
+        )}
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const DestinationInfoComponent = ({ destination, name }) => {
             name={"What to do in " + name}
             text={destination.activity_description}
             label="What to do"
-            query={name + " event"}
+            query={name + " trips"}
           ></DestinationCard>
         </ul>
       </div>

@@ -9,8 +9,25 @@
     margin: 0;
     padding: 0;
     font-family: 'PT Sans', sans-serif;
-  }
 
+}
+
+.App {
+  background-color: var(--background-color);
+  min-height: 1300px;
+
+}
+
+
+  /* .darkMode {
+    background-color: black;
+    color: whitesmoke;
+  }
+  .lightMode {
+    background-color: whitesmoke;
+    color:black;
+  } */
+  
   .home {
     display: flex;
     height: 90vh;
@@ -20,11 +37,11 @@
   }
 
   /* Brukes denne?*/
-  #header-title {
+  /* #header-title {
     font-family: Bradley Hand, cursive;
     color: beige;
     align-items: center;
-}
+} */
 
   #title-link {
     font-family: Pacifico;

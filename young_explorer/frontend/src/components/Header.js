@@ -25,6 +25,7 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
         console.log(error);
       });
   };
+  
   const profile = () => {
     navigate("/profile");
   };
@@ -60,7 +61,9 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
             Young Explorer{" "}
           </Link>
         </Typography>
-
+        {/* {darkMode ? (<DarkModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>) : (
+          (<LightModeIcon id="darkmode-btn" onClick={toggleDarkMode} fontSize="large"/>))} */}
+        {/* <DarkModeToggle isChecked={isDark}/> */}
         <div class="dropdown">
           <FaRegUserCircle id="user-btn" onClick={toggleMenu} size={42}/>
           {isMenuOpen && (
@@ -83,8 +86,8 @@ const Header = ({ client, currentUser, setCurrentUser }) => {
                 <Button class="dropdown-item" onClick={login}>
                   Log In
                 </Button>
-        )}
-
+              )
+              }
             </div>
           )}
         </div>

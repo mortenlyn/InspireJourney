@@ -31,11 +31,14 @@
     font-weight: 600;
     font-size: 7vw;
     text-transform: uppercase;
-    background-color: #ffffff;
+    /* background-color: beige; */
+    background-color: var(--toggle-bg);
     mix-blend-mode: screen;
     overflow: hidden;
     white-space: nowrap;
     padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
 }
 
 #beach-picture {

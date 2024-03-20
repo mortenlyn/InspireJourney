@@ -32,7 +32,6 @@ const ReviewComponent = ({
             {[...Array(5)].map((_, index) => {
               const currentRating = index + 1;
               return (
-                console.log(currentRating, editedRating),
                 (
                   <label key={currentRating}>
                     <input

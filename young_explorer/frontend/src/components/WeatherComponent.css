@@ -29,12 +29,16 @@
     flex-direction: column;
     height: 100%;
     align-items: center;
+    padding: 20px;
+    background-color: var(--foreground-color);
+    
   }
 
   .weather_item_info {
     padding: 20px 30px 30px;
     text-align: left;
     align-items: left;
+    
   }
 
   .weather_item_text {
@@ -50,4 +54,9 @@
 
   #weather_text {
     text-align: left;
+    color: var(--secondary-text-color);
+  }
+
+  #weatherh1 {
+    color: var(--secondary-text-color);
   }

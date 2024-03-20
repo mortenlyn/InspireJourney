@@ -254,7 +254,7 @@ function GeneralDestination() {
       />
 
       <div className="reviewDiv">
-        <h2>Reviews</h2>
+        <h2 style={{color: "var(--toggle-fg)"}}>Reviews</h2>
         <p style={{ fontSize: "20px" }}>
           Average Rating: {renderAverageRating()} (
           {Math.round(averageReview() * 10) / 10}

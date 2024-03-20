@@ -31,7 +31,7 @@ function LoginForm({ client, setCurrentUser }) {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container" style={{minHeight: "750px"}}>
       <h1 className="title">Log in</h1>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -57,10 +57,10 @@ function LoginForm({ client, setCurrentUser }) {
           Log in
         </Button>
       </form>
-      <span>
+      <span style={{color: "var(--primary-text-color)"}}>
         Don't have an account? <Link to="/register">Register here!</Link>
       </span>
-      <span>
+      <span style={{color: "var(--primary-text-color)"}}>
         Check out our destinations <Link to="/home">here.</Link>
       </span>
     </div>
