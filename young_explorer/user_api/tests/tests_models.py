@@ -15,10 +15,11 @@ class TestWebsiteModel(TestCase):
 class TestWebsiteModelSuperuser(TestCase):
     def setUp(self):
         self.superuser = WebsiteUser.objects.create_superuser(
-            email="supertestuser@example.com", password="password123")
+            email="supertestuser@example.com", username="supertestuser", password="password123")
 
     def test_superuser_creation(self):
         self.assertEqual(self.superuser.email, "supertestuser@example.com")
+        self.assertEqual(self.superuser.username, "supertestuser")
         self.assertTrue(self.superuser.check_password("password123"))
         self.assertTrue(self.superuser.is_superuser)
 
@@ -40,14 +41,14 @@ class TestWebsiteModelUserFailures(TestCase):
 class TestWebsiteModelSuperuserFailures(TestCase):
     def test_superuser_creation_no_email(self):
         with self.assertRaises(TypeError) as context:
-            WebsiteUser.objects.create_superuser(None, password="password123")
+            WebsiteUser.objects.create_superuser(None, username="testsuperuser", password="password123")
 
         self.assertTrue('Users need an email' in str(context.exception))
 
     def test_superuser_creation_no_password(self):
         with self.assertRaises(TypeError) as context:
             WebsiteUser.objects.create_superuser(
-                email="supertestuser@example.com")
+                email="supertestuser@example.com", username="testsuperuser", password=None)
 
         self.assertTrue('Users need a password' in str(context.exception))
 
