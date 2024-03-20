@@ -139,13 +139,14 @@ export default function FilterBox(props) {
   return (
     <div style={{backgroundColor: "var(--background-color)"}}>
       {/* Toggle the visibility of filter_box when filter_button is clicked */}
-      <div
+      
+      {props.currentUser ? <div
         className="filter_button"
         onClick={() => setShowFilterBox(!showFilterBox)}
       >
         <FaSlidersH id="sliderIcon" />
         <p id="filterText">Filter</p>
-      </div>
+      </div> : <></>}
       <div
         className={`filter_box ${showFilterBox ? "show" : ""}`}
         style={{
@@ -269,7 +270,9 @@ export default function FilterBox(props) {
         <br></br>
         <h1 style={{color: "var(--primary-text-color)"}}>Check out these destinations!</h1>
         {CardItemArray.length > 0 && filteredAttractions ? (
-          CardItemArray
+          <div className="cards_container">
+            {CardItemArray}
+          </div>
         ) : !filterApplied ? (
           <GetAllAttractions currentUser={props.currentUser} />
         ) : (
