@@ -87,11 +87,16 @@
     animation-duration: 2s;
   }
 
+  /* This ::after element works, the one in DestinationBox.css does not
+  I have added justify-content: left and left: 0*/
+
   .cards__item__pic-wrap::after {
     content: attr(data-category);
     position: absolute;
+    justify-content: left;
+    left: 0;
     bottom: 0;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     padding: 6px 8px;
     max-width: calc((100%) - 60px);
     font-size: 12px;
